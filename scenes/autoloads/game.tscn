@@ -117,6 +117,7 @@ grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 16
 theme_override_fonts/font = ExtResource("3_tfa0m")
+theme_override_font_sizes/font_size = 32
 text = "0 people"
 
 [connection signal="pressed" from="Interface/HBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]

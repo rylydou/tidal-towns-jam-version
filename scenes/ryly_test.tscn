@@ -1,9 +1,8 @@
-[gd_scene load_steps=55 format=3 uid="uid://d34gcwb56tge4"]
+[gd_scene load_steps=52 format=3 uid="uid://d34gcwb56tge4"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_6xbif"]
 [ext_resource type="Script" path="res://addons/goshapes/base/GoCurve3D.gd" id="1_f5h7v"]
 [ext_resource type="Script" path="res://addons/goshapes/Goshape.gd" id="2_5gu2y"]
-[ext_resource type="Texture2D" uid="uid://bema6ya2t5py6" path="res://resources/kloofendal_48d_partly_cloudy_puresky_1k.exr" id="3_7tk8i"]
 [ext_resource type="Script" path="res://addons/goshapes/base/PathOptions.gd" id="3_jdui4"]
 [ext_resource type="Script" path="res://addons/goshapes/MeshShaper/Shapers/BottomShaper.gd" id="4_q84rl"]
 [ext_resource type="Script" path="res://addons/goshapes/MeshShaper/Shapers/CapFlatShaper.gd" id="5_npgyw"]
@@ -18,15 +17,11 @@
 [sub_resource type="PlaneMesh" id="PlaneMesh_5cbay"]
 size = Vector2(300, 300)
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_23x6l"]
-panorama = ExtResource("3_7tk8i")
-
-[sub_resource type="Sky" id="Sky_7f4fp"]
-sky_material = SubResource("PanoramaSkyMaterial_23x6l")
-
 [sub_resource type="Environment" id="Environment_2e5y2"]
-background_mode = 2
-sky = SubResource("Sky_7f4fp")
+background_mode = 1
+background_color = Color(0.223529, 0.470588, 0.658824, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.156863, 0.8, 0.87451, 1)
 tonemap_mode = 2
 fog_density = 0.0
 
@@ -339,7 +334,7 @@ directional_shadow_fade_start = 0.9
 directional_shadow_max_distance = 50.0
 
 [node name="CameraAnchor" type="Node3D" parent="." node_paths=PackedStringArray("camera")]
-transform = Transform3D(0.236838, -0.557258, 0.795846, 0, 0.819152, 0.573576, -0.971549, -0.135845, 0.194006, 0, 0, 0)
+transform = Transform3D(0.236838, -0.485775, 0.841386, 0, 0.866026, 0.5, -0.971549, -0.118419, 0.205108, 0, 0, 0)
 script = ExtResource("12_3idn7")
 camera = NodePath("Camera")
 

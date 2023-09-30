@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_toon,specular_toon;
+render_mode blend_mix,depth_draw_never,unshaded,diffuse_toon,specular_toon;
 
 uniform vec4 WATER_COL : source_color = vec4(0.176471, 0.635294, 0.85098, 1.0);
 uniform vec4 WATER2_COL : source_color = vec4(0.0588235, 0.529412, 0.776471, 1.0);
@@ -9,6 +9,7 @@ uniform float distortion_speed = 2.0;
 uniform vec2 tile = vec2(5.0, 5.0);
 uniform vec2 offset = vec2(0, 0);
 uniform vec2 size = vec2(32., 32.);
+uniform float pixel_factor = 500.0;
 
 const float TWOPI = 6.283185307;
 const float SIXPI = 18.84955592;
@@ -135,7 +136,8 @@ void vertex() {
 
 void fragment() {
 	vec2 uv = globalposition.xz/size;
-	vec3 water = water(uv * tile + offset, vec3(0., 1., 0.), TIME*distortion_speed);
+	uv = round(uv*pixel_factor)/pixel_factor;
+	vec3 water = water(uv*tile + offset, vec3(0., 1., 0.), TIME*distortion_speed);
 	float t = distance(globalposition, CAMERA_POSITION_WORLD)/50.;
 	t = min(t, 1.);
 	ALBEDO.rgb = mix(water, WATER_COL.rgb, t);
