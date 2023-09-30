@@ -1,15 +1,11 @@
-class_name Building extends Area3D
+extends Area3D
+
+@export var destruction_cost = 0
 
 @export_category('Reclaim')
 @export var reclaim_wood = 0
 @export var reclaim_stone = 0
 @export var reclaim_steel = 0
-
-@export_group('Other')
-@export var normal_color := Color.WHITE
-@export var warning_color := Color.RED
-
-@onready var label: Label3D = %Label
 
 var is_reclaimed = false
 
@@ -18,10 +14,6 @@ func _enter_tree() -> void:
 	Game.water_level_changed.connect(water_level_changed)
 
 func water_level_changed() -> void:
-	var is_sunk = position.y <= Game.next_water_level
-	label.modulate = warning_color if is_sunk else normal_color
-	label.visible = is_sunk
-	
 	if position.y <= Game.current_water_level:
 		Game.fail()
 		var tween = create_tween()
@@ -31,19 +23,11 @@ func _on_input_event(camera: Node, event: InputEvent, position: Vector3, normal:
 	var mouse_event = event as InputEventMouseButton
 	if not mouse_event: return
 	
-	if Input.is_action_just_pressed('add'):
-		_add()
-		return
-
 	if Input.is_action_just_pressed('sub'):
-		_sub()
+		if Game.people <= 0 and Game.money >= destruction_cost:
+			Game.money -= destruction_cost
+			reclaim()
 		return
-
-func _add() -> void:
-	pass
-
-func _sub() -> void:
-	reclaim()
 
 func reclaim() -> void:
 	if is_reclaimed: return

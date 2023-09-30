@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ma0url8bjxmu"]
+
+[ext_resource type="Script" path="res://scripts/prop.gd" id="1_sbmdg"]
+
+[node name="BaseProp" type="Area3D"]
+script = ExtResource("1_sbmdg")
+
+[node name="Collision" type="CollisionShape3D" parent="."]

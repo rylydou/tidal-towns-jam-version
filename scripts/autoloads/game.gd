@@ -1,7 +1,7 @@
 extends Control
 
 signal next_day()
-signal update_buildings()
+signal water_level_changed()
 
 var day = 0
 
@@ -59,12 +59,12 @@ func restart() -> void:
 	
 	get_tree().reload_current_scene()
 	
-	await get_tree().process_frame
-	await get_tree().process_frame
+	# await get_tree().process_frame
+	# await get_tree().process_frame
 	await get_tree().process_frame
 	
 	next_day.emit()
-	update_buildings.emit()
+	water_level_changed.emit()
 	
 	win_screen.hide()
 	fail_screen.hide()
@@ -87,4 +87,4 @@ func _on_next_button_pressed() -> void:
 	day += 1
 	
 	next_day.emit()
-	update_buildings.emit()
+	water_level_changed.emit()

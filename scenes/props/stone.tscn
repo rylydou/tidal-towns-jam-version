@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cjxuybyvl8xjt"]
+
+[ext_resource type="PackedScene" uid="uid://ma0url8bjxmu" path="res://scenes/props/_base.tscn" id="1_jixdt"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_b6vdd"]
+height = 1.0
+radius = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qc2ch"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.490196, 0.439216, 0.443137, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_xt4na"]
+radius = 1.0
+height = 1.5
+radial_segments = 5
+rings = 3
+
+[node name="Stone" instance=ExtResource("1_jixdt")]
+destruction_cost = 1
+reclaim_stone = 1
+
+[node name="Collision" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_b6vdd")
+
+[node name="Rocks" type="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = SubResource("StandardMaterial3D_qc2ch")
+mesh = SubResource("SphereMesh_xt4na")

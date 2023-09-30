@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://dce2mkn36kmp6"]
+
+[ext_resource type="PackedScene" uid="uid://cwg6imm7grt3y" path="res://scenes/buildings/_base.tscn" id="1_ntjrb"]
+[ext_resource type="Script" path="res://scripts/home.gd" id="2_p0tt8"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_uyx32"]
+height = 1.5
+radius = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tfpre"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.54902, 0.372549, 0.0862745, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_18d1l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mr15e"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.729412, 0.666667, 0.176471, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_5vjb4"]
+size = Vector3(1, 0.5, 1)
+
+[node name="TestShack" instance=ExtResource("1_ntjrb")]
+script = ExtResource("2_p0tt8")
+current_inhabitants = 0
+max_inhabitants = 1
+reclaim_wood = 1
+
+[node name="Collision" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("CylinderShape3D_uyx32")
+
+[node name="Banner" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Base" type="MeshInstance3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = SubResource("StandardMaterial3D_tfpre")
+gi_mode = 2
+mesh = SubResource("BoxMesh_18d1l")
+
+[node name="Roof" type="MeshInstance3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+material_override = SubResource("StandardMaterial3D_mr15e")
+gi_mode = 2
+mesh = SubResource("PrismMesh_5vjb4")

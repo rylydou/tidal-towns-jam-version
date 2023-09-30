@@ -9,6 +9,7 @@ class_name Level extends Node3D
 
 # @export_region('References')
 @export var water: Node3D
+@export var camera_anchor: Node3D
 
 func _ready() -> void:
 	Game.money = starting_money
@@ -27,7 +28,8 @@ func update_water_level() -> void:
 		Game.next_water_level = water_levels[Game.day + 1]
 	
 	var tween := create_tween()
-	tween.tween_property(water, 'position:y', Game.current_water_level, 1.0)
+	tween.tween_property(water, 'position:y', Game.current_water_level, 1.25).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
+	tween.parallel().tween_property(camera_anchor, 'position:y', Game.current_water_level, 1.5).set_delay(1.25).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_SINE)
 
 func _on_next_day() -> void:
 	update_water_level()

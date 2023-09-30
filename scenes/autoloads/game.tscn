@@ -23,11 +23,11 @@ script = ExtResource("1_vcqlu")
 win_screen = NodePath("Interface/WinLabel")
 fail_screen = NodePath("Interface/FailLabel")
 people_label = NodePath("PeopleLabel")
-money_label = NodePath("Interface/VBoxContainer/MoneyLabel")
-wood_label = NodePath("Interface/VBoxContainer/WoodLabel")
-stone_label = NodePath("Interface/VBoxContainer/StoneLabel")
-steel_label = NodePath("Interface/VBoxContainer/SteelLabel")
-day_button = NodePath("Interface/HBoxContainer/NextButton")
+money_label = NodePath("Interface/Mats/MoneyLabel")
+wood_label = NodePath("Interface/Mats/WoodLabel")
+stone_label = NodePath("Interface/Mats/StoneLabel")
+steel_label = NodePath("Interface/Mats/SteelLabel")
+day_button = NodePath("Interface/Buttons/NextButton")
 
 [node name="Interface" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -44,46 +44,48 @@ theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Interface"]
+[node name="Mats" type="VBoxContainer" parent="Interface"]
 layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 
-[node name="MoneyLabel" type="Label" parent="Interface/VBoxContainer"]
+[node name="MoneyLabel" type="Label" parent="Interface/Mats"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "Money: One million dolla"
 
-[node name="WoodLabel" type="Label" parent="Interface/VBoxContainer"]
+[node name="WoodLabel" type="Label" parent="Interface/Mats"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "Wood: like 2 or something"
 
-[node name="StoneLabel" type="Label" parent="Interface/VBoxContainer"]
+[node name="StoneLabel" type="Label" parent="Interface/Mats"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "Stone: ten"
 
-[node name="SteelLabel" type="Label" parent="Interface/VBoxContainer"]
+[node name="SteelLabel" type="Label" parent="Interface/Mats"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "Steel: please don't steal from me"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Interface"]
+[node name="Buttons" type="HBoxContainer" parent="Interface"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 alignment = 2
 
-[node name="RetryButton" type="Button" parent="Interface/HBoxContainer"]
+[node name="RetryButton" type="Button" parent="Interface/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "Retry?"
 
-[node name="NextButton" type="Button" parent="Interface/HBoxContainer"]
+[node name="NextButton" type="Button" parent="Interface/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
@@ -101,6 +103,34 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "You Failed :("
 
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+alignment = 1
+
+[node name="Label" type="Label" parent="Interface/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "--- Build ---"
+
+[node name="Build" type="HBoxContainer" parent="Interface/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="Interface/VBoxContainer/Build"]
+layout_mode = 2
+text = "Shack"
+
+[node name="Button2" type="Button" parent="Interface/VBoxContainer/Build"]
+layout_mode = 2
+text = "Mine"
+
+[node name="Button3" type="Button" parent="Interface/VBoxContainer/Build"]
+layout_mode = 2
+text = "House"
+
 [node name="PeopleLabel" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -115,10 +145,9 @@ offset_bottom = 13.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 16
+theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("3_tfa0m")
-theme_override_font_sizes/font_size = 32
 text = "0 people"
 
-[connection signal="pressed" from="Interface/HBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
-[connection signal="pressed" from="Interface/HBoxContainer/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="Interface/Buttons/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="Interface/Buttons/NextButton" to="." method="_on_next_button_pressed"]
