@@ -28,7 +28,10 @@ radial_segments = 4
 rings = 3
 
 [node name="Tree" instance=ExtResource("1_fqdyx")]
-destruction_cost = 1
+info_name = "Small Tree"
+info_description = "Costs 1 gold to remove.
+Gives 1 wood."
+reclaim_cost = 1
 reclaim_wood = 1
 
 [node name="Collision" parent="." index="0"]

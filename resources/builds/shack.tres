@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="Build" load_steps=3 format=3 uid="uid://dy337vj7d8pbj"]
+
+[ext_resource type="Script" path="res://scripts/resources/build.gd" id="1_5j6bk"]
+[ext_resource type="PackedScene" uid="uid://dce2mkn36kmp6" path="res://scenes/buildings/test_shack.tscn" id="1_cewrk"]
+
+[resource]
+script = ExtResource("1_5j6bk")
+info_name = "Shack"
+info_description = ""
+scene = ExtResource("1_cewrk")
+cost_money = 0
+cost_wood = 0
+cost_stone = 0
+cost_steel = 0

@@ -18,7 +18,7 @@
 [sub_resource type="PlaneMesh" id="PlaneMesh_5cbay"]
 size = Vector2(100, 100)
 
-[sub_resource type="Curve3D" id="Curve3D_pxom7"]
+[sub_resource type="Curve3D" id="Curve3D_2iv0f"]
 _data = {
 "points": PackedVector3Array(0, 0, 0, 0, 0, 0, -3.62712, 0, 2.06688, 0, 0, 0, 0, 0, 0, 2.06315, 0, 5.4403, 0, 0, 0, 0, 0, 0, 3.23933, 0, -5.40267, 0, 0, 0, 0, 0, 0, -2.73385, 0, -5.19929),
 "tilts": PackedFloat32Array(0, 0, 0, 0)
@@ -26,7 +26,7 @@ _data = {
 point_count = 4
 script = ExtResource("1_f5h7v")
 
-[sub_resource type="Resource" id="Resource_dsfsr"]
+[sub_resource type="Resource" id="Resource_xuvbq"]
 script = ExtResource("3_jdui4")
 flatten = true
 twist = false
@@ -37,91 +37,91 @@ points_on_ground = false
 offset_y = 0.0
 ground_placement_mask = 0
 
-[sub_resource type="Resource" id="Resource_67soa"]
+[sub_resource type="Resource" id="Resource_42yvq"]
 script = ExtResource("4_q84rl")
 base_depth = 1.0
 enabled = false
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_h2vh6"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1fr7n"]
 load_path = "res://.godot/imported/f_grass.png-88009ec70824f5532227d1b454f04e55.ctex"
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q44i7"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gtyvi"]
 diffuse_mode = 3
 specular_mode = 1
-albedo_texture = SubResource("CompressedTexture2D_h2vh6")
+albedo_texture = SubResource("CompressedTexture2D_1fr7n")
 uv1_scale = Vector3(0.25, 0.25, 0.25)
 uv1_triplanar = true
 uv1_world_triplanar = true
 texture_filter = 2
 
-[sub_resource type="Resource" id="Resource_6dcxc"]
+[sub_resource type="Resource" id="Resource_8oi0v"]
 script = ExtResource("5_npgyw")
 conform_to_wall = false
-material = SubResource("StandardMaterial3D_q44i7")
+material = SubResource("StandardMaterial3D_gtyvi")
 build_collider = true
 collision_layer = 1
 enabled = true
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_30nbn"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_v4bg2"]
 load_path = "res://.godot/imported/w_dirt.png-2eeddf25eb383eb98acb11546669d0f9.ctex"
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j8df2"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m44wm"]
 diffuse_mode = 3
 specular_mode = 1
-albedo_texture = SubResource("CompressedTexture2D_30nbn")
+albedo_texture = SubResource("CompressedTexture2D_v4bg2")
 uv1_scale = Vector3(0.25, 0.25, 0.25)
 texture_filter = 2
 
-[sub_resource type="Resource" id="Resource_u2gfo"]
+[sub_resource type="Resource" id="Resource_gnsmb"]
 script = ExtResource("7_lqfn8")
 height = 5.0
 bevel = 0.0
 taper = 0.0
-material = SubResource("StandardMaterial3D_j8df2")
+material = SubResource("StandardMaterial3D_m44wm")
 build_collider = true
 collision_layer = 1
 enabled = true
 
-[sub_resource type="Resource" id="Resource_4y271"]
+[sub_resource type="Resource" id="Resource_fxwdd"]
 script = ExtResource("6_d3558")
-cap_shaper = SubResource("Resource_6dcxc")
-wall_shaper = SubResource("Resource_u2gfo")
-bottom_shaper = SubResource("Resource_67soa")
+cap_shaper = SubResource("Resource_8oi0v")
+wall_shaper = SubResource("Resource_gnsmb")
+bottom_shaper = SubResource("Resource_42yvq")
 bottom_depth = 0.0
 collider_type = 2
 collider_ridge = 0.0
 enabled = true
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_4y6tr"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_k6lj6"]
 _surfaces = [{
 "aabb": AABB(-3.62712, 0, -5.40267, 6.86645, 1e-05, 10.843),
 "attribute_data": PackedByteArray(188, 34, 104, 192, 195, 71, 4, 64, 166, 10, 4, 64, 240, 22, 174, 64, 47, 81, 79, 64, 172, 226, 172, 192, 102, 247, 46, 192, 149, 96, 166, 192),
 "format": 4115,
 "index_count": 6,
 "index_data": PackedByteArray(0, 0, 3, 0, 2, 0, 2, 0, 1, 0, 0, 0),
-"material": SubResource("StandardMaterial3D_q44i7"),
+"material": SubResource("StandardMaterial3D_gtyvi"),
 "primitive": 3,
 "vertex_count": 4,
 "vertex_data": PackedByteArray(188, 34, 104, 192, 0, 0, 0, 0, 195, 71, 4, 64, 255, 127, 255, 255, 166, 10, 4, 64, 0, 0, 0, 0, 240, 22, 174, 64, 255, 127, 255, 255, 47, 81, 79, 64, 0, 0, 0, 0, 172, 226, 172, 192, 255, 127, 255, 255, 102, 247, 46, 192, 0, 0, 0, 0, 149, 96, 166, 192, 255, 127, 255, 255)
 }]
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_xvt38"]
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_dr1kf"]
 data = PackedVector3Array(-3.6271, 0, 2.0669, -2.7339, 0, -5.1993, 3.2393, 0, -5.4027, 3.2393, 0, -5.4027, 2.0631, 0, 5.4403, -3.6271, 0, 2.0669)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_4mldu"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_5xeth"]
 _surfaces = [{
 "aabb": AABB(-3.62712, -5, -5.40267, 6.86645, 5.00001, 10.843),
 "attribute_data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 165, 174, 211, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 160, 192, 165, 174, 211, 64, 0, 0, 160, 192, 165, 174, 211, 64, 0, 0, 0, 0, 84, 44, 140, 65, 0, 0, 0, 0, 165, 174, 211, 64, 0, 0, 160, 192, 84, 44, 140, 65, 0, 0, 160, 192, 84, 44, 140, 65, 0, 0, 0, 0, 126, 252, 187, 65, 0, 0, 0, 0, 84, 44, 140, 65, 0, 0, 160, 192, 126, 252, 187, 65, 0, 0, 160, 192, 126, 252, 187, 65, 0, 0, 0, 0, 162, 141, 246, 65, 0, 0, 0, 0, 126, 252, 187, 65, 0, 0, 160, 192, 162, 141, 246, 65, 0, 0, 160, 192),
 "format": 4115,
 "index_count": 24,
 "index_data": PackedByteArray(0, 0, 1, 0, 3, 0, 2, 0, 0, 0, 3, 0, 4, 0, 5, 0, 7, 0, 6, 0, 4, 0, 7, 0, 8, 0, 9, 0, 11, 0, 10, 0, 8, 0, 11, 0, 12, 0, 13, 0, 15, 0, 14, 0, 12, 0, 15, 0),
-"material": SubResource("StandardMaterial3D_j8df2"),
+"material": SubResource("StandardMaterial3D_m44wm"),
 "primitive": 3,
 "vertex_count": 16,
 "vertex_data": PackedByteArray(188, 34, 104, 192, 0, 0, 0, 0, 195, 71, 4, 64, 91, 80, 255, 127, 166, 10, 4, 64, 0, 0, 0, 0, 240, 22, 174, 64, 91, 80, 255, 127, 188, 34, 104, 192, 0, 0, 160, 192, 195, 71, 4, 64, 91, 80, 255, 127, 166, 10, 4, 64, 0, 0, 160, 192, 240, 22, 174, 64, 91, 80, 255, 127, 166, 10, 4, 64, 0, 0, 0, 0, 240, 22, 174, 64, 120, 243, 255, 127, 47, 81, 79, 64, 0, 0, 0, 0, 172, 226, 172, 192, 120, 243, 255, 127, 166, 10, 4, 64, 0, 0, 160, 192, 240, 22, 174, 64, 120, 243, 255, 127, 47, 81, 79, 64, 0, 0, 160, 192, 172, 226, 172, 192, 120, 243, 255, 127, 47, 81, 79, 64, 0, 0, 0, 0, 172, 226, 172, 192, 0, 0, 200, 251, 102, 247, 46, 192, 0, 0, 0, 0, 149, 96, 166, 192, 0, 0, 200, 251, 47, 81, 79, 64, 0, 0, 160, 192, 172, 226, 172, 192, 0, 0, 200, 251, 102, 247, 46, 192, 0, 0, 160, 192, 149, 96, 166, 192, 0, 0, 200, 251, 102, 247, 46, 192, 0, 0, 0, 0, 149, 96, 166, 192, 0, 0, 2, 142, 188, 34, 104, 192, 0, 0, 0, 0, 195, 71, 4, 64, 0, 0, 2, 142, 102, 247, 46, 192, 0, 0, 160, 192, 149, 96, 166, 192, 0, 0, 2, 142, 188, 34, 104, 192, 0, 0, 160, 192, 195, 71, 4, 64, 0, 0, 2, 142)
 }]
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_j476y"]
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_a3p43"]
 data = PackedVector3Array(-3.6271, 0, 2.0669, 2.0631, 0, 5.4403, 2.0631, -5, 5.4403, -3.6271, -5, 2.0669, -3.6271, 0, 2.0669, 2.0631, -5, 5.4403, 2.0631, 0, 5.4403, 3.2393, 0, -5.4027, 3.2393, -5, -5.4027, 2.0631, -5, 5.4403, 2.0631, 0, 5.4403, 3.2393, -5, -5.4027, 3.2393, 0, -5.4027, -2.7339, 0, -5.1993, -2.7339, -5, -5.1993, 3.2393, -5, -5.4027, 3.2393, 0, -5.4027, -2.7339, -5, -5.1993, -2.7339, 0, -5.1993, -3.6271, 0, 2.0669, -3.6271, -5, 2.0669, -2.7339, -5, -5.1993, -2.7339, 0, -5.1993, -3.6271, -5, 2.0669)
 
 [sub_resource type="Curve3D" id="Curve3D_eqawu"]
@@ -389,26 +389,26 @@ warning_color = Color(1, 0, 0, 1)
 
 [node name="Goshape" type="Path3D" parent="Island"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.02057, 0)
-curve = SubResource("Curve3D_pxom7")
+curve = SubResource("Curve3D_2iv0f")
 script = ExtResource("2_5gu2y")
-path_options = SubResource("Resource_dsfsr")
-shaper = SubResource("Resource_4y271")
+path_options = SubResource("Resource_xuvbq")
+shaper = SubResource("Resource_fxwdd")
 
 [node name="Mesh0" type="MeshInstance3D" parent="Island/Goshape"]
-mesh = SubResource("ArrayMesh_4y6tr")
+mesh = SubResource("ArrayMesh_k6lj6")
 
 [node name="Collider1" type="StaticBody3D" parent="Island/Goshape"]
 
 [node name="CollisionShape" type="CollisionShape3D" parent="Island/Goshape/Collider1"]
-shape = SubResource("ConcavePolygonShape3D_xvt38")
+shape = SubResource("ConcavePolygonShape3D_dr1kf")
 
 [node name="Mesh2" type="MeshInstance3D" parent="Island/Goshape"]
-mesh = SubResource("ArrayMesh_4mldu")
+mesh = SubResource("ArrayMesh_5xeth")
 
 [node name="Collider3" type="StaticBody3D" parent="Island/Goshape"]
 
 [node name="CollisionShape" type="CollisionShape3D" parent="Island/Goshape/Collider3"]
-shape = SubResource("ConcavePolygonShape3D_j476y")
+shape = SubResource("ConcavePolygonShape3D_a3p43")
 
 [node name="Goshape1" type="Path3D" parent="Island"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.70977, 0.900288, -1.87407)
@@ -460,9 +460,18 @@ shape = SubResource("ConcavePolygonShape3D_0jsmm")
 
 [node name="Stone" parent="Props" instance=ExtResource("13_g65rn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.04246, 0.900288, -2.56412)
+reclaim_cost = 0
+reclaim_stone = 0
+warning_color = Color(1, 0, 0, 1)
 
 [node name="Tree" parent="Props" instance=ExtResource("14_8yxcd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.99455, 2.64669, 0.599106)
+reclaim_cost = 0
+reclaim_wood = 0
+warning_color = Color(1, 0, 0, 1)
 
 [node name="Tree2" parent="Props" instance=ExtResource("14_8yxcd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0262299, 5.02057, 2.35686)
+reclaim_cost = 0
+reclaim_wood = 0
+warning_color = Color(1, 0, 0, 1)

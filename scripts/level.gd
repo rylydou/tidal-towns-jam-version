@@ -17,7 +17,7 @@ func _ready() -> void:
 	Game.stone = starting_stone
 	Game.steel = starting_steel
 	
-	Game.max_water_level = water_levels.size() - 1
+	Game.max_day = water_levels.size() - 1
 	update_water_level()
 	
 	Game.next_day.connect(_on_next_day)

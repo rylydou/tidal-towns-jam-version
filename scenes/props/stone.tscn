@@ -18,7 +18,10 @@ radial_segments = 5
 rings = 3
 
 [node name="Stone" instance=ExtResource("1_jixdt")]
-destruction_cost = 1
+info_name = "Small stone"
+info_description = "Costs 1 gold to remove.
+Gives 1 stone."
+reclaim_cost = 1
 reclaim_stone = 1
 
 [node name="Collision" parent="." index="0"]

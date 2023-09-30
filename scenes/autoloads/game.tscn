@@ -1,14 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://c7h6b26r26rq4"]
+[gd_scene load_steps=9 format=3 uid="uid://c7h6b26r26rq4"]
 
 [ext_resource type="FontFile" uid="uid://l2dq2jygykoh" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Bold.otf" id="1_mol1f"]
 [ext_resource type="Script" path="res://scripts/autoloads/game.gd" id="1_vcqlu"]
+[ext_resource type="Resource" uid="uid://dy337vj7d8pbj" path="res://resources/builds/shack.tres" id="3_5w1rh"]
+[ext_resource type="Material" uid="uid://ba5wfnhxarbg7" path="res://resources/mats/ui_bg_blur.tres" id="3_panam"]
 [ext_resource type="FontFile" uid="uid://himeqy34fskt" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Extrabold.otf" id="3_tfa0m"]
+[ext_resource type="FontFile" uid="uid://dd1acucu1fj2u" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Regular.otf" id="4_votfr"]
 
 [sub_resource type="Theme" id="Theme_tjem8"]
 default_font = ExtResource("1_mol1f")
 default_font_size = 24
 
-[node name="Game" type="Control" node_paths=PackedStringArray("win_screen", "fail_screen", "people_label", "money_label", "wood_label", "stone_label", "steel_label", "day_button")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q2qm8"]
+content_margin_left = 24.0
+content_margin_top = 16.0
+content_margin_right = 24.0
+content_margin_bottom = 16.0
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 1, 1, 0)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="Game" type="Control" node_paths=PackedStringArray("win_screen", "fail_screen", "info_control", "info_name_label", "info_description_label", "build_menu", "people_label", "money_label", "wood_label", "stone_label", "steel_label", "day_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,14 +41,20 @@ theme = SubResource("Theme_tjem8")
 script = ExtResource("1_vcqlu")
 win_screen = NodePath("Interface/WinLabel")
 fail_screen = NodePath("Interface/FailLabel")
+info_control = NodePath("Interface/InfoPanel")
+info_name_label = NodePath("Interface/InfoPanel/VBox/NameLabel")
+info_description_label = NodePath("Interface/InfoPanel/VBox/DesciptionLabel")
+build_menu = NodePath("Interface/Build/HBox")
 people_label = NodePath("PeopleLabel")
 money_label = NodePath("Interface/Mats/MoneyLabel")
 wood_label = NodePath("Interface/Mats/WoodLabel")
 stone_label = NodePath("Interface/Mats/StoneLabel")
 steel_label = NodePath("Interface/Mats/SteelLabel")
 day_button = NodePath("Interface/Buttons/NextButton")
+builds = Array[Resource("res://scripts/resources/build.gd")]([ExtResource("3_5w1rh")])
 
 [node name="Interface" type="MarginContainer" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,6 +68,30 @@ theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
+
+[node name="InfoPanel" type="PanelContainer" parent="Interface"]
+material = ExtResource("3_panam")
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_q2qm8")
+
+[node name="VBox" type="VBoxContainer" parent="Interface/InfoPanel"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="NameLabel" type="Label" parent="Interface/InfoPanel/VBox"]
+layout_mode = 2
+text = "Name"
+horizontal_alignment = 1
+
+[node name="DesciptionLabel" type="Label" parent="Interface/InfoPanel/VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_votfr")
+theme_override_font_sizes/font_size = 16
+text = "Description"
+autowrap_mode = 3
 
 [node name="Mats" type="VBoxContainer" parent="Interface"]
 layout_mode = 2
@@ -59,18 +108,21 @@ text = "Money: One million dolla"
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("4_votfr")
 text = "Wood: like 2 or something"
 
 [node name="StoneLabel" type="Label" parent="Interface/Mats"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("4_votfr")
 text = "Stone: ten"
 
 [node name="SteelLabel" type="Label" parent="Interface/Mats"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("4_votfr")
 text = "Steel: please don't steal from me"
 
 [node name="Buttons" type="HBoxContainer" parent="Interface"]
@@ -103,33 +155,22 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "You Failed :("
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Interface"]
+[node name="Build" type="VBoxContainer" parent="Interface"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 alignment = 1
 
-[node name="Label" type="Label" parent="Interface/VBoxContainer"]
+[node name="Label" type="Label" parent="Interface/Build"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 text = "--- Build ---"
 
-[node name="Build" type="HBoxContainer" parent="Interface/VBoxContainer"]
+[node name="HBox" type="HBoxContainer" parent="Interface/Build"]
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="Button" type="Button" parent="Interface/VBoxContainer/Build"]
-layout_mode = 2
-text = "Shack"
-
-[node name="Button2" type="Button" parent="Interface/VBoxContainer/Build"]
-layout_mode = 2
-text = "Mine"
-
-[node name="Button3" type="Button" parent="Interface/VBoxContainer/Build"]
-layout_mode = 2
-text = "House"
+alignment = 1
 
 [node name="PeopleLabel" type="Label" parent="."]
 layout_mode = 1

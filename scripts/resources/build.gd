@@ -1,7 +1,7 @@
 class_name Build extends Resource
 
-@export var name = ''
-@export var description = ''
+@export var info_name = ''
+@export_multiline var info_description = ''
 @export var scene: PackedScene
 
 @export_category('Cost')
