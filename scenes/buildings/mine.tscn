@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://bm3mkyqnqkeg1"]
+
+[ext_resource type="Script" path="res://scripts/building.gd" id="1_th27e"]
+[ext_resource type="FontFile" uid="uid://himeqy34fskt" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Extrabold.otf" id="2_adui4"]
+[ext_resource type="PackedScene" uid="uid://brcxv2e7g7qs2" path="res://resources/models/mine.glb" id="3_0wgyv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_riijj"]
+size = Vector3(2, 1.5, 2)
+
+[node name="mine" type="Area3D"]
+script = ExtResource("1_th27e")
+info_name = "Mine"
+info_description = "A mine used to extract materials from the earth. Generates 2 stone per turn."
+can_destroy = false
+stone_income = 2
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("BoxShape3D_riijj")
+
+[node name="Banner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49575, 0)
+
+[node name="Label" type="Label3D" parent="Banner"]
+unique_name_in_owner = true
+billboard = 1
+texture_filter = 1
+text = "!"
+font = ExtResource("2_adui4")
+font_size = 96
+outline_size = 16
+vertical_alignment = 2
+line_spacing = -70.0
+
+[node name="mine" parent="." instance=ExtResource("3_0wgyv")]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)

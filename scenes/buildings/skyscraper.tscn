@@ -12,6 +12,7 @@ script = ExtResource("1_b423b")
 max_inhabitants = 25
 info_name = "Skyscraper"
 info_description = "A tower that reaches for the skies. Holds 25 people."
+can_destroy = false
 steel_income = 5
 
 [node name="Collision" type="CollisionShape3D" parent="."]

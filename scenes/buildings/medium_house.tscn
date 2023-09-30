@@ -12,6 +12,7 @@ script = ExtResource("1_8xmec")
 max_inhabitants = 4
 info_name = "Medium House"
 info_description = "A regular house. Holds 4 people."
+can_destroy = false
 
 [node name="Collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.749531, 0)

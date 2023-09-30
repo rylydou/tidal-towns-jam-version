@@ -12,13 +12,14 @@ script = ExtResource("1_rt48w")
 max_inhabitants = 50
 info_name = "Arcology"
 info_description = "A self sustained city contained within a single structure"
+can_destroy = false
 
 [node name="Collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 shape = SubResource("BoxShape3D_mlo78")
 
 [node name="Banner" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.53087, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.23987, 0)
 
 [node name="Label" type="Label3D" parent="Banner"]
 unique_name_in_owner = true
@@ -32,4 +33,4 @@ vertical_alignment = 2
 line_spacing = -70.0
 
 [node name="arcology" parent="." instance=ExtResource("3_n0xqg")]
-transform = Transform3D(0.5, 0, 0, 0, 0.6, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

@@ -12,6 +12,7 @@ script = ExtResource("1_vvgpx")
 max_inhabitants = 15
 info_name = "Large Apartment Building"
 info_description = "An apartment building that holds 15 people."
+can_destroy = false
 
 [node name="Collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.65595e-05, 0.995645, 0.00192785)

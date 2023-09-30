@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://dx8mw360pgrdl"]
+[gd_scene load_steps=67 format=3 uid="uid://dx8mw360pgrdl"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_5k8tj"]
 [ext_resource type="Material" uid="uid://c18l5tcblctdt" path="res://resources/mats/water.tres" id="2_kdj58"]
@@ -16,8 +16,10 @@
 [ext_resource type="PackedScene" uid="uid://eg1clhlpqjr6" path="res://scenes/buildings/small_apartments.tscn" id="9_vnmcf"]
 [ext_resource type="Script" path="res://addons/goshapes/MeshShaper/Shapers/CapFlatShaper.gd" id="10_cafao"]
 [ext_resource type="Script" path="res://addons/goshapes/MeshShaper/BlockShaper.gd" id="11_dbxcl"]
+[ext_resource type="PackedScene" uid="uid://bnnqjxynv4ohs" path="res://scenes/buildings/shop.tscn" id="11_jjhyq"]
 [ext_resource type="Script" path="res://addons/goshapes/MeshShaper/Shapers/WallBevelShaper.gd" id="12_6xx3b"]
 [ext_resource type="PackedScene" uid="uid://cjxuybyvl8xjt" path="res://scenes/props/stone.tscn" id="13_3t0oc"]
+[ext_resource type="PackedScene" uid="uid://bm3mkyqnqkeg1" path="res://scenes/buildings/mine.tscn" id="14_aaybj"]
 [ext_resource type="PackedScene" uid="uid://b1h4v8rs4vn7n" path="res://scenes/props/tree.tscn" id="14_q5xdx"]
 [ext_resource type="PackedScene" uid="uid://de08m53utm5qi" path="res://scenes/buildings/skyscraper.tscn" id="20_jk5kh"]
 [ext_resource type="PackedScene" uid="uid://pvlo5xbd2ey6" path="res://scenes/buildings/arcology.tscn" id="21_6dhgi"]
@@ -401,6 +403,18 @@ transform = Transform3D(0.888505, 0, -0.458867, 0, 1, 0, 0.458867, 0, 0.888505, 
 [node name="small_apartments" parent="Level/Buildings" instance=ExtResource("9_vnmcf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.68336, 5.04335, 1.03769)
 
+[node name="shop" parent="Level/Buildings" instance=ExtResource("11_jjhyq")]
+transform = Transform3D(0.872709, 0, 0.48824, 0, 1, 0, -0.48824, 0, 0.872709, 6.24743, 0.909744, -5.23016)
+
+[node name="skyscraper" parent="Level/Buildings" instance=ExtResource("20_jk5kh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 5, 0)
+
+[node name="arcology" parent="Level/Buildings" instance=ExtResource("21_6dhgi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -10)
+
+[node name="mine" parent="Level/Buildings" instance=ExtResource("14_aaybj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.00736, 0.911802, 1.10883)
+
 [node name="Island" type="Node3D" parent="Level"]
 
 [node name="Goshape" type="Path3D" parent="Level/Island"]
@@ -482,9 +496,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.99455, 2.64669, 0.599106)
 
 [node name="Tree2" parent="Level/Props" instance=ExtResource("14_q5xdx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0262299, 5.02057, 2.35686)
-
-[node name="skyscraper" parent="." instance=ExtResource("20_jk5kh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 5, 0)
-
-[node name="arcology" parent="." instance=ExtResource("21_6dhgi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -10)

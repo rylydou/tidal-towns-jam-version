@@ -12,6 +12,7 @@ script = ExtResource("1_qdfru")
 max_inhabitants = 6
 info_name = "Large House"
 info_description = "The peak of luxury. Holds 6 people."
+can_destroy = false
 
 [node name="Collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
