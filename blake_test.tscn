@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=3 uid="uid://dx8mw360pgrdl"]
+[gd_scene load_steps=65 format=3 uid="uid://dx8mw360pgrdl"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_5k8tj"]
 [ext_resource type="Material" uid="uid://c18l5tcblctdt" path="res://resources/mats/water.tres" id="2_kdj58"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://cjxuybyvl8xjt" path="res://scenes/props/stone.tscn" id="13_3t0oc"]
 [ext_resource type="PackedScene" uid="uid://b1h4v8rs4vn7n" path="res://scenes/props/tree.tscn" id="14_q5xdx"]
 [ext_resource type="PackedScene" uid="uid://de08m53utm5qi" path="res://scenes/buildings/skyscraper.tscn" id="20_jk5kh"]
+[ext_resource type="PackedScene" uid="uid://pvlo5xbd2ey6" path="res://scenes/buildings/arcology.tscn" id="21_6dhgi"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_5cbay"]
 size = Vector2(100, 100)
@@ -346,12 +347,14 @@ data = PackedVector3Array(-11.6078, 0, 5.163, -4.9909, 0, 8.0853, -4.9909, -5, 8
 
 [node name="Level" type="Node3D" parent="." node_paths=PackedStringArray("water", "camera_anchor")]
 script = ExtResource("1_5k8tj")
+money_per_day = 3
 starting_money = 2
 water_levels = Array[float]([0.0, 1.0, 4.0])
 water = NodePath("Water")
 camera_anchor = NodePath("CameraAnchor")
 
 [node name="Water" type="MeshInstance3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0102768, -0.0211029, 0.0252094)
 material_override = ExtResource("2_kdj58")
 cast_shadow = 0
 gi_mode = 0
@@ -363,6 +366,7 @@ script = ExtResource("3_h68mq")
 
 [node name="Camera" type="Camera3D" parent="Level/CameraAnchor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 25)
+current = true
 fov = 30.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Level"]
@@ -481,3 +485,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0262299, 5.02057, 2.35686)
 
 [node name="skyscraper" parent="." instance=ExtResource("20_jk5kh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 5, 0)
+
+[node name="arcology" parent="." instance=ExtResource("21_6dhgi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -10)

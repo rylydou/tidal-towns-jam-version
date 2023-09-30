@@ -11,6 +11,8 @@ radius = 1.0
 [node name="small_house" type="Area3D"]
 script = ExtResource("1_an2rr")
 max_inhabitants = 2
+info_name = "Small House"
+info_description = "A modest house for modest needs. Holds 2 people."
 reclaim_wood = 1
 
 [node name="Collision" type="CollisionShape3D" parent="."]

@@ -10,6 +10,9 @@ size = Vector3(2.5, 4, 2.5)
 [node name="skyscraper" type="Area3D"]
 script = ExtResource("1_b423b")
 max_inhabitants = 25
+info_name = "Skyscraper"
+info_description = "A tower that reaches for the skies. Holds 25 people."
+steel_income = 5
 
 [node name="Collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000621319, 2, -0.0106144)
