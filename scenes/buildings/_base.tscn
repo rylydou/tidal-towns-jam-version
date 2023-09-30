@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwg6imm7grt3y"]
+
+[ext_resource type="Script" path="res://scripts/building.gd" id="1_nv4aq"]
+[ext_resource type="FontFile" uid="uid://himeqy34fskt" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Extrabold.otf" id="2_lwisg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fd7vp"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xupx1"]
+
+[node name="Building" type="Area3D"]
+script = ExtResource("1_nv4aq")
+max_inhabitants = 1
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_fd7vp")
+
+[node name="Banner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.50616, 0)
+
+[node name="PopulationLabel" type="Label3D" parent="Banner"]
+unique_name_in_owner = true
+billboard = 1
+alpha_cut = 2
+texture_filter = 1
+text = "5"
+font = ExtResource("2_lwisg")
+font_size = 96
+outline_size = 10
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_xupx1")
