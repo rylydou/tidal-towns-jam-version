@@ -5,6 +5,7 @@ class_name Building extends Area3D
 @export var fail_on_sink = false
 
 @export_category('Reclaim')
+@export var can_destroy = false
 @export var reclaim_cost = 0
 @export var reclaim_money = 0
 @export var reclaim_wood = 0
@@ -22,6 +23,7 @@ var is_reclaimed = false
 func _enter_tree() -> void:
 	input_event.connect(_on_input_event)
 	Game.water_level_changed.connect(water_level_changed)
+	Game.building_special.connect(special)
 
 func water_level_changed() -> void:
 	var will_sink = position.y <= Game.next_water_level
@@ -35,23 +37,25 @@ func water_level_changed() -> void:
 		var tween = create_tween()
 		tween.tween_property(self, 'position:y', position.y - 10, 2.5).set_delay(1.0)
 
+func special() -> void:
+	pass
+
 func _on_input_event(camera: Node, event: InputEvent, position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	var mouse_event = event as InputEventMouseButton
 	if not mouse_event: return
 	
 	if Input.is_action_just_pressed('add'):
 		_add()
-		return
 
 	if Input.is_action_just_pressed('sub'):
 		_sub()
-		return
 
 func _add() -> void:
 	pass
 
 func _sub() -> void:
-	reclaim()
+	if can_destroy:
+		reclaim()
 
 func reclaim() -> void:
 	if is_reclaimed: return
@@ -68,7 +72,6 @@ func reclaim() -> void:
 func test_placement(floor_valid: bool) -> bool:
 	var is_valid = floor_valid
 	if get_overlapping_areas().size() > 0: is_valid = false
-	# if get_overlapping_bodies().size() > 1: is_valid = false
 	
 	label.visible = not is_valid
 	label.modulate = warning_color

@@ -1,5 +1,7 @@
 class_name Level extends Node3D
 
+@export var money_per_day := 0
+
 @export var starting_money := 0
 @export var starting_wood := 0
 @export var starting_stone := 0
@@ -33,3 +35,4 @@ func update_water_level() -> void:
 
 func _on_next_day() -> void:
 	update_water_level()
+	Game.money += money_per_day

@@ -2,6 +2,7 @@ extends Control
 
 signal next_day()
 signal water_level_changed()
+signal building_special()
 
 @export var win_screen: Control
 @export var fail_screen: Control
@@ -145,9 +146,6 @@ func restart() -> void:
 	
 	next_day.emit()
 	water_level_changed.emit()
-	
-	win_screen.hide()
-	fail_screen.hide()
 
 func win() -> void:
 	win_screen.show()
@@ -168,3 +166,4 @@ func _on_next_button_pressed() -> void:
 	
 	next_day.emit()
 	water_level_changed.emit()
+	building_special.emit()

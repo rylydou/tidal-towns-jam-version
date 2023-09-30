@@ -143,6 +143,23 @@ size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "Next Day 0/3"
 
+[node name="Build" type="VBoxContainer" parent="Interface"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+alignment = 1
+
+[node name="Label" type="Label" parent="Interface/Build"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Build"
+
+[node name="HBox" type="HBoxContainer" parent="Interface/Build"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
 [node name="WinLabel" type="Label" parent="Interface"]
 visible = false
 layout_mode = 2
@@ -154,23 +171,6 @@ visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 text = "You Failed :("
-
-[node name="Build" type="VBoxContainer" parent="Interface"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-alignment = 1
-
-[node name="Label" type="Label" parent="Interface/Build"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-text = "--- Build ---"
-
-[node name="HBox" type="HBoxContainer" parent="Interface/Build"]
-layout_mode = 2
-size_flags_vertical = 3
-alignment = 1
 
 [node name="PeopleLabel" type="Label" parent="."]
 layout_mode = 1
