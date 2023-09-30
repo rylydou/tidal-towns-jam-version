@@ -2,10 +2,9 @@ class_name Building extends Area3D
 
 @export var info_name = ''
 @export_multiline var info_description = ''
-@export var fail_on_sink = false
 
 @export_category('Reclaim')
-@export var can_destroy = false
+@export var can_destroy = true
 @export var reclaim_cost = 0
 @export var reclaim_money = 0
 @export var reclaim_wood = 0
@@ -25,6 +24,8 @@ class_name Building extends Area3D
 @onready var label: Label3D = %Label
 
 var is_reclaimed = false
+var is_sunk = false
+var will_sink = false
 
 func _enter_tree() -> void:
 	input_event.connect(_on_input_event)
@@ -32,18 +33,17 @@ func _enter_tree() -> void:
 	Game.building_special.connect(special)
 
 func water_level_changed() -> void:
-	var will_sink = position.y <= Game.next_water_level
-	if fail_on_sink:
-		label.modulate = warning_color if will_sink else normal_color
-		label.visible = will_sink
+	will_sink = position.y <= Game.next_water_level
+	label.text = '!'
+	label.modulate = warning_color if will_sink else normal_color
+	label.visible = will_sink
 	
 	if position.y <= Game.current_water_level:
-		if fail_on_sink:
-			Game.fail()
-		var tween = create_tween()
-		tween.tween_property(self, 'position:y', position.y - 10, 2.5).set_delay(1.0)
+		sink()
 
 func special() -> void:
+	if is_sunk: return
+		
 	Game.wood += wood_income
 	Game.stone += stone_income
 	Game.steel += steel_income
@@ -77,6 +77,12 @@ func reclaim() -> void:
 	Game.stone += reclaim_stone
 	Game.steel += reclaim_steel
 	queue_free()
+
+func sink() -> void:
+	if is_sunk: return
+	is_sunk = true
+	var tween = create_tween()
+	tween.tween_property(self, 'position:y', position.y - 10, 2.5).set_delay(1.0)
 
 func test_placement(floor_valid: bool) -> bool:
 	var is_valid = floor_valid

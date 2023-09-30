@@ -18,7 +18,7 @@ radial_segments = 5
 rings = 3
 
 [node name="Stone" instance=ExtResource("1_jixdt")]
-info_name = "Small stone"
+info_name = "Stone"
 info_description = "Costs 1 gold to remove.
 Gives 1 stone."
 reclaim_cost = 1
@@ -32,3 +32,6 @@ shape = SubResource("CylinderShape3D_b6vdd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 material_override = SubResource("StandardMaterial3D_qc2ch")
 mesh = SubResource("SphereMesh_xt4na")
+
+[node name="Banner" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)

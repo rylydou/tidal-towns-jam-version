@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://cfxe1qp81ae7d"]
+
+[ext_resource type="PackedScene" uid="uid://ma0url8bjxmu" path="res://scenes/props/_base.tscn" id="1_sslie"]
+[ext_resource type="Script" path="res://scripts/sapling.gd" id="2_u78xt"]
+[ext_resource type="PackedScene" uid="uid://b1h4v8rs4vn7n" path="res://scenes/props/tree.tscn" id="3_jmlki"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_wjl0o"]
+radius = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hlhl0"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.627451, 0.356863, 0.32549, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_l4waw"]
+top_radius = 0.125
+bottom_radius = 0.125
+height = 0.5
+radial_segments = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_opp7v"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.713726, 0.835294, 0.235294, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_0wegr"]
+radial_segments = 5
+rings = 1
+
+[node name="Sapling" instance=ExtResource("1_sslie")]
+script = ExtResource("2_u78xt")
+tree_scene = ExtResource("3_jmlki")
+info_name = "Sapling"
+info_description = "It's still a baby."
+reclaim_cost = 1
+reclaim_wood = 1
+
+[node name="Collision" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_wjl0o")
+
+[node name="Trunk" type="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+material_override = SubResource("StandardMaterial3D_hlhl0")
+mesh = SubResource("CylinderMesh_l4waw")
+
+[node name="Leaves" type="MeshInstance3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+material_override = SubResource("StandardMaterial3D_opp7v")
+mesh = SubResource("SphereMesh_0wegr")
+
+[node name="Banner" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)

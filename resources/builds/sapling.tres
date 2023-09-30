@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Build" load_steps=3 format=3 uid="uid://hobe62ee2omb"]
+
+[ext_resource type="PackedScene" uid="uid://cfxe1qp81ae7d" path="res://scenes/props/sapling.tscn" id="1_oxxd8"]
+[ext_resource type="Script" path="res://scripts/resources/build.gd" id="2_eag0x"]
+
+[resource]
+script = ExtResource("2_eag0x")
+info_name = "Sapling"
+info_description = "Plant a body tree for 1 gold.
+The next day it will grow into a big tree."
+scene = ExtResource("1_oxxd8")
+cost_money = 1
+cost_wood = 0
+cost_stone = 0
+cost_steel = 0

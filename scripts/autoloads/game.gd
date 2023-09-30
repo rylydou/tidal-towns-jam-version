@@ -37,6 +37,7 @@ var current_water_level := 0.0
 var next_water_level := 0.0
 
 var people := 0
+var build: Build
 var building: Building
 
 var body_ray: RayCast3D
@@ -52,9 +53,9 @@ func _ready() -> void:
 		build_menu.add_child(build_button)
 	
 	body_ray = RayCast3D.new()
+	add_child(body_ray)
 	body_ray.collide_with_areas = false
 	body_ray.collide_with_bodies = true
-	add_child(body_ray)
 	
 	area_ray = RayCast3D.new()
 	add_child(area_ray)
@@ -95,10 +96,14 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed('add'):
 		if building:
-			if building.test_placement(floor_valid):
-				building.water_level_changed()
-			else:
-				building.queue_free()
+			if not building.test_placement(floor_valid):
+				return
+			
+			building.water_level_changed()
+			money -= build.cost_money
+			wood -= build.cost_wood
+			stone -= build.cost_stone
+			steel -= build.cost_steel
 			
 			building = null
 			return
@@ -108,6 +113,8 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed('sub'):
 		if building:
+			building.queue_free()
+			building = null
 			return
 		
 		if people > 0:
@@ -121,6 +128,7 @@ func _process(delta: float) -> void:
 		return
 
 func cast_ray() -> void:
+	if not is_instance_valid(camera): return
 	body_ray.position = camera.global_position
 	body_ray.target_position = body_ray.position + camera.project_ray_normal(get_local_mouse_position())*1000
 	body_ray.force_raycast_update()
@@ -130,6 +138,13 @@ func cast_ray() -> void:
 	area_ray.force_raycast_update()
 
 func start_build(build: Build) -> void:
+	if money < build.cost_money: return
+	if wood < build.cost_wood: return
+	if stone < build.cost_stone: return
+	if steel < build.cost_steel: return
+	
+	self.build = build
+	
 	building = build.scene.instantiate() as Building
 	get_tree().current_scene.add_child(building)
 
@@ -145,6 +160,7 @@ func restart() -> void:
 	camera = get_tree().current_scene.find_child('Camera')
 	
 	next_day.emit()
+	await get_tree().process_frame
 	water_level_changed.emit()
 
 func win() -> void:

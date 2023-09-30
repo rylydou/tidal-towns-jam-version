@@ -6,9 +6,10 @@
 [resource]
 script = ExtResource("1_5j6bk")
 info_name = "Shack"
-info_description = ""
+info_description = "Houses 1 person.
+Costs 1 gold and 1 wood."
 scene = ExtResource("1_cewrk")
-cost_money = 0
-cost_wood = 0
+cost_money = 1
+cost_wood = 1
 cost_stone = 0
 cost_steel = 0

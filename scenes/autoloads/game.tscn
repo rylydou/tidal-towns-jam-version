@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://c7h6b26r26rq4"]
+[gd_scene load_steps=10 format=3 uid="uid://c7h6b26r26rq4"]
 
 [ext_resource type="FontFile" uid="uid://l2dq2jygykoh" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Bold.otf" id="1_mol1f"]
 [ext_resource type="Script" path="res://scripts/autoloads/game.gd" id="1_vcqlu"]
 [ext_resource type="Resource" uid="uid://dy337vj7d8pbj" path="res://resources/builds/shack.tres" id="3_5w1rh"]
 [ext_resource type="Material" uid="uid://ba5wfnhxarbg7" path="res://resources/mats/ui_bg_blur.tres" id="3_panam"]
 [ext_resource type="FontFile" uid="uid://himeqy34fskt" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Extrabold.otf" id="3_tfa0m"]
+[ext_resource type="Resource" uid="uid://hobe62ee2omb" path="res://resources/builds/sapling.tres" id="4_bvova"]
 [ext_resource type="FontFile" uid="uid://dd1acucu1fj2u" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Regular.otf" id="4_votfr"]
 
 [sub_resource type="Theme" id="Theme_tjem8"]
@@ -51,7 +52,7 @@ wood_label = NodePath("Interface/Mats/WoodLabel")
 stone_label = NodePath("Interface/Mats/StoneLabel")
 steel_label = NodePath("Interface/Mats/SteelLabel")
 day_button = NodePath("Interface/Buttons/NextButton")
-builds = Array[Resource("res://scripts/resources/build.gd")]([ExtResource("3_5w1rh")])
+builds = Array[Resource("res://scripts/resources/build.gd")]([ExtResource("3_5w1rh"), ExtResource("4_bvova")])
 
 [node name="Interface" type="MarginContainer" parent="."]
 unique_name_in_owner = true

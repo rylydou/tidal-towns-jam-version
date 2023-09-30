@@ -10,8 +10,9 @@ func update_label() -> void:
 func water_level_changed() -> void:
 	super.water_level_changed()
 	
-	label.show()
 	update_label()
+	
+	label.show()
 
 func _add() -> void:
 	if Game.people > 0 and current_inhabitants < max_inhabitants:

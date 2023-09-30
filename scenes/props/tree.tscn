@@ -28,7 +28,7 @@ radial_segments = 4
 rings = 3
 
 [node name="Tree" instance=ExtResource("1_fqdyx")]
-info_name = "Small Tree"
+info_name = "Tree"
 info_description = "Costs 1 gold to remove.
 Gives 1 wood."
 reclaim_cost = 1
@@ -47,3 +47,6 @@ mesh = SubResource("CylinderMesh_kgdq3")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 material_override = SubResource("StandardMaterial3D_0eaif")
 mesh = SubResource("SphereMesh_mhgc5")
+
+[node name="Banner" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
