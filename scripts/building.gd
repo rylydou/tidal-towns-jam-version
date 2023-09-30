@@ -67,6 +67,7 @@ func _sub() -> void:
 		reclaim()
 
 func reclaim() -> void:
+	if is_sunk: return
 	if is_reclaimed: return
 	if Game.money < reclaim_cost: return
 	is_reclaimed = true
@@ -80,6 +81,7 @@ func reclaim() -> void:
 
 func sink() -> void:
 	if is_sunk: return
+	if is_reclaimed: return
 	is_sunk = true
 	var tween = create_tween()
 	tween.tween_property(self, 'position:y', position.y - 10, 2.5).set_delay(1.0)
