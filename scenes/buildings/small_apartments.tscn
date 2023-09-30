@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://eg1clhlpqjr6"]
+
+[ext_resource type="Script" path="res://scripts/home.gd" id="1_i5xid"]
+[ext_resource type="FontFile" uid="uid://himeqy34fskt" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Extrabold.otf" id="2_68nij"]
+[ext_resource type="PackedScene" uid="uid://dd6yecdm2cxu4" path="res://resources/models/smallapartments.glb" id="3_d0wyk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_py1yn"]
+size = Vector3(1.5, 2, 3.5)
+
+[node name="small_apartments" type="Area3D"]
+script = ExtResource("1_i5xid")
+max_inhabitants = 10
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.65595e-05, 0.995645, 0.00192785)
+shape = SubResource("BoxShape3D_py1yn")
+
+[node name="Banner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.05085, 0)
+
+[node name="Label" type="Label3D" parent="Banner"]
+unique_name_in_owner = true
+billboard = 1
+texture_filter = 1
+text = "!"
+font = ExtResource("2_68nij")
+font_size = 96
+outline_size = 16
+vertical_alignment = 2
+line_spacing = -70.0
+
+[node name="smallapartments" parent="." instance=ExtResource("3_d0wyk")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

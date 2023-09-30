@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5wksippryt16"]
+
+[ext_resource type="Script" path="res://scripts/home.gd" id="1_qdfru"]
+[ext_resource type="FontFile" uid="uid://himeqy34fskt" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Extrabold.otf" id="2_g1fq6"]
+[ext_resource type="PackedScene" uid="uid://dkj68oi2v2vo7" path="res://resources/models/largehouse.glb" id="3_u4sdx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dwwfp"]
+size = Vector3(1.5, 1.5, 2.5)
+
+[node name="large_house" type="Area3D"]
+script = ExtResource("1_qdfru")
+max_inhabitants = 6
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("BoxShape3D_dwwfp")
+
+[node name="Banner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Label" type="Label3D" parent="Banner"]
+unique_name_in_owner = true
+billboard = 1
+texture_filter = 1
+text = "!"
+font = ExtResource("2_g1fq6")
+font_size = 96
+outline_size = 16
+vertical_alignment = 2
+line_spacing = -70.0
+
+[node name="largehouse" parent="." instance=ExtResource("3_u4sdx")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://bokbi171ehuta"]
+
+[ext_resource type="Script" path="res://scripts/home.gd" id="1_vvgpx"]
+[ext_resource type="FontFile" uid="uid://himeqy34fskt" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Extrabold.otf" id="2_ee71h"]
+[ext_resource type="PackedScene" uid="uid://ct5buxnpq01yw" path="res://resources/models/largeapartments.glb" id="3_mibil"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d25fd"]
+size = Vector3(1.5, 2, 3.5)
+
+[node name="large_apartments" type="Area3D"]
+script = ExtResource("1_vvgpx")
+max_inhabitants = 15
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.65595e-05, 0.995645, 0.00192785)
+shape = SubResource("BoxShape3D_d25fd")
+
+[node name="Banner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.50611, 0)
+
+[node name="Label" type="Label3D" parent="Banner"]
+unique_name_in_owner = true
+billboard = 1
+texture_filter = 1
+text = "!"
+font = ExtResource("2_ee71h")
+font_size = 96
+outline_size = 16
+vertical_alignment = 2
+line_spacing = -70.0
+
+[node name="largeapartments" parent="." instance=ExtResource("3_mibil")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

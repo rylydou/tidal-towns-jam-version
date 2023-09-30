@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdb8muc2fmkou"]
+
+[ext_resource type="Script" path="res://scripts/home.gd" id="1_an2rr"]
+[ext_resource type="PackedScene" uid="uid://cyir8urjplhog" path="res://resources/models/smallhouse.glb" id="2_uw0r8"]
+[ext_resource type="FontFile" uid="uid://himeqy34fskt" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Extrabold.otf" id="3_1shsy"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_jqp1b"]
+height = 1.5
+radius = 1.0
+
+[node name="small_house" type="Area3D"]
+script = ExtResource("1_an2rr")
+max_inhabitants = 2
+reclaim_wood = 1
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("CylinderShape3D_jqp1b")
+
+[node name="smallhouse" parent="." instance=ExtResource("2_uw0r8")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="Banner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="Label" type="Label3D" parent="Banner"]
+unique_name_in_owner = true
+billboard = 1
+texture_filter = 1
+text = "!"
+font = ExtResource("3_1shsy")
+font_size = 96
+outline_size = 16
+vertical_alignment = 2
+line_spacing = -70.0

@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://de08m53utm5qi"]
+
+[ext_resource type="Script" path="res://scripts/home.gd" id="1_b423b"]
+[ext_resource type="FontFile" uid="uid://himeqy34fskt" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Extrabold.otf" id="2_ji6oo"]
+[ext_resource type="PackedScene" uid="uid://dsdpuxmwcxxg6" path="res://resources/models/skyscraper.glb" id="3_asgif"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fvu68"]
+size = Vector3(2.5, 4, 2.5)
+
+[node name="skyscraper" type="Area3D"]
+script = ExtResource("1_b423b")
+max_inhabitants = 25
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000621319, 2, -0.0106144)
+shape = SubResource("BoxShape3D_fvu68")
+
+[node name="Banner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.11975, 0)
+
+[node name="Label" type="Label3D" parent="Banner"]
+unique_name_in_owner = true
+billboard = 1
+texture_filter = 1
+text = "!"
+font = ExtResource("2_ji6oo")
+font_size = 96
+outline_size = 16
+vertical_alignment = 2
+line_spacing = -70.0
+
+[node name="skyscraper" parent="." instance=ExtResource("3_asgif")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

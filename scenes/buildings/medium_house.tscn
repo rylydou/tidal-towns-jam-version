@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwgs2igp3u77a"]
+
+[ext_resource type="Script" path="res://scripts/home.gd" id="1_8xmec"]
+[ext_resource type="PackedScene" uid="uid://uaoyx8q8xim4" path="res://resources/models/mediumhouse.glb" id="2_lig0a"]
+[ext_resource type="FontFile" uid="uid://himeqy34fskt" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Extrabold.otf" id="3_spfao"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kqk1t"]
+size = Vector3(1.5, 1.5, 2.5)
+
+[node name="medium_house" type="Area3D"]
+script = ExtResource("1_8xmec")
+max_inhabitants = 4
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.749531, 0)
+shape = SubResource("BoxShape3D_kqk1t")
+
+[node name="mediumhouse" parent="." instance=ExtResource("2_lig0a")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="Banner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49575, 0)
+
+[node name="Label" type="Label3D" parent="Banner"]
+unique_name_in_owner = true
+billboard = 1
+texture_filter = 1
+text = "!"
+font = ExtResource("3_spfao")
+font_size = 96
+outline_size = 16
+vertical_alignment = 2
+line_spacing = -70.0
