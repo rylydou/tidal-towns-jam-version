@@ -12,6 +12,12 @@ class_name Building extends Area3D
 @export var reclaim_stone = 0
 @export var reclaim_steel = 0
 
+@export_category('Income')
+@export var wood_income = 0
+@export var stone_income = 0
+@export var steel_income = 0
+@export var money_income = 0
+
 @export_group('Other')
 @export var normal_color := Color.WHITE
 @export var warning_color := Color.RED
@@ -38,7 +44,10 @@ func water_level_changed() -> void:
 		tween.tween_property(self, 'position:y', position.y - 10, 2.5).set_delay(1.0)
 
 func special() -> void:
-	pass
+	Game.wood += wood_income
+	Game.stone += stone_income
+	Game.steel += steel_income
+	Game.money += money_income
 
 func _on_input_event(camera: Node, event: InputEvent, position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	var mouse_event = event as InputEventMouseButton
