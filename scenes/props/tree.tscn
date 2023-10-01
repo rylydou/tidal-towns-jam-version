@@ -40,6 +40,7 @@ Gives 1 wood when removed.
 Will grow into big tree tomorrow."
 reclaim_cost = 1
 reclaim_wood = 1
+is_built = true
 
 [node name="Collision" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

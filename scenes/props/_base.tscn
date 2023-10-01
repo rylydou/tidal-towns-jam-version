@@ -5,7 +5,7 @@
 
 [node name="BaseProp" type="Area3D"]
 script = ExtResource("1_ry6w6")
-warning_color = Color(0.901961, 0.282353, 0.180392, 1)
+is_built = true
 
 [node name="Collision" type="CollisionShape3D" parent="."]
 
