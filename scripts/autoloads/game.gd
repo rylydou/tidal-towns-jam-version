@@ -48,6 +48,7 @@ var next_water_level := 0.0
 
 var people := 0
 var build: Build
+@export var sapling_build: Build
 var building: Building
 
 var body_ray: RayCast3D
@@ -123,7 +124,11 @@ func _process(delta: float) -> void:
 			stone -= build.cost_stone
 			steel -= build.cost_steel
 			
-			building = null
+			if build == sapling_build:
+				building = null
+				start_build(sapling_build)
+			else:
+				building = null
 			return
 		
 		if people > 0:
@@ -238,6 +243,7 @@ func next_level():
 	current_level = levels[level_number].instantiate()
 	tutorial_label.text = current_level.tutorial_messages[0]
 	message_num = 0
+	tutorial_container.visible = true
 	
 	day = 0
 	people = 0

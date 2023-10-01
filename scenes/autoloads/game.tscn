@@ -94,6 +94,7 @@ steel_label = NodePath("Interface/VBox/SteelLabel")
 day_button = NodePath("MarginContainer/ButtonPanel/Hbox/NextButton")
 builds = Array[Resource("res://scripts/resources/build.gd")]([ExtResource("4_bvova"), ExtResource("12_70825"), ExtResource("13_a1ur6"), ExtResource("14_jypvw"), ExtResource("4_vbed1"), ExtResource("5_mv84u"), ExtResource("6_cnkh4"), ExtResource("7_f5r7k"), ExtResource("13_8w7o7"), ExtResource("8_087w2"), ExtResource("9_xgsky"), ExtResource("10_4d3lr"), ExtResource("11_jrb1s")])
 levels = Array[PackedScene]([ExtResource("16_ub6ls"), ExtResource("16_y8j82"), ExtResource("17_c7orv")])
+sapling_build = ExtResource("4_bvova")
 
 [node name="Interface" type="MarginContainer" parent="."]
 unique_name_in_owner = true
