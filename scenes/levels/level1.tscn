@@ -574,8 +574,8 @@ data = PackedVector3Array(4.2266, 0, 3.7929, 4.47, 0, 3.6096, 4.47, -5, 3.6096, 
 [node name="Level" type="Node3D" node_paths=PackedStringArray("water", "camera_anchor")]
 script = ExtResource("1_yas5d")
 money_per_day = 3
-water_levels = Array[float]([0.2, 0.4, 0.6, 0.8, 0.9, 1.1, 1.1, 1.1, 1.1, 1.1, 2.1, 2.1, 2.1, 2.1, 2.1, 3.1, 3.1, 3.1, 3.1, 3.1, 4.1, 4.1, 4.1, 4.1, 4.1, 5.2])
-tutorial_messages = Array[String](["Test", "Test2"])
+water_levels = Array[float]([0.2, 0.4, 0.6, 0.8, 1.1, 1.1, 1.1, 1.1, 1.1, 2.1, 2.1, 2.1, 2.1, 2.1, 3.1, 3.1, 3.1, 3.1, 3.1, 4.1, 4.1, 4.1, 4.1, 4.1, 5.2])
+tutorial_messages = Array[String](["This island is more populated than the last, and the top level is smaller too!", "You will need to much more desnly populate this island.", "To build more effective structures, you will need to boost your econmy and obtain stone and steel.", "Shops cost wood and provide gold. \\nMines cost wood and gold and produce stone. \\nFactories cost stone and gold and produce steel.", "Only tents can be destroyed, so make sure to make good use of your space or else you'll run out.", "Good luck, and remember to always plant saplings!"])
 water = NodePath("Water")
 camera_anchor = NodePath("CameraAnchor")
 
@@ -621,15 +621,15 @@ transform = Transform3D(-0.190312, 0, 0.981724, 0, 1, 0, -0.981724, 0, -0.190312
 current_inhabitants = 6
 
 [node name="tent" parent="Buildings" instance=ExtResource("19_8kmen")]
-transform = Transform3D(0.896541, 0, -0.442962, 0, 1, 0, 0.442962, 0, 0.896541, 8.96181, 0.900287, 2.84134)
+transform = Transform3D(-0.696114, 0, 0.717932, 0, 1, 0, -0.717932, 0, -0.696114, 5.62109, 0.900287, 0.844861)
 current_inhabitants = 1
 
 [node name="tent2" parent="Buildings" instance=ExtResource("19_8kmen")]
-transform = Transform3D(0.945632, 0, 0.325238, 0, 1, 0, -0.325238, 0, 0.945632, 10.3836, 0.900287, -8.12066)
+transform = Transform3D(-0.553973, 0, -0.832535, 0, 1, 0, 0.832535, 0, -0.553973, 5.70846, 0.900287, -4.4702)
 current_inhabitants = 1
 
 [node name="tent3" parent="Buildings" instance=ExtResource("19_8kmen")]
-transform = Transform3D(-0.62856, 0, 0.777761, 0, 1, 0, -0.777761, 0, -0.62856, 0.779158, 0.900288, 0.941444)
+transform = Transform3D(0.998947, 0, 0.0458679, 0, 1, 0, -0.0458679, 0, 0.998947, 0.300914, 0.900288, -1.54901)
 current_inhabitants = 1
 
 [node name="small_house" parent="Buildings" instance=ExtResource("20_gr3rw")]

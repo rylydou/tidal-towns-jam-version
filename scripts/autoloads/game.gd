@@ -88,7 +88,7 @@ func _process(delta: float) -> void:
 	stone_label.text = str('Stone: ',stone)
 	steel_label.text = str('Steel: ',steel)
 	if !day == max_day:
-		day_button.text = str('Next day ',day,'/',max_day)
+		day_button.text = str('Next day ',day + 1,'/',max_day + 1)
 	else:
 		day_button.text = "Finish Level"
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://c7h6b26r26rq4"]
+[gd_scene load_steps=28 format=3 uid="uid://c7h6b26r26rq4"]
 
 [ext_resource type="FontFile" uid="uid://l2dq2jygykoh" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Bold.otf" id="1_mol1f"]
 [ext_resource type="Script" path="res://scripts/autoloads/game.gd" id="1_vcqlu"]
@@ -18,6 +18,7 @@
 [ext_resource type="Resource" uid="uid://bw68kmmntqpm8" path="res://resources/builds/luxury_house.tres" id="13_8w7o7"]
 [ext_resource type="Resource" uid="uid://cxniechkt666t" path="res://resources/builds/mine.tres" id="13_a1ur6"]
 [ext_resource type="Resource" uid="uid://cp7b1a473jjci" path="res://resources/builds/factory.tres" id="14_jypvw"]
+[ext_resource type="PackedScene" uid="uid://31cp861mja7v" path="res://scenes/levels/tutorial.tscn" id="16_ub6ls"]
 [ext_resource type="PackedScene" uid="uid://b11mgoded0h1x" path="res://scenes/levels/level1.tscn" id="16_y8j82"]
 [ext_resource type="PackedScene" uid="uid://dll8aigsplnav" path="res://scenes/levels/level2.tscn" id="17_c7orv"]
 [ext_resource type="Script" path="res://scripts/build_panel.gd" id="18_px0iy"]
@@ -92,7 +93,7 @@ stone_label = NodePath("Interface/VBox/StoneLabel")
 steel_label = NodePath("Interface/VBox/SteelLabel")
 day_button = NodePath("MarginContainer/ButtonPanel/Hbox/NextButton")
 builds = Array[Resource("res://scripts/resources/build.gd")]([ExtResource("4_bvova"), ExtResource("12_70825"), ExtResource("13_a1ur6"), ExtResource("14_jypvw"), ExtResource("4_vbed1"), ExtResource("5_mv84u"), ExtResource("6_cnkh4"), ExtResource("7_f5r7k"), ExtResource("13_8w7o7"), ExtResource("8_087w2"), ExtResource("9_xgsky"), ExtResource("10_4d3lr"), ExtResource("11_jrb1s")])
-levels = Array[PackedScene]([ExtResource("16_y8j82"), ExtResource("17_c7orv")])
+levels = Array[PackedScene]([ExtResource("16_ub6ls"), ExtResource("16_y8j82"), ExtResource("17_c7orv")])
 
 [node name="Interface" type="MarginContainer" parent="."]
 unique_name_in_owner = true
