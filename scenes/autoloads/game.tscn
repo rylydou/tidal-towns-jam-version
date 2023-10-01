@@ -215,6 +215,7 @@ text = "Retry?"
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
+focus_mode = 0
 text = "Next Day 0/3"
 
 [node name="InfoPanel" type="PanelContainer" parent="MarginContainer"]
