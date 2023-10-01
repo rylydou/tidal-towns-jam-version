@@ -2,7 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://l2dq2jygykoh" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Bold.otf" id="1_mol1f"]
 [ext_resource type="Script" path="res://scripts/autoloads/game.gd" id="1_vcqlu"]
-[ext_resource type="Material" uid="uid://ba5wfnhxarbg7" path="res://resources/mats/ui_bg_blur.tres" id="3_panam"]
+[ext_resource type="Material" path="res://resources/mats/ui_bg_blur.tres" id="3_panam"]
 [ext_resource type="FontFile" uid="uid://himeqy34fskt" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Extrabold.otf" id="3_tfa0m"]
 [ext_resource type="Resource" uid="uid://b8jyq1mo0o2r3" path="res://resources/builds/sapling.tres" id="4_bvova"]
 [ext_resource type="Resource" uid="uid://0u78ugqfg4qd" path="res://resources/builds/tent.tres" id="4_vbed1"]

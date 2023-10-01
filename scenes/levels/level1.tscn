@@ -11,7 +11,6 @@
 [ext_resource type="Script" path="res://addons/goshapes/MeshShaper/Shapers/CapFlatShaper.gd" id="9_43tdp"]
 [ext_resource type="Script" path="res://addons/goshapes/MeshShaper/BlockShaper.gd" id="10_h2b1s"]
 [ext_resource type="Script" path="res://addons/goshapes/MeshShaper/Shapers/WallBevelShaper.gd" id="11_7h72a"]
-[ext_resource type="PackedScene" uid="uid://b1h4v8rs4vn7n" path="res://scenes/props/tree.tscn" id="14_qsyk1"]
 [ext_resource type="PackedScene" uid="uid://cjxuybyvl8xjt" path="res://scenes/props/stone.tscn" id="15_8aec7"]
 [ext_resource type="PackedScene" uid="uid://cwgs2igp3u77a" path="res://scenes/buildings/medium_house.tscn" id="16_0ak8x"]
 [ext_resource type="PackedScene" uid="uid://eg1clhlpqjr6" path="res://scenes/buildings/small_apartments.tscn" id="17_3kvhf"]
@@ -19,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dsim2f1kdbmsw" path="res://scenes/buildings/tent.tscn" id="19_8kmen"]
 [ext_resource type="PackedScene" uid="uid://cdb8muc2fmkou" path="res://scenes/buildings/small_house.tscn" id="20_gr3rw"]
 [ext_resource type="Material" uid="uid://dmo6d463ux1e6" path="res://resources/mats/f_grass.tres" id="21_tuuf6"]
+[ext_resource type="PackedScene" uid="uid://diafb5jrc84ix" path="res://scenes/props/big_tree.tscn" id="21_w1egb"]
 [ext_resource type="PackedScene" uid="uid://bokbi171ehuta" path="res://scenes/buildings/large_apartments.tscn" id="21_yejxe"]
 [ext_resource type="Material" uid="uid://bib2exw0ihb31" path="res://resources/mats/w_dirt.tres" id="22_u115j"]
 
@@ -805,18 +805,6 @@ shape = SubResource("ConcavePolygonShape3D_v11v1")
 
 [node name="Props" type="Node3D" parent="."]
 
-[node name="Tree" parent="Props" instance=ExtResource("14_qsyk1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0844231, 4, 8.30695)
-
-[node name="Tree2" parent="Props" instance=ExtResource("14_qsyk1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.1164, 3, -4.74539)
-
-[node name="Tree3" parent="Props" instance=ExtResource("14_qsyk1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.97056, 6, 6.34156)
-
-[node name="Tree4" parent="Props" instance=ExtResource("14_qsyk1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.312245, 5, -11.0513)
-
 [node name="Stone" parent="Props" instance=ExtResource("15_8aec7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.02197, 0.900288, 0.984372)
 
@@ -826,5 +814,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.78974, 0.900287, -5.166)
 [node name="Stone3" parent="Props" instance=ExtResource("15_8aec7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.06846, 2, 5.54148)
 
-[node name="Tree5" parent="Props" instance=ExtResource("14_qsyk1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.698052, 3, -14.4296)
+[node name="Tree" parent="." instance=ExtResource("21_w1egb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.33698, 3, -13.0873)
+
+[node name="Tree2" parent="." instance=ExtResource("21_w1egb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.85142, 6, 7.73304)
+
+[node name="Tree3" parent="." instance=ExtResource("21_w1egb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.12751, 4, 1.66904)

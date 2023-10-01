@@ -10,7 +10,7 @@ radius = 1.5
 
 [node name="arcology" type="Area3D"]
 script = ExtResource("1_rt48w")
-max_inhabitants = 50
+max_inhabitants = 100
 info_name = "Arcology"
 info_description = "A self sustained city contained within a single structure."
 can_destroy = false

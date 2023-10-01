@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cfxe1qp81ae7d"]
+[gd_scene load_steps=9 format=3 uid="uid://dh7e74qbnhsg3"]
 
 [ext_resource type="PackedScene" uid="uid://ma0url8bjxmu" path="res://scenes/props/_base.tscn" id="1_sslie"]
 [ext_resource type="Script" path="res://scripts/sapling.gd" id="2_u78xt"]
