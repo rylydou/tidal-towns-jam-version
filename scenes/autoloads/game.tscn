@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://c7h6b26r26rq4"]
+[gd_scene load_steps=34 format=3 uid="uid://c7h6b26r26rq4"]
 
 [ext_resource type="FontFile" uid="uid://l2dq2jygykoh" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Bold.otf" id="1_mol1f"]
 [ext_resource type="Script" path="res://scripts/autoloads/game.gd" id="1_vcqlu"]
@@ -94,6 +94,9 @@ font = ExtResource("3_tfa0m")
 font_size = 40
 font_color = Color(0.901961, 0.282353, 0.180392, 1)
 
+[sub_resource type="Theme" id="Theme_qq77b"]
+Button/fonts/font = ExtResource("4_votfr")
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ncfp"]
 content_margin_left = 12.0
 content_margin_top = 12.0
@@ -154,32 +157,38 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+theme_override_constants/separation = 0
 
 [node name="MoneyLabel" type="Label" parent="Interface/VBox"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("3_tfa0m")
+theme_override_font_sizes/font_size = 24
 text = "Money: One million dolla"
 
 [node name="WoodLabel" type="Label" parent="Interface/VBox"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-theme_override_fonts/font = ExtResource("4_votfr")
+theme_override_fonts/font = ExtResource("1_mol1f")
+theme_override_font_sizes/font_size = 24
 text = "Wood: like 2 or something"
 
 [node name="StoneLabel" type="Label" parent="Interface/VBox"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-theme_override_fonts/font = ExtResource("4_votfr")
+theme_override_fonts/font = ExtResource("1_mol1f")
+theme_override_font_sizes/font_size = 24
 text = "Stone: ten"
 
 [node name="SteelLabel" type="Label" parent="Interface/VBox"]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-theme_override_fonts/font = ExtResource("4_votfr")
+theme_override_fonts/font = ExtResource("1_mol1f")
+theme_override_font_sizes/font_size = 24
 text = "Steel: please don't steal from me"
 
 [node name="FailContainer" type="PanelContainer" parent="Interface"]
@@ -303,6 +312,7 @@ offset_right = 212.0
 grow_vertical = 0
 size_flags_horizontal = 0
 size_flags_vertical = 8
+theme = SubResource("Theme_qq77b")
 theme_override_styles/panel = SubResource("StyleBoxFlat_7ncfp")
 script = ExtResource("18_px0iy")
 
