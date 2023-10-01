@@ -33,7 +33,7 @@ func _add_all() -> void:
 
 func _sub() -> void:
 	if current_inhabitants <= 0 and Game.people <= 0:
-		if can_destroy && is_built:
+		if can_destroy:
 			reclaim()
 		return
 	

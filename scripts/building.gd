@@ -19,8 +19,6 @@ class_name Building extends Area3D
 
 @onready var label: Label3D = %Label
 
-@export var is_built := false
-
 var is_reclaimed = false
 var is_sunk = false
 var will_sink = false
@@ -53,6 +51,8 @@ func special() -> void:
 func _on_input_event(camera: Node, event: InputEvent, position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	var mouse_event = event as InputEventMouseButton
 	if not mouse_event: return
+		
+	if is_instance_valid(Game.building): return
 	
 	if Input.is_action_just_pressed("add_all", true):
 		_add_all()
@@ -73,9 +73,9 @@ func _add_all() -> void:
 	pass
 
 func _sub() -> void:
-	if can_destroy && is_built:
+	if can_destroy:
 		reclaim()
-		
+
 func _sub_all() -> void:
 	pass
 
@@ -102,6 +102,7 @@ func sink() -> void:
 func test_placement(floor_valid: bool) -> bool:
 	var is_valid = floor_valid
 	if get_overlapping_areas().size() > 0: is_valid = false
+	if position.y <= Game.current_water_level: is_valid = false
 	
 	label.visible = not is_valid
 	label.modulate = warning_color

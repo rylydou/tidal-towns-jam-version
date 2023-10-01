@@ -4,7 +4,6 @@ signal next_day()
 signal water_level_changed()
 signal building_special()
 
-@export var win_screen: Control
 @export var fail_screen: Control
 
 @export var info_control: Control
@@ -61,6 +60,8 @@ func _ready() -> void:
 		build_button.text = build.info_name
 		build_button.tooltip_text = build.info_description
 		build_button.pressed.connect(func(): start_build(build))
+		build_button.alignment = HORIZONTAL_ALIGNMENT_LEFT
+		build_button.focus_mode = Control.FOCUS_NONE
 		build_menu.add_child(build_button)
 	
 	body_ray = RayCast3D.new()
@@ -106,14 +107,13 @@ func _process(delta: float) -> void:
 		info_name_label.text = obj.info_name
 		info_description_label.text = obj.info_description
 	
-	if building:
+	if is_instance_valid(building):
 		building.position = body_ray.get_collision_point()
-		building.rotation.y += (float(Input.is_action_pressed("spin_left")) - float(Input.is_action_pressed("spin_right"))) * delta * spin_speed
+		building.rotation.y += Input.get_axis("spin_left", "spin_right") * delta * spin_speed
 		building.test_placement(floor_valid)
 	
-
 	if Input.is_action_just_pressed('add'):
-		if building:
+		if is_instance_valid(building):
 			if not building.test_placement(floor_valid):
 				return
 			
@@ -135,7 +135,7 @@ func _process(delta: float) -> void:
 			return
 	
 	if Input.is_action_just_pressed('sub'):
-		if building:
+		if is_instance_valid(building):
 			building.queue_free()
 			building = null
 			return
@@ -156,6 +156,7 @@ func _process(delta: float) -> void:
 			tutorial_label.text = current_level.tutorial_messages[message_num]
 		else:
 			tutorial_container.visible = false
+
 func cast_ray() -> void:
 	if not is_instance_valid(camera): return
 	body_ray.position = camera.global_position
@@ -167,15 +168,15 @@ func cast_ray() -> void:
 	area_ray.force_raycast_update()
 
 func start_build(build: Build) -> void:
+	if is_instance_valid(building): return
+	
 	if money < build.cost_money: return
 	if wood < build.cost_wood: return
 	if stone < build.cost_stone: return
 	if steel < build.cost_steel: return
 	
 	self.build = build
-	if building:
-		building.queue_free()
-	building = build.scene.instantiate() as Building
+	building = build.scene.instantiate()
 	get_tree().current_scene.add_child(building)
 
 func restart() -> void:
@@ -195,7 +196,7 @@ func restart() -> void:
 	water_level_changed.emit()
 
 func win() -> void:
-	win_screen.show()
+	pass
 
 func fail() -> void:
 	fail_screen.show()
