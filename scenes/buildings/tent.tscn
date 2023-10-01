@@ -4,9 +4,8 @@
 [ext_resource type="FontFile" uid="uid://himeqy34fskt" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Extrabold.otf" id="2_63qya"]
 [ext_resource type="PackedScene" uid="uid://dhx5k6v6duu1o" path="res://resources/models/tent.glb" id="3_mq7o6"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_lyoyg"]
-height = 1.5
-radius = 1.0
+[sub_resource type="BoxShape3D" id="BoxShape3D_oric3"]
+size = Vector3(1, 1.5, 1)
 
 [node name="tent" type="Area3D"]
 script = ExtResource("1_p23v4")
@@ -16,7 +15,7 @@ info_description = "It's something. Holds 1 person. Tents can be destroyed."
 
 [node name="Collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
-shape = SubResource("CylinderShape3D_lyoyg")
+shape = SubResource("BoxShape3D_oric3")
 
 [node name="Banner" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)

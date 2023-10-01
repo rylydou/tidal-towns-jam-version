@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b00r3iakwx13e" path="res://resources/models/factory.glb" id="3_l4opr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_j8dlx"]
-size = Vector3(1.5, 1.5, 2.5)
+size = Vector3(1.25, 3, 2)
 
 [node name="factory" type="Area3D"]
 script = ExtResource("1_48o52")
@@ -15,7 +15,7 @@ can_destroy = false
 steel_income = 2
 
 [node name="Collision" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.749531, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49953, 0)
 shape = SubResource("BoxShape3D_j8dlx")
 
 [node name="Banner" type="Node3D" parent="."]
@@ -33,4 +33,3 @@ vertical_alignment = 2
 line_spacing = -70.0
 
 [node name="factory" parent="." instance=ExtResource("3_l4opr")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

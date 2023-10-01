@@ -19,9 +19,11 @@ radial_segments = 4
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0eaif"]
 diffuse_mode = 3
 specular_mode = 1
-albedo_color = Color(0.443137, 0.666667, 0.203922, 1)
+albedo_color = Color(0.447059, 0.670588, 0.207843, 1)
+distance_fade_max_distance = 5.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_mhgc5"]
+lightmap_size_hint = Vector2i(33, 13)
 radius = 1.0
 height = 1.5
 radial_segments = 4

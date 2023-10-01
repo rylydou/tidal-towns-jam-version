@@ -31,5 +31,4 @@ outline_size = 16
 vertical_alignment = 2
 line_spacing = -70.0
 
-[node name="factory" parent="." instance=ExtResource("3_y2nh5")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+[node name="luxury_house" parent="." instance=ExtResource("3_y2nh5")]

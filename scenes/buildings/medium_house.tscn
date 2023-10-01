@@ -5,7 +5,7 @@
 [ext_resource type="FontFile" uid="uid://himeqy34fskt" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Extrabold.otf" id="3_spfao"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kqk1t"]
-size = Vector3(1.5, 1.5, 2.5)
+size = Vector3(1, 1.5, 2)
 
 [node name="medium_house" type="Area3D"]
 script = ExtResource("1_8xmec")
@@ -17,9 +17,6 @@ can_destroy = false
 [node name="Collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.749531, 0)
 shape = SubResource("BoxShape3D_kqk1t")
-
-[node name="mediumhouse" parent="." instance=ExtResource("2_lig0a")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="Banner" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49575, 0)
@@ -34,3 +31,5 @@ font_size = 96
 outline_size = 16
 vertical_alignment = 2
 line_spacing = -70.0
+
+[node name="mediumhouse" parent="." instance=ExtResource("2_lig0a")]

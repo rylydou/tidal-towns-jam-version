@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ct5buxnpq01yw" path="res://resources/models/largeapartments.glb" id="3_mibil"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d25fd"]
-size = Vector3(1.5, 2, 3.5)
+size = Vector3(1, 2.5, 3)
 
 [node name="large_apartments" type="Area3D"]
 script = ExtResource("1_vvgpx")
@@ -15,7 +15,7 @@ info_description = "An apartment building that holds 15 people."
 can_destroy = false
 
 [node name="Collision" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.65595e-05, 0.995645, 0.00192785)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.65595e-05, 1.24565, 0.00192785)
 shape = SubResource("BoxShape3D_d25fd")
 
 [node name="Banner" type="Node3D" parent="."]
@@ -33,4 +33,3 @@ vertical_alignment = 2
 line_spacing = -70.0
 
 [node name="largeapartments" parent="." instance=ExtResource("3_mibil")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

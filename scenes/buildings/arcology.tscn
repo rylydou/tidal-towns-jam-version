@@ -1,11 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://pvlo5xbd2ey6"]
+[gd_scene load_steps=5 format=3 uid="uid://b6lebnmk011fa"]
 
 [ext_resource type="Script" path="res://scripts/home.gd" id="1_rt48w"]
 [ext_resource type="FontFile" uid="uid://himeqy34fskt" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Extrabold.otf" id="2_m2rc2"]
 [ext_resource type="PackedScene" uid="uid://4bxblgkbw3qb" path="res://resources/models/arcology.glb" id="3_n0xqg"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_mlo78"]
-size = Vector3(3.5, 8, 3.5)
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ll8k6"]
+height = 8.0
+radius = 1.5
 
 [node name="arcology" type="Area3D"]
 script = ExtResource("1_rt48w")
@@ -16,7 +17,7 @@ can_destroy = false
 
 [node name="Collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
-shape = SubResource("BoxShape3D_mlo78")
+shape = SubResource("CylinderShape3D_ll8k6")
 
 [node name="Banner" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.23987, 0)
@@ -33,4 +34,3 @@ vertical_alignment = 2
 line_spacing = -70.0
 
 [node name="arcology" parent="." instance=ExtResource("3_n0xqg")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
