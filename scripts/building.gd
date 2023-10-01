@@ -19,6 +19,8 @@ class_name Building extends Area3D
 
 @onready var label: Label3D = %Label
 
+@export var is_built := false
+
 var is_reclaimed = false
 var is_sunk = false
 var will_sink = false
@@ -71,7 +73,7 @@ func _add_all() -> void:
 	pass
 
 func _sub() -> void:
-	if can_destroy:
+	if can_destroy && is_built:
 		reclaim()
 		
 func _sub_all() -> void:

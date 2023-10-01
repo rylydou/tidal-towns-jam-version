@@ -117,6 +117,7 @@ func _process(delta: float) -> void:
 				return
 			
 			building.water_level_changed()
+			building.is_built = true
 			money -= build.cost_money
 			wood -= build.cost_wood
 			stone -= build.cost_stone
