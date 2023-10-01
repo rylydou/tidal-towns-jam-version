@@ -84,7 +84,7 @@ func _process(delta: float) -> void:
 	people_label.position.x += 16.
 	
 	people_label.visible = people > 0
-	people_label.text = str(people,' people')
+	people_label.text = str(people,' ','people' if people > 1 else 'person')
 	money_label.text = str('Gold: ',money)
 	wood_label.text = str('Wood: ',wood)
 	stone_label.text = str('Stone: ',stone)

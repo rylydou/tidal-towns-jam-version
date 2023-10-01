@@ -3,7 +3,11 @@ extends Control
 func _physics_process(delta: float) -> void:
 	var target: float
 	
-	var is_visible := get_global_rect().has_point(get_global_mouse_position())
+	var mouse_position := get_global_mouse_position()
+	var is_visible := get_global_rect().has_point(mouse_position)
+	
+	if mouse_position.y >= get_parent().size.y:
+		is_visible = false
 	
 	if Game.people > 0 or is_instance_valid(Game.building):
 		is_visible = false
