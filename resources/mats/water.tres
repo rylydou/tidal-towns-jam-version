@@ -1,5 +1,6 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c18l5tcblctdt"]
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://c18l5tcblctdt"]
 
+[ext_resource type="Texture2D" uid="uid://ch36qmjdqh0ih" path="res://resources/textures/water.png" id="2_5dp7x"]
 [ext_resource type="Shader" path="res://resources/shaders/water.gdshader" id="2_6owko"]
 
 [resource]
@@ -13,3 +14,4 @@ shader_parameter/tile = Vector2(1, 1)
 shader_parameter/offset = Vector2(0, 0)
 shader_parameter/size = Vector2(1, 1)
 shader_parameter/pixel_factor = 15.0
+shader_parameter/water_texture = ExtResource("2_5dp7x")
