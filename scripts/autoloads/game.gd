@@ -237,6 +237,7 @@ func next_level():
 	area_ray.collide_with_bodies = false
 	current_level = levels[level_number].instantiate()
 	tutorial_label.text = current_level.tutorial_messages[0]
+	message_num = 0
 	
 	day = 0
 	people = 0
