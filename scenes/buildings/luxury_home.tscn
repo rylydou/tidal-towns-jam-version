@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/building.gd" id="1_3uqii"]
 [ext_resource type="FontFile" uid="uid://himeqy34fskt" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Extrabold.otf" id="2_rrc8e"]
-[ext_resource type="PackedScene" uid="uid://br1la1vjewfr7" path="res://resources/models/factory.glb" id="3_y2nh5"]
+[ext_resource type="PackedScene" uid="uid://br1la1vjewfr7" path="res://resources/models/luxury_house.glb" id="3_y2nh5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2qp6s"]
 size = Vector3(2, 1.5, 2)

@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://bpeeo71t5aiqr"]
+
+[ext_resource type="Script" path="res://scripts/building.gd" id="1_48o52"]
+[ext_resource type="FontFile" uid="uid://himeqy34fskt" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Extrabold.otf" id="2_v0thp"]
+[ext_resource type="PackedScene" uid="uid://b00r3iakwx13e" path="res://resources/models/factory.glb" id="3_l4opr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_j8dlx"]
+size = Vector3(1.5, 1.5, 2.5)
+
+[node name="factory" type="Area3D"]
+script = ExtResource("1_48o52")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.749531, 0)
+shape = SubResource("BoxShape3D_j8dlx")
+
+[node name="Banner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49575, 0)
+
+[node name="Label" type="Label3D" parent="Banner"]
+unique_name_in_owner = true
+billboard = 1
+texture_filter = 1
+text = "!"
+font = ExtResource("2_v0thp")
+font_size = 96
+outline_size = 16
+vertical_alignment = 2
+line_spacing = -70.0
+
+[node name="factory" parent="." instance=ExtResource("3_l4opr")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
