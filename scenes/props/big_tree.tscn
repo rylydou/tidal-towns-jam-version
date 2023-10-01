@@ -35,7 +35,6 @@ info_description = "Costs 1 gold to remove.
 Gives 2 wood."
 reclaim_cost = 1
 reclaim_wood = 2
-is_built = true
 
 [node name="Collision" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
