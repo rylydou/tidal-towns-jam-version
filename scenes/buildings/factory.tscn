@@ -9,6 +9,10 @@ size = Vector3(1.5, 1.5, 2.5)
 
 [node name="factory" type="Area3D"]
 script = ExtResource("1_48o52")
+info_name = "Factory"
+info_description = "An industrial power house. Generates 2 steel per day."
+can_destroy = false
+steel_income = 2
 
 [node name="Collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.749531, 0)

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Build" load_steps=3 format=3 uid="uid://buqunby63c5bk"]
+
+[ext_resource type="PackedScene" uid="uid://eg1clhlpqjr6" path="res://scenes/buildings/small_apartments.tscn" id="1_ycbv2"]
+[ext_resource type="Script" path="res://scripts/resources/build.gd" id="2_oto6y"]
+
+[resource]
+script = ExtResource("2_oto6y")
+info_name = "Small Apartment Building"
+info_description = "An apartment building for all your housing needs. 
+Costs 2 gold, 2 wood, and 3 stone. 
+Holds 10 people."
+scene = ExtResource("1_ycbv2")
+cost_money = 2
+cost_wood = 2
+cost_stone = 3
+cost_steel = 0

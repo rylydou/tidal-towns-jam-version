@@ -1,12 +1,23 @@
-[gd_scene load_steps=10 format=3 uid="uid://c7h6b26r26rq4"]
+[gd_scene load_steps=21 format=3 uid="uid://c7h6b26r26rq4"]
 
 [ext_resource type="FontFile" uid="uid://l2dq2jygykoh" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Bold.otf" id="1_mol1f"]
 [ext_resource type="Script" path="res://scripts/autoloads/game.gd" id="1_vcqlu"]
-[ext_resource type="Resource" uid="uid://dy337vj7d8pbj" path="res://resources/builds/shack.tres" id="3_5w1rh"]
-[ext_resource type="Material" uid="uid://ba5wfnhxarbg7" path="res://resources/mats/ui_bg_blur.tres" id="3_panam"]
+[ext_resource type="Material" path="res://resources/mats/ui_bg_blur.tres" id="3_panam"]
 [ext_resource type="FontFile" uid="uid://himeqy34fskt" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Extrabold.otf" id="3_tfa0m"]
-[ext_resource type="Resource" uid="uid://hobe62ee2omb" path="res://resources/builds/sapling.tres" id="4_bvova"]
+[ext_resource type="Resource" uid="uid://b8jyq1mo0o2r3" path="res://resources/builds/sapling.tres" id="4_bvova"]
+[ext_resource type="Resource" uid="uid://0u78ugqfg4qd" path="res://resources/builds/tent.tres" id="4_vbed1"]
 [ext_resource type="FontFile" uid="uid://dd1acucu1fj2u" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Regular.otf" id="4_votfr"]
+[ext_resource type="Resource" uid="uid://de7f5moc3pgx0" path="res://resources/builds/small_house.tres" id="5_mv84u"]
+[ext_resource type="Resource" uid="uid://3ig8giauhd0e" path="res://resources/builds/medium_house.tres" id="6_cnkh4"]
+[ext_resource type="Resource" uid="uid://o6jkjdc4w4o2" path="res://resources/builds/large_house.tres" id="7_f5r7k"]
+[ext_resource type="Resource" uid="uid://buqunby63c5bk" path="res://resources/builds/small_apartments.tres" id="8_087w2"]
+[ext_resource type="Resource" uid="uid://sakvyvaaggud" path="res://resources/builds/large_apartments.tres" id="9_xgsky"]
+[ext_resource type="Resource" uid="uid://gdpcklrusayd" path="res://resources/builds/skyscraper.tres" id="10_4d3lr"]
+[ext_resource type="Resource" uid="uid://qjfflhvo0h63" path="res://resources/builds/arcology.tres" id="11_jrb1s"]
+[ext_resource type="Resource" uid="uid://b8vpkqo68wqoo" path="res://resources/builds/shop.tres" id="12_70825"]
+[ext_resource type="Resource" uid="uid://bw68kmmntqpm8" path="res://resources/builds/luxury_house.tres" id="13_8w7o7"]
+[ext_resource type="Resource" uid="uid://cxniechkt666t" path="res://resources/builds/mine.tres" id="13_a1ur6"]
+[ext_resource type="Resource" uid="uid://cp7b1a473jjci" path="res://resources/builds/factory.tres" id="14_jypvw"]
 
 [sub_resource type="Theme" id="Theme_tjem8"]
 default_font = ExtResource("1_mol1f")
@@ -45,14 +56,14 @@ fail_screen = NodePath("Interface/FailLabel")
 info_control = NodePath("Interface/InfoPanel")
 info_name_label = NodePath("Interface/InfoPanel/VBox/NameLabel")
 info_description_label = NodePath("Interface/InfoPanel/VBox/DesciptionLabel")
-build_menu = NodePath("Interface/Build/HBox")
+build_menu = NodePath("Interface/Build")
 people_label = NodePath("PeopleLabel")
 money_label = NodePath("Interface/Mats/MoneyLabel")
 wood_label = NodePath("Interface/Mats/WoodLabel")
 stone_label = NodePath("Interface/Mats/StoneLabel")
 steel_label = NodePath("Interface/Mats/SteelLabel")
 day_button = NodePath("Interface/Buttons/NextButton")
-builds = Array[Resource("res://scripts/resources/build.gd")]([ExtResource("3_5w1rh"), ExtResource("4_bvova")])
+builds = Array[Resource("res://scripts/resources/build.gd")]([ExtResource("4_bvova"), ExtResource("12_70825"), ExtResource("13_a1ur6"), ExtResource("14_jypvw"), ExtResource("4_vbed1"), ExtResource("5_mv84u"), ExtResource("6_cnkh4"), ExtResource("7_f5r7k"), ExtResource("13_8w7o7"), ExtResource("8_087w2"), ExtResource("9_xgsky"), ExtResource("10_4d3lr"), ExtResource("11_jrb1s")])
 
 [node name="Interface" type="MarginContainer" parent="."]
 unique_name_in_owner = true
@@ -146,7 +157,7 @@ text = "Next Day 0/3"
 
 [node name="Build" type="VBoxContainer" parent="Interface"]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 8
 size_flags_vertical = 8
 alignment = 1
 

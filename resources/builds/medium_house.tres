@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Build" load_steps=3 format=3 uid="uid://3ig8giauhd0e"]
+
+[ext_resource type="PackedScene" uid="uid://cwgs2igp3u77a" path="res://scenes/buildings/medium_house.tscn" id="1_6tn5u"]
+[ext_resource type="Script" path="res://scripts/resources/build.gd" id="2_uuu1e"]
+
+[resource]
+script = ExtResource("2_uuu1e")
+info_name = "Medium House"
+info_description = "A regular house. 
+Costs 2 wood. 
+Holds 4 people."
+scene = ExtResource("1_6tn5u")
+cost_money = 0
+cost_wood = 2
+cost_stone = 0
+cost_steel = 0

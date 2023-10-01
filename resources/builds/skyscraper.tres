@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Build" load_steps=3 format=3 uid="uid://gdpcklrusayd"]
+
+[ext_resource type="PackedScene" uid="uid://de08m53utm5qi" path="res://scenes/buildings/skyscraper.tscn" id="1_td808"]
+[ext_resource type="Script" path="res://scripts/resources/build.gd" id="2_nijo8"]
+
+[resource]
+script = ExtResource("2_nijo8")
+info_name = "Skyscraper"
+info_description = "A tower that reaches for the skies. 
+Costs 10 steel. 
+Holds 25 people."
+scene = ExtResource("1_td808")
+cost_money = 0
+cost_wood = 0
+cost_stone = 0
+cost_steel = 4

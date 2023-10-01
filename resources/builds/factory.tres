@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Build" load_steps=3 format=3 uid="uid://cp7b1a473jjci"]
+
+[ext_resource type="PackedScene" uid="uid://bpeeo71t5aiqr" path="res://scenes/buildings/factory.tscn" id="1_xulvy"]
+[ext_resource type="Script" path="res://scripts/resources/build.gd" id="2_bd3gw"]
+
+[resource]
+script = ExtResource("2_bd3gw")
+info_name = "Factory"
+info_description = "An industrial power house.
+Costs 5 gold and 5 stone.
+Generates 2 steel per day."
+scene = ExtResource("1_xulvy")
+cost_money = 5
+cost_wood = 0
+cost_stone = 5
+cost_steel = 0

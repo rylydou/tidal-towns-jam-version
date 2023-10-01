@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://dx8mw360pgrdl"]
+[gd_scene load_steps=69 format=3 uid="uid://dx8mw360pgrdl"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_5k8tj"]
 [ext_resource type="Material" uid="uid://c18l5tcblctdt" path="res://resources/mats/water.tres" id="2_kdj58"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://dc0e7h1v3dsq1" path="res://scenes/buildings/luxury_home.tscn" id="15_irfko"]
 [ext_resource type="PackedScene" uid="uid://de08m53utm5qi" path="res://scenes/buildings/skyscraper.tscn" id="20_jk5kh"]
 [ext_resource type="PackedScene" uid="uid://pvlo5xbd2ey6" path="res://scenes/buildings/arcology.tscn" id="21_6dhgi"]
+[ext_resource type="PackedScene" uid="uid://bpeeo71t5aiqr" path="res://scenes/buildings/factory.tscn" id="25_5147s"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_5cbay"]
 size = Vector2(100, 100)
@@ -47,24 +48,24 @@ points_on_ground = false
 offset_y = 0.0
 ground_placement_mask = 0
 
-[sub_resource type="Resource" id="Resource_67soa"]
+[sub_resource type="Resource" id="Resource_evinj"]
 script = ExtResource("9_8hmkg")
 base_depth = 1.0
 enabled = false
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_h2vh6"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ca5ys"]
 load_path = "res://.godot/imported/f_grass.png-88009ec70824f5532227d1b454f04e55.ctex"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q44i7"]
 diffuse_mode = 3
 specular_mode = 1
-albedo_texture = SubResource("CompressedTexture2D_h2vh6")
+albedo_texture = SubResource("CompressedTexture2D_ca5ys")
 uv1_scale = Vector3(0.25, 0.25, 0.25)
 uv1_triplanar = true
 uv1_world_triplanar = true
 texture_filter = 2
 
-[sub_resource type="Resource" id="Resource_6dcxc"]
+[sub_resource type="Resource" id="Resource_av6c1"]
 script = ExtResource("10_cafao")
 conform_to_wall = false
 material = SubResource("StandardMaterial3D_q44i7")
@@ -72,17 +73,17 @@ build_collider = true
 collision_layer = 1
 enabled = true
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_30nbn"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_un531"]
 load_path = "res://.godot/imported/w_dirt.png-2eeddf25eb383eb98acb11546669d0f9.ctex"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j8df2"]
 diffuse_mode = 3
 specular_mode = 1
-albedo_texture = SubResource("CompressedTexture2D_30nbn")
+albedo_texture = SubResource("CompressedTexture2D_un531")
 uv1_scale = Vector3(0.25, 0.25, 0.25)
 texture_filter = 2
 
-[sub_resource type="Resource" id="Resource_u2gfo"]
+[sub_resource type="Resource" id="Resource_n7wx7"]
 script = ExtResource("12_6xx3b")
 height = 5.0
 bevel = 0.0
@@ -94,9 +95,9 @@ enabled = true
 
 [sub_resource type="Resource" id="Resource_4y271"]
 script = ExtResource("11_dbxcl")
-cap_shaper = SubResource("Resource_6dcxc")
-wall_shaper = SubResource("Resource_u2gfo")
-bottom_shaper = SubResource("Resource_67soa")
+cap_shaper = SubResource("Resource_av6c1")
+wall_shaper = SubResource("Resource_n7wx7")
+bottom_shaper = SubResource("Resource_evinj")
 bottom_depth = 0.0
 collider_type = 2
 collider_ridge = 0.0
@@ -153,23 +154,23 @@ points_on_ground = false
 offset_y = 0.0
 ground_placement_mask = 0
 
-[sub_resource type="Resource" id="Resource_piu1c"]
+[sub_resource type="Resource" id="Resource_cilfg"]
 script = ExtResource("9_8hmkg")
 base_depth = 1.0
 enabled = false
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_siq1r"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gkv6q"]
 load_path = "res://.godot/imported/f_stone.png-073722adc8788c199ca23cbbfea7e823.ctex"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mxx8h"]
 diffuse_mode = 3
 specular_mode = 1
-albedo_texture = SubResource("CompressedTexture2D_siq1r")
+albedo_texture = SubResource("CompressedTexture2D_gkv6q")
 uv1_scale = Vector3(0.25, 0.25, 0.25)
 uv1_world_triplanar = true
 texture_filter = 2
 
-[sub_resource type="Resource" id="Resource_3bcxy"]
+[sub_resource type="Resource" id="Resource_pc5mm"]
 script = ExtResource("10_cafao")
 conform_to_wall = false
 material = SubResource("StandardMaterial3D_mxx8h")
@@ -177,18 +178,18 @@ build_collider = true
 collision_layer = 1
 enabled = true
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_bp6ay"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_xuhxp"]
 load_path = "res://.godot/imported/w_stone.png-ba6fe8d1c01c9fe3dd37bd767c8c5768.ctex"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_70fcg"]
 diffuse_mode = 3
 specular_mode = 1
-albedo_texture = SubResource("CompressedTexture2D_bp6ay")
+albedo_texture = SubResource("CompressedTexture2D_xuhxp")
 uv1_scale = Vector3(0.25, 0.25, 0.25)
 uv1_world_triplanar = true
 texture_filter = 2
 
-[sub_resource type="Resource" id="Resource_hmsjx"]
+[sub_resource type="Resource" id="Resource_fxcg2"]
 script = ExtResource("12_6xx3b")
 height = 5.0
 bevel = 0.0
@@ -200,9 +201,9 @@ enabled = true
 
 [sub_resource type="Resource" id="Resource_jjjee"]
 script = ExtResource("11_dbxcl")
-cap_shaper = SubResource("Resource_3bcxy")
-wall_shaper = SubResource("Resource_hmsjx")
-bottom_shaper = SubResource("Resource_piu1c")
+cap_shaper = SubResource("Resource_pc5mm")
+wall_shaper = SubResource("Resource_fxcg2")
+bottom_shaper = SubResource("Resource_cilfg")
 bottom_depth = 0.0
 collider_type = 2
 collider_ridge = 0.0
@@ -259,24 +260,24 @@ points_on_ground = false
 offset_y = 0.0
 ground_placement_mask = 0
 
-[sub_resource type="Resource" id="Resource_1ptah"]
+[sub_resource type="Resource" id="Resource_hpkc6"]
 script = ExtResource("9_8hmkg")
 base_depth = 1.0
 enabled = false
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fq51t"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_p1her"]
 load_path = "res://.godot/imported/f_grass.png-88009ec70824f5532227d1b454f04e55.ctex"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fks68"]
 diffuse_mode = 3
 specular_mode = 1
-albedo_texture = SubResource("CompressedTexture2D_fq51t")
+albedo_texture = SubResource("CompressedTexture2D_p1her")
 uv1_scale = Vector3(0.25, 0.25, 0.25)
 uv1_triplanar = true
 uv1_world_triplanar = true
 texture_filter = 2
 
-[sub_resource type="Resource" id="Resource_5l4el"]
+[sub_resource type="Resource" id="Resource_xnnok"]
 script = ExtResource("10_cafao")
 conform_to_wall = false
 material = SubResource("StandardMaterial3D_fks68")
@@ -284,17 +285,17 @@ build_collider = true
 collision_layer = 1
 enabled = true
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_p3t28"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_amr5s"]
 load_path = "res://.godot/imported/w_dirt.png-2eeddf25eb383eb98acb11546669d0f9.ctex"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dv24c"]
 diffuse_mode = 3
 specular_mode = 1
-albedo_texture = SubResource("CompressedTexture2D_p3t28")
+albedo_texture = SubResource("CompressedTexture2D_amr5s")
 uv1_scale = Vector3(0.25, 0.25, 0.25)
 texture_filter = 2
 
-[sub_resource type="Resource" id="Resource_mbf2h"]
+[sub_resource type="Resource" id="Resource_dapim"]
 script = ExtResource("12_6xx3b")
 height = 5.0
 bevel = 0.0
@@ -306,9 +307,9 @@ enabled = true
 
 [sub_resource type="Resource" id="Resource_yymep"]
 script = ExtResource("11_dbxcl")
-cap_shaper = SubResource("Resource_5l4el")
-wall_shaper = SubResource("Resource_mbf2h")
-bottom_shaper = SubResource("Resource_1ptah")
+cap_shaper = SubResource("Resource_xnnok")
+wall_shaper = SubResource("Resource_dapim")
+bottom_shaper = SubResource("Resource_hpkc6")
 bottom_depth = 0.0
 collider_type = 2
 collider_ridge = 0.0
@@ -417,7 +418,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -10)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.20736, 0.911802, 0.408826)
 
 [node name="luxury_home" parent="Level/Buildings" instance=ExtResource("15_irfko")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.52338, 2.64177, 4.63557)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.52338, 2.65278, 4.63557)
 
 [node name="Island" type="Node3D" parent="Level"]
 
@@ -500,3 +501,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.99455, 2.64669, 0.599106)
 
 [node name="Tree2" parent="Level/Props" instance=ExtResource("14_q5xdx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0262299, 5.02057, 2.35686)
+
+[node name="factory" parent="." instance=ExtResource("25_5147s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, 3)

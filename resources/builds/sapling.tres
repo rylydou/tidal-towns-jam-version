@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="Build" load_steps=3 format=3 uid="uid://hobe62ee2omb"]
+[gd_resource type="Resource" script_class="Build" load_steps=3 format=3 uid="uid://b8jyq1mo0o2r3"]
 
-[ext_resource type="PackedScene" uid="uid://cfxe1qp81ae7d" path="res://scenes/props/sapling.tscn" id="1_oxxd8"]
+[ext_resource type="PackedScene" path="res://scenes/props/sapling.tscn" id="1_oxxd8"]
 [ext_resource type="Script" path="res://scripts/resources/build.gd" id="2_eag0x"]
 
 [resource]

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Build" load_steps=3 format=3 uid="uid://0u78ugqfg4qd"]
+
+[ext_resource type="PackedScene" uid="uid://dsim2f1kdbmsw" path="res://scenes/buildings/tent.tscn" id="1_f7hv6"]
+[ext_resource type="Script" path="res://scripts/resources/build.gd" id="2_oc1qj"]
+
+[resource]
+script = ExtResource("2_oc1qj")
+info_name = "Tent"
+info_description = "A quick fix to a housing crisis.
+Costs 1 gold. 
+Holds 1 person. Tents can be destroyed. "
+scene = ExtResource("1_f7hv6")
+cost_money = 1
+cost_wood = 0
+cost_stone = 0
+cost_steel = 0

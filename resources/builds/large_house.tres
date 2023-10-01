@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Build" load_steps=3 format=3 uid="uid://o6jkjdc4w4o2"]
+
+[ext_resource type="PackedScene" uid="uid://b5wksippryt16" path="res://scenes/buildings/large_house.tscn" id="1_7bef2"]
+[ext_resource type="Script" path="res://scripts/resources/build.gd" id="2_j2ayn"]
+
+[resource]
+script = ExtResource("2_j2ayn")
+info_name = "Large House"
+info_description = "A big house for a big family. 
+Costs 2 wood and 2 stone. 
+Holds 6 people."
+scene = ExtResource("1_7bef2")
+cost_money = 0
+cost_wood = 2
+cost_stone = 2
+cost_steel = 0

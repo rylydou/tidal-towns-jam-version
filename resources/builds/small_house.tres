@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Build" load_steps=3 format=3 uid="uid://de7f5moc3pgx0"]
+
+[ext_resource type="PackedScene" uid="uid://cdb8muc2fmkou" path="res://scenes/buildings/small_house.tscn" id="1_tyukw"]
+[ext_resource type="Script" path="res://scripts/resources/build.gd" id="2_bq6w1"]
+
+[resource]
+script = ExtResource("2_bq6w1")
+info_name = "Small House"
+info_description = "A modest house for modest needs. 
+Costs 1 wood. 
+Holds 2 people."
+scene = ExtResource("1_tyukw")
+cost_money = 0
+cost_wood = 1
+cost_stone = 0
+cost_steel = 0

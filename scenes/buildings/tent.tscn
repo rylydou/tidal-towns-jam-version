@@ -10,7 +10,6 @@ radius = 1.0
 
 [node name="tent" type="Area3D"]
 script = ExtResource("1_p23v4")
-current_inhabitants = 1
 max_inhabitants = 1
 info_name = "Tent"
 info_description = "It's something. Holds 1 person. Tents can be destroyed."

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Build" load_steps=3 format=3 uid="uid://b8vpkqo68wqoo"]
+
+[ext_resource type="PackedScene" uid="uid://bnnqjxynv4ohs" path="res://scenes/buildings/shop.tscn" id="1_30nmf"]
+[ext_resource type="Script" path="res://scripts/resources/build.gd" id="2_pl8nd"]
+
+[resource]
+script = ExtResource("2_pl8nd")
+info_name = "Shop"
+info_description = "A shop that pays texes to your island.
+Costs 5 wood. 
+Generates 2 gold per day."
+scene = ExtResource("1_30nmf")
+cost_money = 0
+cost_wood = 4
+cost_stone = 0
+cost_steel = 0

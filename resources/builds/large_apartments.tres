@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Build" load_steps=3 format=3 uid="uid://sakvyvaaggud"]
+
+[ext_resource type="PackedScene" uid="uid://bokbi171ehuta" path="res://scenes/buildings/large_apartments.tscn" id="1_ehej7"]
+[ext_resource type="Script" path="res://scripts/resources/build.gd" id="2_fnbcg"]
+
+[resource]
+script = ExtResource("2_fnbcg")
+info_name = "Large Apartment Building"
+info_description = "An apartment building for bulk housing. 
+Costs 4 wood and 4 steel. 
+Holds 15 people."
+scene = ExtResource("1_ehej7")
+cost_money = 0
+cost_wood = 4
+cost_stone = 0
+cost_steel = 4
