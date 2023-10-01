@@ -182,6 +182,7 @@ func restart() -> void:
 	day = 0
 	people = 0
 	is_failed = false
+	fail_screen.hide()
 	
 	get_tree().reload_current_scene()
 	
@@ -204,15 +205,16 @@ func _on_retry_button_pressed() -> void:
 	restart()
 
 func _on_next_button_pressed() -> void:
-	if day >= max_day:
-		next_level()
-		return
-	
-	day += 1
-	
-	next_day.emit()
-	water_level_changed.emit()
-	building_special.emit()
+	if !is_failed:
+		if day >= max_day:
+			next_level()
+			return
+		
+		day += 1
+		
+		next_day.emit()
+		water_level_changed.emit()
+		building_special.emit()
 
 func next_level():
 	level_number += 1

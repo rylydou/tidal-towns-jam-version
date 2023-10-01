@@ -13,6 +13,11 @@ func water_level_changed() -> void:
 	update_label()
 	
 	label.show()
+	
+func sink():
+	super.sink()
+	if current_inhabitants > 0:
+		Game.fail()
 
 func _add() -> void:
 	if Game.people > 0 and current_inhabitants < max_inhabitants:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c7h6b26r26rq4"]
+[gd_scene load_steps=29 format=3 uid="uid://c7h6b26r26rq4"]
 
 [ext_resource type="FontFile" uid="uid://l2dq2jygykoh" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Bold.otf" id="1_mol1f"]
 [ext_resource type="Script" path="res://scripts/autoloads/game.gd" id="1_vcqlu"]
@@ -66,6 +66,10 @@ Button/styles/normal = SubResource("StyleBoxFlat_x1jn4")
 Button/styles/pressed = SubResource("StyleBoxFlat_x1jn4")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_wqbbo")
 
+[sub_resource type="LabelSettings" id="LabelSettings_maoyo"]
+font_size = 40
+font_color = Color(0.788235, 0.164706, 0.117647, 1)
+
 [node name="Game" type="Control" node_paths=PackedStringArray("win_screen", "fail_screen", "info_control", "info_name_label", "info_description_label", "tutorial_container", "tutorial_label", "build_menu", "people_label", "money_label", "wood_label", "stone_label", "steel_label", "day_button")]
 layout_mode = 3
 anchors_preset = 15
@@ -79,7 +83,7 @@ mouse_filter = 2
 theme = SubResource("Theme_tjem8")
 script = ExtResource("1_vcqlu")
 win_screen = NodePath("Interface/WinLabel")
-fail_screen = NodePath("Interface/FailLabel")
+fail_screen = NodePath("Interface/FailContainer")
 info_control = NodePath("MarginContainer/InfoPanel")
 info_name_label = NodePath("MarginContainer/InfoPanel/VBox/NameLabel")
 info_description_label = NodePath("MarginContainer/InfoPanel/VBox/DesciptionLabel")
@@ -151,11 +155,30 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "You Win!"
 
-[node name="FailLabel" type="Label" parent="Interface"]
+[node name="FailContainer" type="PanelContainer" parent="Interface"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
-text = "You Failed :("
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface/FailContainer"]
+material = ExtResource("3_panam")
+layout_mode = 2
+alignment = 1
+
+[node name="Fail" type="Label" parent="Interface/FailContainer/VBoxContainer"]
+layout_mode = 2
+text = "Your city sank."
+label_settings = SubResource("LabelSettings_maoyo")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Interface/FailContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Try Again" type="Button" parent="Interface/FailContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Try Again"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -288,6 +311,7 @@ theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("3_tfa0m")
 text = "0 people"
 
+[connection signal="pressed" from="Interface/FailContainer/VBoxContainer/HBoxContainer/Try Again" to="." method="_on_retry_button_pressed"]
 [connection signal="mouse_entered" from="MarginContainer/BuildPanel" to="MarginContainer/BuildPanel" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="MarginContainer/BuildPanel" to="MarginContainer/BuildPanel" method="_on_mouse_exited"]
 [connection signal="pressed" from="MarginContainer/ButtonPanel/Hbox/RetryButton" to="." method="_on_retry_button_pressed"]
