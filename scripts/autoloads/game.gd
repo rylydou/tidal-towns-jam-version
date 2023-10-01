@@ -210,9 +210,41 @@ func _on_next_button_pressed() -> void:
 
 func next_level():
 	level_number += 1
-	day = 0
+	
 	get_tree().change_scene_to_packed(levels[level_number])
+	
 	current_level = levels[level_number].instantiate()
-	if current_level.tutorial_messages.size() > 0:
-		tutorial_label.text = current_level.tutorial_messages[0]
-	message_num = 0
+	
+	for n in build_menu.get_children():
+		build_menu.remove_child(n)
+		n.queue_free()
+	for build in builds:
+		var build_button := Button.new()
+		build_button.text = build.info_name
+		build_button.tooltip_text = build.info_description
+		build_button.pressed.connect(func(): start_build(build))
+		build_menu.add_child(build_button)
+	
+	body_ray = RayCast3D.new()
+	add_child(body_ray)
+	body_ray.collide_with_areas = false
+	body_ray.collide_with_bodies = true
+	
+	area_ray = RayCast3D.new()
+	add_child(area_ray)
+	area_ray.collide_with_areas = true
+	area_ray.collide_with_bodies = false
+	current_level = levels[level_number].instantiate()
+	tutorial_label.text = current_level.tutorial_messages[0]
+	
+	day = 0
+	people = 0
+	is_failed = false
+	
+	await get_tree().process_frame
+	
+	camera = get_tree().current_scene.find_child('Camera')
+	
+	next_day.emit()
+	await get_tree().process_frame
+	water_level_changed.emit()
