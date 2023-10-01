@@ -167,7 +167,8 @@ func start_build(build: Build) -> void:
 	if steel < build.cost_steel: return
 	
 	self.build = build
-	
+	if building:
+		building.queue_free()
 	building = build.scene.instantiate() as Building
 	get_tree().current_scene.add_child(building)
 
