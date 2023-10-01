@@ -23,6 +23,8 @@ signal building_special()
 
 @export var builds: Array[Build] = []
 
+@export var spin_speed := 2.0
+
 var money := 0
 var wood := 0
 var stone := 0
@@ -92,6 +94,7 @@ func _process(delta: float) -> void:
 	
 	if building:
 		building.position = body_ray.get_collision_point()
+		building.rotation.y += (float(Input.is_action_pressed("spin_left")) - float(Input.is_action_pressed("spin_right"))) * delta * spin_speed
 		building.test_placement(floor_valid)
 	
 	if Input.is_action_just_pressed('add'):
