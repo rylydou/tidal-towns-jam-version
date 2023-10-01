@@ -35,6 +35,9 @@ var is_failed = false
 var day := 0
 var max_day := 1
 
+@export var levels: Array[PackedScene]
+var level_number := 0
+
 var current_water_level := 0.0
 var next_water_level := 0.0
 
@@ -73,7 +76,7 @@ func _process(delta: float) -> void:
 	
 	people_label.visible = people > 0
 	people_label.text = str(people,' people')
-	money_label.text = str('Money: ',money)
+	money_label.text = str('Gold: ',money)
 	wood_label.text = str('Wood: ',wood)
 	stone_label.text = str('Stone: ',stone)
 	steel_label.text = str('Steel: ',steel)
@@ -97,6 +100,7 @@ func _process(delta: float) -> void:
 		building.rotation.y += (float(Input.is_action_pressed("spin_left")) - float(Input.is_action_pressed("spin_right"))) * delta * spin_speed
 		building.test_placement(floor_valid)
 	
+
 	if Input.is_action_just_pressed('add'):
 		if building:
 			if not building.test_placement(floor_valid):
@@ -178,7 +182,9 @@ func _on_retry_button_pressed() -> void:
 
 func _on_next_button_pressed() -> void:
 	if day >= max_day:
-		restart()
+		level_number += 1
+		day = 0
+		get_tree().change_scene_to_packed(levels[level_number])
 		return
 	
 	day += 1

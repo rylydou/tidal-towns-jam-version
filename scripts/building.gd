@@ -52,18 +52,30 @@ func _on_input_event(camera: Node, event: InputEvent, position: Vector3, normal:
 	var mouse_event = event as InputEventMouseButton
 	if not mouse_event: return
 	
-	if Input.is_action_just_pressed('add'):
+	if Input.is_action_just_pressed("add_all"):
+		_add_all()
+		
+	elif Input.is_action_just_pressed('add'):
 		_add()
+		
+	if Input.is_action_just_pressed("sub_all"):
+		_sub_all()
 
-	if Input.is_action_just_pressed('sub'):
+	elif Input.is_action_just_pressed('sub'):
 		_sub()
 
 func _add() -> void:
+	pass
+	
+func _add_all() -> void:
 	pass
 
 func _sub() -> void:
 	if can_destroy:
 		reclaim()
+		
+func _sub_all() -> void:
+	pass
 
 func reclaim() -> void:
 	if is_sunk: return

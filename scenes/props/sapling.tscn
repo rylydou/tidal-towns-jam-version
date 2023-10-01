@@ -31,7 +31,8 @@ rings = 1
 script = ExtResource("2_u78xt")
 tree_scene = ExtResource("3_jmlki")
 info_name = "Sapling"
-info_description = "It's still a baby."
+info_description = "Costs 1 gold to plant.
+Will grow into small tree next day."
 
 [node name="Collision" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

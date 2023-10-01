@@ -20,6 +20,12 @@ func _add() -> void:
 		Game.people -= 1
 		update_label()
 
+func _add_all() -> void:
+	while(Game.people > 0 and current_inhabitants < max_inhabitants):
+		current_inhabitants += 1
+		Game.people -= 1
+		update_label()
+
 func _sub() -> void:
 	if current_inhabitants <= 0 and Game.people <= 0:
 		if can_destroy:
@@ -31,3 +37,9 @@ func _sub() -> void:
 		Game.people += 1
 		update_label()
 		return
+
+func _sub_all() -> void:
+	while(current_inhabitants > 0):
+		current_inhabitants -= 1
+		Game.people += 1
+		update_label()

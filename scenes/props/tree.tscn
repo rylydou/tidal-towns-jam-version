@@ -34,7 +34,7 @@ rings = 3
 [node name="Tree" instance=ExtResource("1_fqdyx")]
 script = ExtResource("2_j7nw3")
 tree_scene = ExtResource("3_hw80n")
-info_name = "Tree"
+info_name = "Small Tree"
 info_description = "Costs 1 gold to remove.
 Gives 1 wood when removed.
 Will grow into big tree tomorrow."
