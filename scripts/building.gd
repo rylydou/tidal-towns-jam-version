@@ -52,10 +52,10 @@ func _on_input_event(camera: Node, event: InputEvent, position: Vector3, normal:
 	var mouse_event = event as InputEventMouseButton
 	if not mouse_event: return
 	
-	if Input.is_action_just_pressed("add_all"):
+	if Input.is_action_just_pressed("add_all", true):
 		_add_all()
 		
-	elif Input.is_action_just_pressed('add'):
+	elif Input.is_action_just_pressed('add', true):
 		_add()
 		
 	if Input.is_action_just_pressed("sub_all"):

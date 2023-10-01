@@ -65,7 +65,7 @@ Button/styles/normal = SubResource("StyleBoxFlat_x1jn4")
 Button/styles/pressed = SubResource("StyleBoxFlat_x1jn4")
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_wqbbo")
 
-[node name="Game" type="Control" node_paths=PackedStringArray("win_screen", "fail_screen", "info_control", "info_name_label", "info_description_label", "build_menu", "people_label", "money_label", "wood_label", "stone_label", "steel_label", "day_button")]
+[node name="Game" type="Control" node_paths=PackedStringArray("win_screen", "fail_screen", "info_control", "info_name_label", "info_description_label", "tutorial_container", "tutorial_label", "build_menu", "people_label", "money_label", "wood_label", "stone_label", "steel_label", "day_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -82,6 +82,8 @@ fail_screen = NodePath("Interface/FailLabel")
 info_control = NodePath("MarginContainer/InfoPanel")
 info_name_label = NodePath("MarginContainer/InfoPanel/VBox/NameLabel")
 info_description_label = NodePath("MarginContainer/InfoPanel/VBox/DesciptionLabel")
+tutorial_container = NodePath("MarginContainer/TutorialPanel")
+tutorial_label = NodePath("MarginContainer/TutorialPanel/VBox/Info")
 build_menu = NodePath("MarginContainer/BuildPanel/VBox/Grid")
 people_label = NodePath("PeopleLabel")
 money_label = NodePath("Interface/VBox/MoneyLabel")
@@ -216,14 +218,14 @@ text = "Next Day 0/3"
 
 [node name="InfoPanel" type="PanelContainer" parent="MarginContainer"]
 material = ExtResource("3_panam")
-custom_minimum_size = Vector2(400, 0)
+custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
 [node name="VBox" type="VBoxContainer" parent="MarginContainer/InfoPanel"]
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 4
 
 [node name="NameLabel" type="Label" parent="MarginContainer/InfoPanel/VBox"]
 layout_mode = 2
@@ -235,6 +237,34 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("4_votfr")
 theme_override_font_sizes/font_size = 16
 text = "Description"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="TutorialPanel" type="PanelContainer" parent="MarginContainer"]
+material = ExtResource("3_panam")
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="VBox" type="VBoxContainer" parent="MarginContainer/TutorialPanel"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Info" type="Label" parent="MarginContainer/TutorialPanel/VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_votfr")
+theme_override_font_sizes/font_size = 16
+text = "Welcome mayor. This town blah blah blah blah blah blah blah"
+autowrap_mode = 3
+
+[node name="Space to Continue" type="Label" parent="MarginContainer/TutorialPanel/VBox"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_votfr")
+theme_override_font_sizes/font_size = 16
+text = "Press space to continue"
+horizontal_alignment = 1
+vertical_alignment = 2
 autowrap_mode = 3
 
 [node name="PeopleLabel" type="Label" parent="."]

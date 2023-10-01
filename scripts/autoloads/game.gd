@@ -11,6 +11,10 @@ signal building_special()
 @export var info_name_label: Label
 @export var info_description_label: Label
 
+@export var tutorial_container: PanelContainer
+var message_num = 0
+@export var tutorial_label: Label
+
 @export var build_menu: Control
 
 @export var people_label: Label
@@ -36,6 +40,7 @@ var day := 0
 var max_day := 1
 
 @export var levels: Array[PackedScene]
+var current_level
 var level_number := 0
 
 var current_water_level := 0.0
@@ -66,6 +71,8 @@ func _ready() -> void:
 	add_child(area_ray)
 	area_ray.collide_with_areas = true
 	area_ray.collide_with_bodies = false
+	current_level = levels[level_number].instantiate()
+	tutorial_label.text = current_level.tutorial_messages[0]
 	
 	restart()
 
@@ -80,7 +87,10 @@ func _process(delta: float) -> void:
 	wood_label.text = str('Wood: ',wood)
 	stone_label.text = str('Stone: ',stone)
 	steel_label.text = str('Steel: ',steel)
-	day_button.text = str('Next day ',day,'/',max_day)
+	if !day == max_day:
+		day_button.text = str('Next day ',day,'/',max_day)
+	else:
+		day_button.text = "Finish Level"
 	
 	cast_ray()
 	
@@ -133,7 +143,13 @@ func _process(delta: float) -> void:
 		stone += 10
 		steel += 10
 		return
-
+		
+	if Input.is_action_just_pressed("next_message"):
+		if message_num < current_level.tutorial_messages.size() - 1:
+			message_num+=1
+			tutorial_label.text = current_level.tutorial_messages[message_num]
+		else:
+			tutorial_container.visible = false
 func cast_ray() -> void:
 	if not is_instance_valid(camera): return
 	body_ray.position = camera.global_position
@@ -182,9 +198,7 @@ func _on_retry_button_pressed() -> void:
 
 func _on_next_button_pressed() -> void:
 	if day >= max_day:
-		level_number += 1
-		day = 0
-		get_tree().change_scene_to_packed(levels[level_number])
+		next_level()
 		return
 	
 	day += 1
@@ -192,3 +206,12 @@ func _on_next_button_pressed() -> void:
 	next_day.emit()
 	water_level_changed.emit()
 	building_special.emit()
+
+func next_level():
+	level_number += 1
+	day = 0
+	get_tree().change_scene_to_packed(levels[level_number])
+	current_level = levels[level_number].instantiate()
+	if current_level.tutorial_messages.size() > 0:
+		tutorial_label.text = current_level.tutorial_messages[0]
+	message_num = 0
