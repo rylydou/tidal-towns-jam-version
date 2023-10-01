@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://dc0e7h1v3dsq1"]
+
+[ext_resource type="Script" path="res://scripts/building.gd" id="1_3uqii"]
+[ext_resource type="FontFile" uid="uid://himeqy34fskt" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Extrabold.otf" id="2_rrc8e"]
+[ext_resource type="PackedScene" uid="uid://br1la1vjewfr7" path="res://resources/models/factory.glb" id="3_y2nh5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2qp6s"]
+size = Vector3(2, 1.5, 2)
+
+[node name="luxury_home" type="Area3D"]
+script = ExtResource("1_3uqii")
+info_name = "Luxury Home"
+info_description = "A luxury home. Holds 4 people and generates 1 gold per day in rent."
+money_income = 1
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("BoxShape3D_2qp6s")
+
+[node name="Banner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49575, 0)
+
+[node name="Label" type="Label3D" parent="Banner"]
+unique_name_in_owner = true
+billboard = 1
+texture_filter = 1
+text = "!"
+font = ExtResource("2_rrc8e")
+font_size = 96
+outline_size = 16
+vertical_alignment = 2
+line_spacing = -70.0
+
+[node name="factory" parent="." instance=ExtResource("3_y2nh5")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
