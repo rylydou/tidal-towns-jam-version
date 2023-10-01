@@ -7,10 +7,10 @@
 script = ExtResource("2_uuu1e")
 info_name = "Medium House"
 info_description = "A regular house. 
-Costs 2 wood. 
+Costs 4 wood. 
 Holds 4 people."
 scene = ExtResource("1_6tn5u")
 cost_money = 0
-cost_wood = 2
+cost_wood = 4
 cost_stone = 0
 cost_steel = 0

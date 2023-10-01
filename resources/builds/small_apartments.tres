@@ -7,10 +7,10 @@
 script = ExtResource("2_oto6y")
 info_name = "Small Apartment"
 info_description = "An apartment building for all your housing needs. 
-Costs 2 gold, 2 wood, and 3 stone. 
+Costs 6 wood and 3 stone. 
 Holds 10 people."
 scene = ExtResource("1_ycbv2")
-cost_money = 2
-cost_wood = 2
+cost_money = 0
+cost_wood = 6
 cost_stone = 3
 cost_steel = 0

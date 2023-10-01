@@ -7,10 +7,10 @@
 script = ExtResource("2_vwgnb")
 info_name = "Luxury House"
 info_description = "The peak of luxury. 
-Costs 2 wood and 2 stone. 
+Costs 4 wood and 2 stone. 
 Holds 4 people, and generates 1 gold per day."
 scene = ExtResource("1_o420j")
 cost_money = 0
-cost_wood = 2
-cost_stone = 3
+cost_wood = 4
+cost_stone = 2
 cost_steel = 0
