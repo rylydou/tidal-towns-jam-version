@@ -32,7 +32,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/goshapes/plugin.cfg", "res://addons/orbit_camera/plugin.cfg")
+enabled=PackedStringArray("res://addons/goshapes/plugin.cfg")
 
 [gui]
 

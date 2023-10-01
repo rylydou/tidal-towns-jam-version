@@ -18,6 +18,7 @@ top_radius = 0.125
 bottom_radius = 0.125
 height = 0.5
 radial_segments = 4
+rings = 1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_opp7v"]
 diffuse_mode = 3
@@ -25,7 +26,6 @@ specular_mode = 1
 albedo_color = Color(0.713726, 0.835294, 0.235294, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_0wegr"]
-radius = 0.75
 radial_segments = 5
 rings = 1
 
@@ -35,7 +35,6 @@ tree_scene = ExtResource("3_jmlki")
 info_name = "Sapling"
 info_description = "Costs 1 gold to plant.
 Will grow into small tree next day."
-is_built = true
 
 [node name="Collision" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
