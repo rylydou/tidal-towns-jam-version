@@ -5,6 +5,7 @@ signal water_level_changed()
 signal building_special()
 
 @export var fail_screen: Control
+@export var win_screen: Control
 
 @export var info_control: Control
 @export var info_name_label: Label
@@ -39,7 +40,6 @@ var day := 0
 var max_day := 1
 
 @export var levels: Array[PackedScene]
-var current_level
 var level_number := 0
 
 var current_water_level := 0.0
@@ -73,8 +73,6 @@ func _ready() -> void:
 	add_child(area_ray)
 	area_ray.collide_with_areas = true
 	area_ray.collide_with_bodies = false
-	current_level = levels[level_number].instantiate()
-	tutorial_label.text = current_level.tutorial_messages[0]
 	
 	restart()
 
@@ -89,10 +87,7 @@ func _process(delta: float) -> void:
 	wood_label.text = str('Wood: ',wood)
 	stone_label.text = str('Stone: ',stone)
 	steel_label.text = str('Steel: ',steel)
-	if !day == max_day:
-		day_button.text = str('Next day ',day + 1,'/',max_day + 1)
-	else:
-		day_button.text = "Finish Level"
+	day_button.text = str('Next day ',day + 1,'/',max_day + 1)
 	
 	cast_ray()
 	
@@ -150,9 +145,9 @@ func _process(delta: float) -> void:
 		return
 		
 	if Input.is_action_just_pressed("next_message"):
-		if message_num < current_level.tutorial_messages.size() - 1:
-			message_num+=1
-			tutorial_label.text = current_level.tutorial_messages[message_num]
+		if message_num < get_tree().current_scene.tutorial_messages.size() - 1:
+			message_num += 1
+			tutorial_label.text = get_tree().current_scene.tutorial_messages[message_num]
 		else:
 			tutorial_container.visible = false
 
@@ -183,19 +178,23 @@ func restart() -> void:
 	people = 0
 	is_failed = false
 	fail_screen.hide()
+	win_screen.hide()
 	
 	get_tree().reload_current_scene()
 	
 	await get_tree().process_frame
 	
 	camera = get_tree().current_scene.find_child('Camera')
+	tutorial_label.text = get_tree().current_scene.tutorial_messages[0]
 	
 	next_day.emit()
+	
 	await get_tree().process_frame
+	
 	water_level_changed.emit()
 
 func win() -> void:
-	pass
+	win_screen.show()
 
 func fail() -> void:
 	fail_screen.show()
@@ -205,56 +204,21 @@ func _on_retry_button_pressed() -> void:
 	restart()
 
 func _on_next_button_pressed() -> void:
-	if !is_failed:
-		if day >= max_day:
-			next_level()
-			return
-		
-		day += 1
-		
-		next_day.emit()
-		water_level_changed.emit()
-		building_special.emit()
+	if is_failed: return
+	
+	if day >= max_day - 1:
+		win_screen.show()
+		return
+	
+	day += 1
+	
+	next_day.emit()
+	water_level_changed.emit()
+	building_special.emit()
 
 func next_level():
 	level_number += 1
 	
 	get_tree().change_scene_to_packed(levels[level_number])
 	
-	current_level = levels[level_number].instantiate()
-	
-	for n in build_menu.get_children():
-		build_menu.remove_child(n)
-		n.queue_free()
-	for build in builds:
-		var build_button := Button.new()
-		build_button.text = build.info_name
-		build_button.tooltip_text = build.info_description
-		build_button.pressed.connect(func(): start_build(build))
-		build_menu.add_child(build_button)
-	
-	body_ray = RayCast3D.new()
-	add_child(body_ray)
-	body_ray.collide_with_areas = false
-	body_ray.collide_with_bodies = true
-	
-	area_ray = RayCast3D.new()
-	add_child(area_ray)
-	area_ray.collide_with_areas = true
-	area_ray.collide_with_bodies = false
-	current_level = levels[level_number].instantiate()
-	tutorial_label.text = current_level.tutorial_messages[0]
-	message_num = 0
-	tutorial_container.visible = true
-	
-	day = 0
-	people = 0
-	is_failed = false
-	
-	await get_tree().process_frame
-	
-	camera = get_tree().current_scene.find_child('Camera')
-	
-	next_day.emit()
-	await get_tree().process_frame
-	water_level_changed.emit()
+	restart()

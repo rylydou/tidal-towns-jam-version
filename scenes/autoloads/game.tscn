@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://c7h6b26r26rq4"]
+[gd_scene load_steps=35 format=3 uid="uid://c7h6b26r26rq4"]
 
 [ext_resource type="FontFile" uid="uid://l2dq2jygykoh" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Bold.otf" id="1_mol1f"]
 [ext_resource type="Script" path="res://scripts/autoloads/game.gd" id="1_vcqlu"]
@@ -94,6 +94,11 @@ font = ExtResource("3_tfa0m")
 font_size = 40
 font_color = Color(0.901961, 0.282353, 0.180392, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_uu5mc"]
+font = ExtResource("3_tfa0m")
+font_size = 40
+font_color = Color(0.223529, 0.482353, 0.266667, 1)
+
 [sub_resource type="Theme" id="Theme_qq77b"]
 Button/fonts/font = ExtResource("4_votfr")
 
@@ -106,7 +111,7 @@ bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 
-[node name="Game" type="Control" node_paths=PackedStringArray("fail_screen", "info_control", "info_name_label", "info_description_label", "tutorial_container", "tutorial_label", "build_menu", "people_label", "money_label", "wood_label", "stone_label", "steel_label", "day_button")]
+[node name="Game" type="Control" node_paths=PackedStringArray("fail_screen", "win_screen", "info_control", "info_name_label", "info_description_label", "tutorial_container", "tutorial_label", "build_menu", "people_label", "money_label", "wood_label", "stone_label", "steel_label", "day_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -119,6 +124,7 @@ mouse_filter = 2
 theme = SubResource("Theme_tjem8")
 script = ExtResource("1_vcqlu")
 fail_screen = NodePath("Interface/FailContainer")
+win_screen = NodePath("Interface/WinContainer")
 info_control = NodePath("MarginContainer/InfoPanel")
 info_name_label = NodePath("MarginContainer/InfoPanel/VBox/NameLabel")
 info_description_label = NodePath("MarginContainer/InfoPanel/VBox/DesciptionLabel")
@@ -204,20 +210,40 @@ layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="Fail" type="Label" parent="Interface/FailContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Interface/FailContainer/VBoxContainer"]
 layout_mode = 2
 text = "Your city sank."
 label_settings = SubResource("LabelSettings_maoyo")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Interface/FailContainer/VBoxContainer"]
-layout_mode = 2
-alignment = 1
-
-[node name="Try Again" type="Button" parent="Interface/FailContainer/VBoxContainer/HBoxContainer"]
+[node name="RetryButton" type="Button" parent="Interface/FailContainer/VBoxContainer"]
 layout_mode = 2
 text = "Try Again"
+
+[node name="WinContainer" type="PanelContainer" parent="Interface"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_rk6pp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface/WinContainer"]
+material = ExtResource("3_panam")
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Label" type="Label" parent="Interface/WinContainer/VBoxContainer"]
+layout_mode = 2
+text = "You win!"
+label_settings = SubResource("LabelSettings_uu5mc")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextButton" type="Button" parent="Interface/WinContainer/VBoxContainer"]
+layout_mode = 2
+text = "Next level"
 
 [node name="Hbox" type="HBoxContainer" parent="Interface"]
 layout_mode = 2
@@ -229,6 +255,7 @@ alignment = 2
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
+focus_mode = 0
 text = "Retry?"
 
 [node name="NextButton" type="Button" parent="Interface/Hbox"]
@@ -352,6 +379,7 @@ theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("3_tfa0m")
 text = "0 people"
 
-[connection signal="pressed" from="Interface/FailContainer/VBoxContainer/HBoxContainer/Try Again" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="Interface/FailContainer/VBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="Interface/WinContainer/VBoxContainer/NextButton" to="." method="next_level"]
 [connection signal="pressed" from="Interface/Hbox/RetryButton" to="." method="_on_retry_button_pressed"]
 [connection signal="pressed" from="Interface/Hbox/NextButton" to="." method="_on_next_button_pressed"]
