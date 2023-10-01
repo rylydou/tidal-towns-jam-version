@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c7h6b26r26rq4"]
+[gd_scene load_steps=22 format=3 uid="uid://c7h6b26r26rq4"]
 
 [ext_resource type="FontFile" uid="uid://l2dq2jygykoh" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Bold.otf" id="1_mol1f"]
 [ext_resource type="Script" path="res://scripts/autoloads/game.gd" id="1_vcqlu"]
@@ -19,9 +19,22 @@
 [ext_resource type="Resource" uid="uid://cxniechkt666t" path="res://resources/builds/mine.tres" id="13_a1ur6"]
 [ext_resource type="Resource" uid="uid://cp7b1a473jjci" path="res://resources/builds/factory.tres" id="14_jypvw"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rr7jx"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 0)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [sub_resource type="Theme" id="Theme_tjem8"]
 default_font = ExtResource("1_mol1f")
 default_font_size = 24
+Button/styles/normal = SubResource("StyleBoxFlat_rr7jx")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q2qm8"]
 content_margin_left = 24.0
@@ -144,12 +157,14 @@ size_flags_vertical = 0
 alignment = 2
 
 [node name="RetryButton" type="Button" parent="Interface/Buttons"]
+material = ExtResource("3_panam")
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 text = "Retry?"
 
 [node name="NextButton" type="Button" parent="Interface/Buttons"]
+material = ExtResource("3_panam")
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0

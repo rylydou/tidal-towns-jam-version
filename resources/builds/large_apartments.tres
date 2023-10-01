@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_fnbcg")
-info_name = "Large Apartment Building"
+info_name = "Large Apartment"
 info_description = "An apartment building for bulk housing. 
 Costs 4 wood and 4 steel. 
 Holds 15 people."

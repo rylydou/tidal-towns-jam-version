@@ -17,15 +17,14 @@ class_name Building extends Area3D
 @export var steel_income = 0
 @export var money_income = 0
 
-@export_group('Other')
-@export var normal_color := Color.WHITE
-@export var warning_color := Color.RED
-
 @onready var label: Label3D = %Label
 
 var is_reclaimed = false
 var is_sunk = false
 var will_sink = false
+
+@onready var warning_color = Color.from_string('#e6482e', Color.RED)
+@onready var normal_color = Color.WHITE
 
 func _enter_tree() -> void:
 	input_event.connect(_on_input_event)

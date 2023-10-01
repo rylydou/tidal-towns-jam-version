@@ -12,9 +12,8 @@ radius = 1.0
 script = ExtResource("1_an2rr")
 max_inhabitants = 2
 info_name = "Small House"
-info_description = "A modest house for modest needs. Holds 2 people."
+info_description = "A modest house for modest needs."
 can_destroy = false
-reclaim_wood = 1
 
 [node name="Collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)

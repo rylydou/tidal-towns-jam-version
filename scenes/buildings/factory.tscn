@@ -10,7 +10,8 @@ size = Vector3(1.25, 3, 2)
 [node name="factory" type="Area3D"]
 script = ExtResource("1_48o52")
 info_name = "Factory"
-info_description = "An industrial power house. Generates 2 steel per day."
+info_description = "An industrial power house.
+Generates 2 steel per day."
 can_destroy = false
 steel_income = 2
 

@@ -11,7 +11,7 @@ size = Vector3(1, 2.5, 3)
 script = ExtResource("1_vvgpx")
 max_inhabitants = 15
 info_name = "Large Apartment Building"
-info_description = "An apartment building that holds 15 people."
+info_description = "A large apartment building."
 can_destroy = false
 
 [node name="Collision" type="CollisionShape3D" parent="."]

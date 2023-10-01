@@ -12,7 +12,7 @@ radius = 1.5
 script = ExtResource("1_rt48w")
 max_inhabitants = 50
 info_name = "Arcology"
-info_description = "A self sustained city contained within a single structure"
+info_description = "A self sustained city contained within a single structure."
 can_destroy = false
 
 [node name="Collision" type="CollisionShape3D" parent="."]

@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_bd3gw")
-info_name = "Factory"
+info_name = "Steel Factory"
 info_description = "An industrial power house.
 Costs 5 gold and 5 stone.
 Generates 2 steel per day."

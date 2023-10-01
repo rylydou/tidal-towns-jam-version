@@ -8,7 +8,7 @@ script = ExtResource("2_oc1qj")
 info_name = "Tent"
 info_description = "A quick fix to a housing crisis.
 Costs 1 gold. 
-Holds 1 person. Tents can be destroyed. "
+Holds 1 person. Tents can be destroyed."
 scene = ExtResource("1_f7hv6")
 cost_money = 1
 cost_wood = 0

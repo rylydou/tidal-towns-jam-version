@@ -7,7 +7,7 @@
 script = ExtResource("2_nijo8")
 info_name = "Skyscraper"
 info_description = "A tower that reaches for the skies. 
-Costs 10 steel. 
+Costs 4 steel. 
 Holds 25 people."
 scene = ExtResource("1_td808")
 cost_money = 0

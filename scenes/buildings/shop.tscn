@@ -10,7 +10,8 @@ size = Vector3(2, 1.5, 2)
 [node name="shop" type="Area3D"]
 script = ExtResource("1_pts4i")
 info_name = "Shop"
-info_description = "A shop that pays taxes for your island. Generates 2 gold per turn."
+info_description = "A shop that pays taxes for your island.
+Generates 2 gold each day."
 can_destroy = false
 money_income = 2
 

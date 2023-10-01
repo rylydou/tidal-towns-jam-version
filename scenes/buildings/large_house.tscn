@@ -11,7 +11,7 @@ size = Vector3(1.5, 1.5, 2.5)
 script = ExtResource("1_qdfru")
 max_inhabitants = 6
 info_name = "Large House"
-info_description = "A big house for a big family. Holds 6 people."
+info_description = "A big house for a big family."
 can_destroy = false
 
 [node name="Collision" type="CollisionShape3D" parent="."]
