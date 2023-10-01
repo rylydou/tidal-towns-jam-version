@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_oto6y")
-info_name = "Small Apartment Building"
+info_name = "Small Apartment"
 info_description = "An apartment building for all your housing needs. 
 Costs 2 gold, 2 wood, and 3 stone. 
 Holds 10 people."
