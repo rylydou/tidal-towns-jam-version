@@ -140,7 +140,7 @@ info_name_label = NodePath("MarginContainer/InfoPanel/VBox/NameLabel")
 info_description_label = NodePath("MarginContainer/InfoPanel/VBox/DesciptionLabel")
 tutorial_container = NodePath("MarginContainer/TutorialPanel")
 tutorial_label = NodePath("MarginContainer/TutorialPanel/Info")
-build_menu = NodePath("BuildPanel/VBox/Grid")
+build_menu = NodePath("BuildPanel/VBox/Container")
 people_label = NodePath("PeopleLabel")
 money_label = NodePath("Interface/VBox/MoneyLabel")
 wood_label = NodePath("Interface/VBox/WoodLabel")
@@ -341,7 +341,7 @@ text = "Welcome mayor. This town blah blah blah blah blah blah blah"
 autowrap_mode = 3
 
 [node name="BuildPanel" type="PanelContainer" parent="."]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(200, 340)
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -368,12 +368,12 @@ text = "Build"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Grid" type="GridContainer" parent="BuildPanel/VBox"]
+[node name="Container" type="FlowContainer" parent="BuildPanel/VBox"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
-columns = 2
+vertical = true
 
 [node name="PeopleLabel" type="Label" parent="."]
 layout_mode = 1
