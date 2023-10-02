@@ -22,8 +22,7 @@ info_name = "Stone"
 info_description = "Costs 1 gold to remove.
 Gives 1 stone."
 reclaim_cost = 1
-reclaim_stone = 2
-is_built = true
+reclaim_stone = 1
 
 [node name="Collision" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
