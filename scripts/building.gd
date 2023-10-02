@@ -55,16 +55,10 @@ func _on_input_event(camera: Node, event: InputEvent, position: Vector3, normal:
 		
 	if is_instance_valid(Game.building): return
 	
-	if Input.is_action_just_pressed("add_all", true):
-		_add_all()
-		
-	elif Input.is_action_just_pressed('add', true):
+	if Input.is_action_just_pressed('add'):
 		_add()
-		
-	if Input.is_action_just_pressed("sub_all"):
-		_sub_all()
-
-	elif Input.is_action_just_pressed('sub'):
+	
+	if Input.is_action_just_pressed('sub'):
 		_sub()
 
 func _add() -> void:
@@ -91,7 +85,7 @@ func reclaim() -> void:
 	Game.wood += reclaim_wood
 	Game.stone += reclaim_stone
 	Game.steel += reclaim_steel
-	SoundBank.play_ui('destroy')
+	SoundBank.play_3d('destroy', global_position)
 	queue_free()
 
 func sink() -> void:

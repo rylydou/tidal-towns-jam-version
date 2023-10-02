@@ -350,10 +350,9 @@ cast_shadow = 0
 gi_mode = 0
 mesh = SubResource("PlaneMesh_5cbay")
 
-[node name="CameraAnchor" type="Node3D" parent="." node_paths=PackedStringArray("camera")]
+[node name="CameraAnchor" type="Node3D" parent="."]
 transform = Transform3D(0.236838, -0.485775, 0.841386, 0, 0.866026, 0.5, -0.971549, -0.118419, 0.205108, 0, 0, 0)
 script = ExtResource("12_3idn7")
-camera = NodePath("Camera")
 
 [node name="Camera" type="Camera3D" parent="CameraAnchor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 25)

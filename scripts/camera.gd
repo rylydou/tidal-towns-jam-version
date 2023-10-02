@@ -32,5 +32,5 @@ func _process(delta: float) -> void:
 	else:
 		target_zoom += Input.get_axis('zoom_in', 'zoom_out')
 	
-	target_zoom = clamp(target_zoom, 25, 40)
+	target_zoom = clamp(target_zoom, 25, 35)
 	camera.position.z = lerp(target_zoom, camera.position.z, exp(delta * -10.0))

@@ -113,7 +113,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed('add'):
 		if is_instance_valid(building):
 			if not building.test_placement(floor_valid):
-				SoundBank.play_ui('build_invalid')
+				SoundBank.play_3d('build_invalid', body_ray.get_collision_point())
 				return
 			
 			building.water_level_changed()
@@ -127,12 +127,12 @@ func _process(delta: float) -> void:
 				start_build(sapling_build)
 			else:
 				building = null
-				SoundBank.play_ui('build_confirm')
+				SoundBank.play_3d('build_confirm', body_ray.get_collision_point())
 			return
 	
 	if Input.is_action_just_pressed('sub'):
 		if is_instance_valid(building):
-			SoundBank.play_ui('build_cancel')
+			SoundBank.play_3d('build_cancel', body_ray.get_collision_point())
 			building.queue_free()
 			building = null
 			return
@@ -154,7 +154,7 @@ func _process(delta: float) -> void:
 
 func next_msg() -> void:
 	if message_num < get_tree().current_scene.tutorial_messages.size() - 1:
-		SoundBank.play_ui('tutorial_next')
+		SoundBank.play_ui('tut_next')
 		message_num += 1
 		tutorial_label.text = get_tree().current_scene.tutorial_messages[message_num]
 		return
@@ -225,6 +225,7 @@ func win() -> void:
 func fail() -> void:
 	SoundBank.play_ui('fail')
 	fail_screen.show()
+	win_screen.hide()
 	is_failed = true
 
 func _on_retry_button_pressed() -> void:
@@ -236,10 +237,8 @@ func _on_next_button_pressed() -> void:
 	if people > 0: return
 	if is_instance_valid(building): return
 	
-	
 	if day >= max_day - 1:
 		win()
-
 	
 	SoundBank.play_ui('next_day')
 	

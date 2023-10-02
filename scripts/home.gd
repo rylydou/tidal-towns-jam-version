@@ -20,16 +20,12 @@ func sink():
 		Game.fail()
 
 func _add() -> void:
-	if Game.people > 0 and current_inhabitants < max_inhabitants:
+	while Game.people > 0 and current_inhabitants < max_inhabitants:
+		SoundBank.play_3d('drop', global_position)
 		current_inhabitants += 1
 		Game.people -= 1
-		update_label()
-
-func _add_all() -> void:
-	while(Game.people > 0 and current_inhabitants < max_inhabitants):
-		current_inhabitants += 1
-		Game.people -= 1
-		update_label()
+	
+	update_label()
 
 func _sub() -> void:
 	if current_inhabitants <= 0 and Game.people <= 0:
@@ -37,14 +33,8 @@ func _sub() -> void:
 			reclaim()
 		return
 	
-	if current_inhabitants > 0:
+	while current_inhabitants > 0:
+		SoundBank.play_3d('pickup', global_position)
 		current_inhabitants -= 1
 		Game.people += 1
-		update_label()
-		return
-
-func _sub_all() -> void:
-	while(current_inhabitants > 0):
-		current_inhabitants -= 1
-		Game.people += 1
-		update_label()
+	update_label()

@@ -65,7 +65,7 @@ func get_sound(name: String) -> AudioStream:
 	loaded_sounds[name] = sound
 	return sound
 
-func play_3d(name: String, position: Vector3, bus: StringName = &'Game') -> void:
+func play_3d(name: String, position: Vector3, bus: StringName = &'SFX') -> void:
 	var player := get_player_3d()
 	var sound := get_sound(name)
 	player.stop()

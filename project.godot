@@ -10,10 +10,16 @@ config_version=5
 
 [application]
 
-config/name="LD54"
+config/name="Tidal Towns"
 run/main_scene="res://scenes/levels/tutorial.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
+boot_splash/bg_color=Color(1, 1, 1, 1)
+boot_splash/show_image=false
 config/icon="res://icon.svg"
+
+[audio]
+
+buses/default_bus_layout="res://resources/bus_layout.tres"
 
 [autoload]
 
@@ -59,6 +65,18 @@ texture={
 "process/size_limit": 0,
 "roughness/mode": 0,
 "roughness/src_normal": ""
+}
+wav={
+"compress/mode": 0,
+"edit/loop_begin": 0,
+"edit/loop_end": -1,
+"edit/loop_mode": 1,
+"edit/normalize": true,
+"edit/trim": true,
+"force/8_bit": false,
+"force/max_rate": true,
+"force/max_rate_hz": 44100,
+"force/mono": false
 }
 
 [input]
