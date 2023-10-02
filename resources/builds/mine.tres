@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("2_ljfyl")
-info_name = "Mine"
+info_name = "Stone Mine"
 info_description = "A mine used to extract materials from the earth. 
 Costs 5 gold and 5 wood.
 Generates 2 stone per turn."

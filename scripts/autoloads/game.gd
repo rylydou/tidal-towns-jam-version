@@ -271,10 +271,10 @@ func calc_til_rise():
 		
 		if raise_day - day == 1:
 			%DaysTilLabel.label_settings.font_color = Color(.9,.28,.18)
-			%DaysTilLabel.text = str(raise_day - day,' day til sea levels rise')
+			%DaysTilLabel.text = str(raise_day - day,' day until sea levels rise')
 		else:
 			%DaysTilLabel.label_settings.font_color = Color.WHITE
-			%DaysTilLabel.text = str(raise_day - day,' days til sea levels rise')
+			%DaysTilLabel.text = str(raise_day - day,' days until sea levels rise')
 		break
 
 

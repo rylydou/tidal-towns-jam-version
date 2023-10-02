@@ -283,7 +283,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-text = "1 day till sea levels rise"
+text = "1 day until sea levels rise"
 label_settings = SubResource("LabelSettings_5w32d")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
