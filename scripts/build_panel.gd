@@ -1,6 +1,6 @@
 extends Control
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	var target: float
 	
 	var mouse_position := get_global_mouse_position()
@@ -17,4 +17,5 @@ func _physics_process(delta: float) -> void:
 	else:
 		target = get_parent().size.y - 48
 	
-	position.y = lerp(position.y, target, .25)
+	# position.y = lerp(position.y, target, .25)
+	position.y = lerp(target, position.y, exp(delta * -10))
