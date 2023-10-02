@@ -6,6 +6,7 @@ signal building_special()
 
 @export var fail_screen: Control
 @export var win_screen: Control
+@export var start_screen: Control
 
 @export var info_control: Control
 @export var info_name_label: Label
@@ -282,3 +283,7 @@ func calc_til_rise():
 func _on_tutorial_panel_gui_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed('add'):
 		next_msg()
+
+
+func _on_start_pressed():
+	start_screen.hide()

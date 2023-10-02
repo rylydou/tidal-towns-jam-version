@@ -2,7 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://l2dq2jygykoh" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Bold.otf" id="1_mol1f"]
 [ext_resource type="Script" path="res://scripts/autoloads/game.gd" id="1_vcqlu"]
-[ext_resource type="Material" path="res://resources/mats/ui_bg_blur.tres" id="3_panam"]
+[ext_resource type="Material" uid="uid://ba5wfnhxarbg7" path="res://resources/mats/ui_bg_blur.tres" id="3_panam"]
 [ext_resource type="FontFile" uid="uid://himeqy34fskt" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Extrabold.otf" id="3_tfa0m"]
 [ext_resource type="Resource" uid="uid://b8jyq1mo0o2r3" path="res://resources/builds/sapling.tres" id="4_bvova"]
 [ext_resource type="Resource" uid="uid://0u78ugqfg4qd" path="res://resources/builds/tent.tres" id="4_vbed1"]
@@ -94,7 +94,7 @@ corner_radius_bottom_left = 24
 [sub_resource type="LabelSettings" id="LabelSettings_maoyo"]
 font = ExtResource("3_tfa0m")
 font_size = 40
-font_color = Color(0.901961, 0.282353, 0.180392, 1)
+font_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_uu5mc"]
 font = ExtResource("3_tfa0m")
@@ -117,7 +117,7 @@ bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 
-[node name="Game" type="Control" node_paths=PackedStringArray("fail_screen", "win_screen", "info_control", "info_name_label", "info_description_label", "tutorial_container", "tutorial_label", "build_menu", "people_label", "money_label", "wood_label", "stone_label", "steel_label", "day_button")]
+[node name="Game" type="Control" node_paths=PackedStringArray("fail_screen", "win_screen", "start_screen", "info_control", "info_name_label", "info_description_label", "tutorial_container", "tutorial_label", "build_menu", "people_label", "money_label", "wood_label", "stone_label", "steel_label", "day_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -131,6 +131,7 @@ theme = SubResource("Theme_tjem8")
 script = ExtResource("1_vcqlu")
 fail_screen = NodePath("Interface/FailContainer")
 win_screen = NodePath("Interface/WinContainer")
+start_screen = NodePath("StartContainer")
 info_control = NodePath("MarginContainer/InfoPanel")
 info_name_label = NodePath("MarginContainer/InfoPanel/VBox/NameLabel")
 info_description_label = NodePath("MarginContainer/InfoPanel/VBox/DesciptionLabel")
@@ -394,8 +395,34 @@ text = "0 people"
 stream = ExtResource("23_3od1q")
 autoplay = true
 
+[node name="StartContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StartContainer"]
+material = ExtResource("3_panam")
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="Label" type="Label" parent="StartContainer/VBoxContainer"]
+layout_mode = 2
+text = "Welcome to Tidal Towns"
+label_settings = SubResource("LabelSettings_maoyo")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Start" type="Button" parent="StartContainer/VBoxContainer"]
+layout_mode = 2
+text = "Start"
+
 [connection signal="pressed" from="Interface/FailContainer/VBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
 [connection signal="pressed" from="Interface/WinContainer/VBoxContainer/NextLevelButton" to="." method="next_level"]
 [connection signal="pressed" from="Interface/VBoxContainer/Hbox/RetryButton" to="." method="_on_retry_button_pressed"]
 [connection signal="pressed" from="Interface/VBoxContainer/Hbox/NextButton" to="." method="_on_next_button_pressed"]
 [connection signal="gui_input" from="MarginContainer/TutorialPanel" to="." method="_on_tutorial_panel_gui_input"]
+[connection signal="pressed" from="StartContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
