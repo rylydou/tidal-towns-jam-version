@@ -16,6 +16,12 @@ class_name Level extends Node3D
 @export var camera_anchor: Node3D
 
 func _ready() -> void:
+	
+	Game.raise_days.clear()
+	for n in range(1, water_levels.size()):
+		if water_levels[n] > water_levels[n-1]:
+			Game.raise_days.append(n)
+	
 	Game.money = starting_money
 	Game.wood = starting_wood
 	Game.stone = starting_stone

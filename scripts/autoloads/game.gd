@@ -25,6 +25,8 @@ var message_num = 0
 @export var steel_label: Label
 @export var day_button: Button
 
+@export var day_counter: Label
+
 @export var builds: Array[Build] = []
 
 @export var spin_speed := 2.0
@@ -40,6 +42,7 @@ var day := 0
 var max_day := 1
 
 @export var levels: Array[PackedScene]
+@export var raise_days: Array[int]
 var level_number := 0
 
 var current_water_level := 0.0
@@ -73,6 +76,9 @@ func _ready() -> void:
 	add_child(area_ray)
 	area_ray.collide_with_areas = true
 	area_ray.collide_with_bodies = false
+	calc_til_rise()
+	
+	
 	
 	restart()
 
@@ -192,6 +198,7 @@ func restart() -> void:
 	await get_tree().process_frame
 	
 	water_level_changed.emit()
+	calc_til_rise()
 
 func win() -> void:
 	win_screen.show()
@@ -215,6 +222,7 @@ func _on_next_button_pressed() -> void:
 	next_day.emit()
 	water_level_changed.emit()
 	building_special.emit()
+	calc_til_rise()
 
 func next_level():
 	level_number += 1
@@ -222,3 +230,13 @@ func next_level():
 	get_tree().change_scene_to_packed(levels[level_number])
 	
 	restart()
+func calc_til_rise():
+	for x in range(0, raise_days.size() - 1):
+		if day > raise_days[x]:
+			pass
+		else:
+			day_counter.text = str(raise_days[x] - day)
+			if raise_days[x] - day == 1:
+				day_counter.label_settings.font_color = Color(.9,.28,.18)
+			else:
+				day_counter.label_settings.font_color = Color(0, 0, 0)
