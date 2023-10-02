@@ -11,8 +11,7 @@ size = Vector3(1, 1.5, 1)
 script = ExtResource("1_p23v4")
 max_inhabitants = 1
 info_name = "Tent"
-info_description = "It's something.
-Tents can be destroyed."
+info_description = "Provides great temporary housing. Tents can be destroyed."
 
 [node name="Collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
