@@ -2120,7 +2120,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.79691, 2.86756, -0.836386)
 
 [node name="Tree3" parent="Props" instance=ExtResource("22_vurj5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.68141, 3.72313, 2.74069)
-
-[node name="tent" parent="." instance=ExtResource("5_he081")]
-transform = Transform3D(0.749984, 0, -0.661456, 0, 1, 0, 0.661456, 0, 0.749984, -16.9045, 0.900288, -19.9639)
-current_inhabitants = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://c7h6b26r26rq4"]
+[gd_scene load_steps=38 format=3 uid="uid://c7h6b26r26rq4"]
 
 [ext_resource type="FontFile" uid="uid://l2dq2jygykoh" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Bold.otf" id="1_mol1f"]
 [ext_resource type="Script" path="res://scripts/autoloads/game.gd" id="1_vcqlu"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://b11mgoded0h1x" path="res://scenes/levels/level1.tscn" id="16_y8j82"]
 [ext_resource type="PackedScene" uid="uid://dll8aigsplnav" path="res://scenes/levels/level2.tscn" id="17_c7orv"]
 [ext_resource type="Script" path="res://scripts/build_panel.gd" id="18_px0iy"]
+[ext_resource type="PackedScene" uid="uid://dgatepbti4k13" path="res://scenes/levels/level3.tscn" id="19_7rlmb"]
 [ext_resource type="AudioStream" uid="uid://8sogjhovgv5x" path="res://resources/music/bgm1.ogg" id="23_3od1q"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_57ici"]
@@ -143,7 +144,7 @@ stone_label = NodePath("Interface/VBox/StoneLabel")
 steel_label = NodePath("Interface/VBox/SteelLabel")
 day_button = NodePath("Interface/VBoxContainer/Hbox/NextButton")
 builds = Array[Resource("res://scripts/resources/build.gd")]([ExtResource("4_bvova"), ExtResource("12_70825"), ExtResource("13_a1ur6"), ExtResource("14_jypvw"), ExtResource("4_vbed1"), ExtResource("5_mv84u"), ExtResource("6_cnkh4"), ExtResource("7_f5r7k"), ExtResource("13_8w7o7"), ExtResource("8_087w2"), ExtResource("9_xgsky"), ExtResource("10_4d3lr"), ExtResource("11_jrb1s")])
-levels = Array[PackedScene]([ExtResource("16_ub6ls"), ExtResource("16_y8j82"), ExtResource("17_c7orv")])
+levels = Array[PackedScene]([ExtResource("16_ub6ls"), ExtResource("16_y8j82"), ExtResource("17_c7orv"), ExtResource("19_7rlmb")])
 sapling_build = ExtResource("4_bvova")
 
 [node name="Interface" type="MarginContainer" parent="."]

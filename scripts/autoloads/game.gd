@@ -237,7 +237,8 @@ func _on_next_button_pressed() -> void:
 	
 	
 	if day >= max_day - 1:
-		win_screen.show()
+		win()
+
 	
 	SoundBank.play_ui('next_day')
 	
