@@ -9,7 +9,7 @@ class_name Level extends Node3D
 
 @export var water_levels: Array[float] = [0.0]
 
-@export var tutorial_messages: Array[String]
+@export_multiline var tutorial_messages: Array[String]
 
 # @export_region('References')
 @export var water: Node3D
