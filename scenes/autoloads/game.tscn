@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://c7h6b26r26rq4"]
+[gd_scene load_steps=39 format=3 uid="uid://c7h6b26r26rq4"]
 
 [ext_resource type="FontFile" uid="uid://l2dq2jygykoh" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Bold.otf" id="1_mol1f"]
 [ext_resource type="Script" path="res://scripts/autoloads/game.gd" id="1_vcqlu"]
@@ -116,6 +116,9 @@ content_margin_bottom = 24.0
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hgrrw"]
+bg_color = Color(1, 1, 1, 1)
 
 [node name="Game" type="Control" node_paths=PackedStringArray("fail_screen", "win_screen", "start_screen", "info_control", "info_name_label", "info_description_label", "tutorial_container", "tutorial_label", "build_menu", "people_label", "money_label", "wood_label", "stone_label", "steel_label", "day_button")]
 layout_mode = 3
@@ -402,10 +405,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hgrrw")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="StartContainer"]
 material = ExtResource("3_panam")
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_constants/separation = 16
 alignment = 1
 
