@@ -2,7 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://l2dq2jygykoh" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Bold.otf" id="1_mol1f"]
 [ext_resource type="Script" path="res://scripts/autoloads/game.gd" id="1_vcqlu"]
-[ext_resource type="Material" path="res://resources/mats/ui_bg_blur.tres" id="3_panam"]
+[ext_resource type="Material" uid="uid://ba5wfnhxarbg7" path="res://resources/mats/ui_bg_blur.tres" id="3_panam"]
 [ext_resource type="FontFile" uid="uid://himeqy34fskt" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Extrabold.otf" id="3_tfa0m"]
 [ext_resource type="Resource" uid="uid://b8jyq1mo0o2r3" path="res://resources/builds/sapling.tres" id="4_bvova"]
 [ext_resource type="Resource" uid="uid://0u78ugqfg4qd" path="res://resources/builds/tent.tres" id="4_vbed1"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://b11mgoded0h1x" path="res://scenes/levels/level1.tscn" id="16_y8j82"]
 [ext_resource type="PackedScene" uid="uid://dll8aigsplnav" path="res://scenes/levels/level2.tscn" id="17_c7orv"]
 [ext_resource type="Script" path="res://scripts/build_panel.gd" id="18_px0iy"]
+[ext_resource type="AudioStream" uid="uid://8sogjhovgv5x" path="res://resources/music/bgm1.ogg" id="23_3od1q"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_57ici"]
 
@@ -99,14 +100,9 @@ font = ExtResource("3_tfa0m")
 font_size = 40
 font_color = Color(0.223529, 0.482353, 0.266667, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_q080i"]
-line_spacing = 0.0
-font_size = 60
-font_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_yj0ip"]
-font_size = 10
-font_color = Color(0, 0, 0, 1)
+[sub_resource type="LabelSettings" id="LabelSettings_5w32d"]
+font = ExtResource("3_tfa0m")
+font_size = 24
 
 [sub_resource type="Theme" id="Theme_qq77b"]
 Button/fonts/font = ExtResource("4_votfr")
@@ -120,7 +116,7 @@ bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 
-[node name="Game" type="Control" node_paths=PackedStringArray("fail_screen", "win_screen", "info_control", "info_name_label", "info_description_label", "tutorial_container", "tutorial_label", "build_menu", "people_label", "money_label", "wood_label", "stone_label", "steel_label", "day_button", "day_counter")]
+[node name="Game" type="Control" node_paths=PackedStringArray("fail_screen", "win_screen", "info_control", "info_name_label", "info_description_label", "tutorial_container", "tutorial_label", "build_menu", "people_label", "money_label", "wood_label", "stone_label", "steel_label", "day_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -145,8 +141,7 @@ money_label = NodePath("Interface/VBox/MoneyLabel")
 wood_label = NodePath("Interface/VBox/WoodLabel")
 stone_label = NodePath("Interface/VBox/StoneLabel")
 steel_label = NodePath("Interface/VBox/SteelLabel")
-day_button = NodePath("Interface/Hbox/NextButton")
-day_counter = NodePath("MarginContainer/Daystilflood/VBox/Days")
+day_button = NodePath("Interface/VBoxContainer/Hbox/NextButton")
 builds = Array[Resource("res://scripts/resources/build.gd")]([ExtResource("4_bvova"), ExtResource("12_70825"), ExtResource("13_a1ur6"), ExtResource("14_jypvw"), ExtResource("4_vbed1"), ExtResource("5_mv84u"), ExtResource("6_cnkh4"), ExtResource("7_f5r7k"), ExtResource("13_8w7o7"), ExtResource("8_087w2"), ExtResource("9_xgsky"), ExtResource("10_4d3lr"), ExtResource("11_jrb1s")])
 levels = Array[PackedScene]([ExtResource("16_ub6ls"), ExtResource("16_y8j82"), ExtResource("17_c7orv")])
 sapling_build = ExtResource("4_bvova")
@@ -173,6 +168,7 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="MoneyLabel" type="Label" parent="Interface/VBox"]
@@ -255,25 +251,40 @@ vertical_alignment = 1
 layout_mode = 2
 text = "Next level"
 
-[node name="Hbox" type="HBoxContainer" parent="Interface"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Interface"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Hbox" type="HBoxContainer" parent="Interface/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
+theme_override_constants/separation = 8
 alignment = 2
 
-[node name="RetryButton" type="Button" parent="Interface/Hbox"]
+[node name="RetryButton" type="Button" parent="Interface/VBoxContainer/Hbox"]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 focus_mode = 0
 text = "Retry?"
 
-[node name="NextButton" type="Button" parent="Interface/Hbox"]
+[node name="NextButton" type="Button" parent="Interface/VBoxContainer/Hbox"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 focus_mode = 0
 text = "Next Day 0/3"
+
+[node name="DaysTilLabel" type="Label" parent="Interface/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "1 day till sea levels rise"
+label_settings = SubResource("LabelSettings_5w32d")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -337,35 +348,6 @@ horizontal_alignment = 1
 vertical_alignment = 2
 autowrap_mode = 3
 
-[node name="Daystilflood" type="PanelContainer" parent="MarginContainer"]
-custom_minimum_size = Vector2(90, 0)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 4
-
-[node name="VBox" type="VBoxContainer" parent="MarginContainer/Daystilflood"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="Days" type="Label" parent="MarginContainer/Daystilflood/VBox"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_votfr")
-theme_override_font_sizes/font_size = 16
-text = "X"
-label_settings = SubResource("LabelSettings_q080i")
-horizontal_alignment = 1
-autowrap_mode = 3
-
-[node name="Til" type="Label" parent="MarginContainer/Daystilflood/VBox"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_votfr")
-theme_override_font_sizes/font_size = 16
-text = "days until sea levels rise"
-label_settings = SubResource("LabelSettings_yj0ip")
-horizontal_alignment = 1
-vertical_alignment = 2
-autowrap_mode = 3
-
 [node name="BuildPanel" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 1
@@ -397,6 +379,8 @@ vertical_alignment = 1
 [node name="Grid" type="GridContainer" parent="BuildPanel/VBox"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
 columns = 2
 
 [node name="PeopleLabel" type="Label" parent="."]
@@ -418,7 +402,12 @@ theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("3_tfa0m")
 text = "0 people"
 
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("23_3od1q")
+autoplay = true
+bus = &"BGM"
+
 [connection signal="pressed" from="Interface/FailContainer/VBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
 [connection signal="pressed" from="Interface/WinContainer/VBoxContainer/NextButton" to="." method="next_level"]
-[connection signal="pressed" from="Interface/Hbox/RetryButton" to="." method="_on_retry_button_pressed"]
-[connection signal="pressed" from="Interface/Hbox/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="Interface/VBoxContainer/Hbox/RetryButton" to="." method="_on_retry_button_pressed"]
+[connection signal="pressed" from="Interface/VBoxContainer/Hbox/NextButton" to="." method="_on_next_button_pressed"]

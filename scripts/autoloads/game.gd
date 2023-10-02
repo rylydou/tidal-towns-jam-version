@@ -25,8 +25,6 @@ var message_num = 0
 @export var steel_label: Label
 @export var day_button: Button
 
-@export var day_counter: Label
-
 @export var builds: Array[Build] = []
 
 @export var spin_speed := 2.0
@@ -42,7 +40,7 @@ var day := 0
 var max_day := 1
 
 @export var levels: Array[PackedScene]
-@export var raise_days: Array[int]
+var raise_days: Array[int]
 var level_number := 0
 
 var current_water_level := 0.0
@@ -77,8 +75,6 @@ func _ready() -> void:
 	area_ray.collide_with_areas = true
 	area_ray.collide_with_bodies = false
 	calc_til_rise()
-	
-	
 	
 	restart()
 
@@ -116,6 +112,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed('add'):
 		if is_instance_valid(building):
 			if not building.test_placement(floor_valid):
+				SoundBank.play_ui('build_invalid')
 				return
 			
 			building.water_level_changed()
@@ -129,18 +126,14 @@ func _process(delta: float) -> void:
 				start_build(sapling_build)
 			else:
 				building = null
-			return
-		
-		if people > 0:
+				SoundBank.play_ui('build_confirm')
 			return
 	
 	if Input.is_action_just_pressed('sub'):
 		if is_instance_valid(building):
+			SoundBank.play_ui('build_cancel')
 			building.queue_free()
 			building = null
-			return
-		
-		if people > 0:
 			return
 	
 	if Input.is_action_just_pressed('debug_give_mats', true):
@@ -149,13 +142,20 @@ func _process(delta: float) -> void:
 		stone += 10
 		steel += 10
 		return
-		
+	
+	if Input.is_action_just_pressed('debug_win', true):
+		win()
+		return
+	
 	if Input.is_action_just_pressed("next_message"):
+		SoundBank.play_ui('tutorial_next')
+		
 		if message_num < get_tree().current_scene.tutorial_messages.size() - 1:
 			message_num += 1
 			tutorial_label.text = get_tree().current_scene.tutorial_messages[message_num]
 		else:
-			tutorial_container.visible = false
+			tutorial_container.hide()
+		return
 
 func cast_ray() -> void:
 	if not is_instance_valid(camera): return
@@ -175,6 +175,8 @@ func start_build(build: Build) -> void:
 	if stone < build.cost_stone: return
 	if steel < build.cost_steel: return
 	
+	SoundBank.play_ui('build_start')
+	
 	self.build = build
 	building = build.scene.instantiate()
 	get_tree().current_scene.add_child(building)
@@ -183,6 +185,8 @@ func restart() -> void:
 	day = 0
 	people = 0
 	is_failed = false
+	message_num = 0
+	
 	fail_screen.hide()
 	win_screen.hide()
 	
@@ -191,7 +195,10 @@ func restart() -> void:
 	await get_tree().process_frame
 	
 	camera = get_tree().current_scene.find_child('Camera')
-	tutorial_label.text = get_tree().current_scene.tutorial_messages[0]
+	tutorial_container.hide()
+	if get_tree().current_scene.tutorial_messages.size() > 0:
+		tutorial_label.text = get_tree().current_scene.tutorial_messages[0]
+		tutorial_container.show()
 	
 	next_day.emit()
 	
@@ -201,13 +208,18 @@ func restart() -> void:
 	calc_til_rise()
 
 func win() -> void:
+	if is_failed: return
+	
+	SoundBank.play_ui('win')
 	win_screen.show()
 
 func fail() -> void:
+	SoundBank.play_ui('fail')
 	fail_screen.show()
 	is_failed = true
 
 func _on_retry_button_pressed() -> void:
+	SoundBank.play_ui('retry')
 	restart()
 
 func _on_next_button_pressed() -> void:
@@ -215,7 +227,10 @@ func _on_next_button_pressed() -> void:
 	
 	if day >= max_day - 1:
 		win_screen.show()
-		return
+	
+	SoundBank.play_ui('next_day')
+	
+	if day >= max_day: return
 	
 	day += 1
 	
@@ -225,18 +240,29 @@ func _on_next_button_pressed() -> void:
 	calc_til_rise()
 
 func next_level():
+	if level_number >= levels.size() - 1: return
+	
+	SoundBank.play_ui('next_level')
+	
 	level_number += 1
 	
 	get_tree().change_scene_to_packed(levels[level_number])
 	
+	await get_tree().process_frame
+	
 	restart()
+	
+	if level_number >= levels.size() - 1:
+		%NextButton.hide()
+
 func calc_til_rise():
-	for x in range(0, raise_days.size() - 1):
-		if day > raise_days[x]:
-			pass
+	for raise_day in raise_days:
+		if day >= raise_day: continue
+		
+		if raise_day - day == 1:
+			%DaysTilLabel.label_settings.font_color = Color(.9,.28,.18)
+			%DaysTilLabel.text = str(raise_day - day,' day til sea levels rise')
 		else:
-			day_counter.text = str(raise_days[x] - day)
-			if raise_days[x] - day == 1:
-				day_counter.label_settings.font_color = Color(.9,.28,.18)
-			else:
-				day_counter.label_settings.font_color = Color(0, 0, 0)
+			%DaysTilLabel.label_settings.font_color = Color.WHITE
+			%DaysTilLabel.text = str(raise_day - day,' days til sea levels rise')
+		break
