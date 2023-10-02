@@ -80,6 +80,13 @@ func _ready() -> void:
 	restart()
 
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed('fullscreen'):
+		var window := get_window()
+		if window.mode == Window.MODE_FULLSCREEN:
+			window.mode = Window.MODE_WINDOWED
+		else:
+			window.mode = Window.MODE_FULLSCREEN
+	
 	people_label.position = get_local_mouse_position()
 	people_label.position.y -= people_label.size.y
 	people_label.position.x += 16.

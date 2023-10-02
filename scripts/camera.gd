@@ -18,8 +18,9 @@ func _process(delta: float) -> void:
 	var move := forward*move_input.y + right*move_input.x
 	
 	target_position += Vector3(move.x, 0, move.z)*move_speed*delta
+	target_position.y = position.y
 	
-	global_position = lerp(target_position, global_position, exp(delta * -7.5))
+	position = lerp(target_position, position, exp(delta * -7.5))
 	
 	target_rotation += Input.get_axis('turn_left', 'turn_right')*turn_speed*delta
 	

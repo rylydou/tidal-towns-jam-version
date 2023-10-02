@@ -43,6 +43,7 @@ func _ready() -> void:
 	generate_pool_ui(POOL_SIZE_UI)
 	if not DirAccess.dir_exists_absolute(SOUND_BANK_FOLDER):
 		printerr('[SoundBank] Sound bank folder not found at %s' % SOUND_BANK_FOLDER)
+	print(DirAccess.get_files_at(SOUND_BANK_FOLDER))
 
 var loaded_sounds := {}
 func get_sound(name: String) -> AudioStream:
@@ -60,6 +61,9 @@ func get_sound(name: String) -> AudioStream:
 		if FileAccess.file_exists(path + '.ogg'):
 			sound = load(path + '.ogg')
 			break
+		if FileAccess.file_exists(path + '.ogg.import'):
+			sound = load(path + '.ogg')
+		break
 		segs.remove_at(segs.size() - 1)
 	
 	loaded_sounds[name] = sound
