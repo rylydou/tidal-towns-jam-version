@@ -148,14 +148,17 @@ func _process(delta: float) -> void:
 		return
 	
 	if Input.is_action_just_pressed("next_message"):
-		SoundBank.play_ui('tutorial_next')
-		
-		if message_num < get_tree().current_scene.tutorial_messages.size() - 1:
-			message_num += 1
-			tutorial_label.text = get_tree().current_scene.tutorial_messages[message_num]
-		else:
-			tutorial_container.hide()
+		next_msg()
 		return
+
+func next_msg() -> void:
+	if message_num < get_tree().current_scene.tutorial_messages.size() - 1:
+		SoundBank.play_ui('tutorial_next')
+		message_num += 1
+		tutorial_label.text = get_tree().current_scene.tutorial_messages[message_num]
+		return
+	
+	tutorial_container.hide()
 
 func cast_ray() -> void:
 	if not is_instance_valid(camera): return
@@ -210,7 +213,12 @@ func restart() -> void:
 func win() -> void:
 	if is_failed: return
 	
-	SoundBank.play_ui('win')
+	%NextLevelButton.visible = level_number < levels.size() - 1
+	
+	if level_number >= levels.size() - 1:
+		SoundBank.play_ui('win_final')
+	else:
+		SoundBank.play_ui('win')
 	win_screen.show()
 
 func fail() -> void:
@@ -224,6 +232,9 @@ func _on_retry_button_pressed() -> void:
 
 func _on_next_button_pressed() -> void:
 	if is_failed: return
+	if people > 0: return
+	if is_instance_valid(building): return
+	
 	
 	if day >= max_day - 1:
 		win_screen.show()
@@ -249,11 +260,10 @@ func next_level():
 	get_tree().change_scene_to_packed(levels[level_number])
 	
 	await get_tree().process_frame
+	await get_tree().process_frame
+	await get_tree().process_frame
 	
 	restart()
-	
-	if level_number >= levels.size() - 1:
-		%NextButton.hide()
 
 func calc_til_rise():
 	for raise_day in raise_days:
@@ -266,3 +276,8 @@ func calc_til_rise():
 			%DaysTilLabel.label_settings.font_color = Color.WHITE
 			%DaysTilLabel.text = str(raise_day - day,' days til sea levels rise')
 		break
+
+
+func _on_tutorial_panel_gui_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed('add'):
+		next_msg()

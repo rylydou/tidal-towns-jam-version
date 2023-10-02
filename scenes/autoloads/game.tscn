@@ -134,7 +134,7 @@ info_control = NodePath("MarginContainer/InfoPanel")
 info_name_label = NodePath("MarginContainer/InfoPanel/VBox/NameLabel")
 info_description_label = NodePath("MarginContainer/InfoPanel/VBox/DesciptionLabel")
 tutorial_container = NodePath("MarginContainer/TutorialPanel")
-tutorial_label = NodePath("MarginContainer/TutorialPanel/VBox/Info")
+tutorial_label = NodePath("MarginContainer/TutorialPanel/Info")
 build_menu = NodePath("BuildPanel/VBox/Grid")
 people_label = NodePath("PeopleLabel")
 money_label = NodePath("Interface/VBox/MoneyLabel")
@@ -247,7 +247,8 @@ label_settings = SubResource("LabelSettings_uu5mc")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="NextButton" type="Button" parent="Interface/WinContainer/VBoxContainer"]
+[node name="NextLevelButton" type="Button" parent="Interface/WinContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Next level"
 
@@ -271,7 +272,6 @@ focus_mode = 0
 text = "Retry?"
 
 [node name="NextButton" type="Button" parent="Interface/VBoxContainer/Hbox"]
-unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
@@ -328,24 +328,11 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="VBox" type="VBoxContainer" parent="MarginContainer/TutorialPanel"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="Info" type="Label" parent="MarginContainer/TutorialPanel/VBox"]
+[node name="Info" type="Label" parent="MarginContainer/TutorialPanel"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_votfr")
 theme_override_font_sizes/font_size = 16
 text = "Welcome mayor. This town blah blah blah blah blah blah blah"
-autowrap_mode = 3
-
-[node name="Space to Continue" type="Label" parent="MarginContainer/TutorialPanel/VBox"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_votfr")
-theme_override_font_sizes/font_size = 16
-text = "Press space to continue"
-horizontal_alignment = 1
-vertical_alignment = 2
 autowrap_mode = 3
 
 [node name="BuildPanel" type="PanelContainer" parent="."]
@@ -408,6 +395,7 @@ autoplay = true
 bus = &"BGM"
 
 [connection signal="pressed" from="Interface/FailContainer/VBoxContainer/RetryButton" to="." method="_on_retry_button_pressed"]
-[connection signal="pressed" from="Interface/WinContainer/VBoxContainer/NextButton" to="." method="next_level"]
+[connection signal="pressed" from="Interface/WinContainer/VBoxContainer/NextLevelButton" to="." method="next_level"]
 [connection signal="pressed" from="Interface/VBoxContainer/Hbox/RetryButton" to="." method="_on_retry_button_pressed"]
 [connection signal="pressed" from="Interface/VBoxContainer/Hbox/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="gui_input" from="MarginContainer/TutorialPanel" to="." method="_on_tutorial_panel_gui_input"]

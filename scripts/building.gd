@@ -81,7 +81,6 @@ func _sub_all() -> void:
 	pass
 
 func reclaim() -> void:
-	SoundBank.play_ui('destroy')
 	if is_sunk: return
 	if is_reclaimed: return
 	if Game.money < reclaim_cost: return
@@ -92,6 +91,7 @@ func reclaim() -> void:
 	Game.wood += reclaim_wood
 	Game.stone += reclaim_stone
 	Game.steel += reclaim_steel
+	SoundBank.play_ui('destroy')
 	queue_free()
 
 func sink() -> void:
