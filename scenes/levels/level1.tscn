@@ -620,16 +620,12 @@ current_inhabitants = 10
 transform = Transform3D(-0.190312, 0, 0.981724, 0, 1, 0, -0.981724, 0, -0.190312, -5.35484, 2.99854, -13.2743)
 current_inhabitants = 6
 
-[node name="tent" parent="Buildings" instance=ExtResource("19_8kmen")]
-transform = Transform3D(-0.696114, 0, 0.717932, 0, 1, 0, -0.717932, 0, -0.696114, 5.62109, 0.900287, 0.844861)
-current_inhabitants = 1
-
 [node name="tent2" parent="Buildings" instance=ExtResource("19_8kmen")]
-transform = Transform3D(-0.553973, 0, -0.832535, 0, 1, 0, 0.832535, 0, -0.553973, 5.70846, 0.900287, -4.4702)
+transform = Transform3D(0.82269, 0, -0.56849, 0, 1, 0, 0.56849, 0, 0.82269, 1.68644, 0.900287, -3.52114)
 current_inhabitants = 1
 
 [node name="tent3" parent="Buildings" instance=ExtResource("19_8kmen")]
-transform = Transform3D(0.998947, 0, 0.0458679, 0, 1, 0, -0.0458679, 0, 0.998947, 0.300914, 0.900288, -1.54901)
+transform = Transform3D(0.806682, 0, 0.590985, 0, 1, 0, -0.590985, 0, 0.806682, 1.61106, 0.900288, 0.653569)
 current_inhabitants = 1
 
 [node name="small_house" parent="Buildings" instance=ExtResource("20_gr3rw")]
