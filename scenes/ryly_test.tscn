@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://addons/goshapes/base/PathOptions.gd" id="3_jdui4"]
 [ext_resource type="Environment" uid="uid://cns5r4bdlocwb" path="res://resources/enviorment.tres" id="3_qhesi"]
 [ext_resource type="Script" path="res://addons/goshapes/MeshShaper/Shapers/BottomShaper.gd" id="4_q84rl"]
-[ext_resource type="PackedScene" uid="uid://dce2mkn36kmp6" path="res://scenes/buildings/test_shack.tscn" id="5_5nbey"]
+[ext_resource type="PackedScene" uid="uid://rujrgsi2i337" path="res://scenes/buildings/test_shack.tscn" id="5_5nbey"]
 [ext_resource type="Script" path="res://addons/goshapes/MeshShaper/Shapers/CapFlatShaper.gd" id="5_npgyw"]
 [ext_resource type="Script" path="res://addons/goshapes/MeshShaper/BlockShaper.gd" id="6_d3558"]
 [ext_resource type="Script" path="res://addons/goshapes/MeshShaper/Shapers/WallBevelShaper.gd" id="7_lqfn8"]
