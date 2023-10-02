@@ -1042,3 +1042,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.42684, 5.9, 6.61168)
 
 [node name="tent" parent="." instance=ExtResource("14_n7dds")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.43573, 1, -0.367634)
+current_inhabitants = 1
+
+[node name="Tree3" parent="." instance=ExtResource("22_1bufv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.93114, 2.9, 0.17015)
