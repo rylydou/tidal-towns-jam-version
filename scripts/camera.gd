@@ -23,7 +23,7 @@ func _process(delta: float) -> void:
 	
 	target_rotation += Input.get_axis('turn_left', 'turn_right')*turn_speed*delta
 	
-	global_rotation.y = lerp(target_rotation, global_rotation.y, exp(delta * -10.0))
+	global_rotation.y = lerp_angle(target_rotation, global_rotation.y, exp(delta * -10.0))
 
 	if Input.is_action_just_pressed('zoom_in'):
 		target_zoom -= 1
