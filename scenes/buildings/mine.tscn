@@ -10,7 +10,7 @@ size = Vector3(1.5, 1.5, 1.5)
 [node name="mine" type="Area3D"]
 script = ExtResource("1_th27e")
 info_name = "Mine"
-info_description = "A mine used to extract materials from the earth. Generates 2 stone per turn."
+info_description = "A mine used to extract materials from the earth. Generates 2 stone per day."
 can_destroy = false
 stone_income = 2
 

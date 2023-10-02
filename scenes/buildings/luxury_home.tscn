@@ -11,8 +11,7 @@ size = Vector3(2, 1.5, 2)
 script = ExtResource("1_7k7xs")
 max_inhabitants = 4
 info_name = "Luxury Home"
-info_description = "A luxury home.
-Generates 1 gold per day in rent."
+info_description = "A luxurious home. Generates 1 gold per day in rent."
 can_destroy = false
 money_income = 1
 

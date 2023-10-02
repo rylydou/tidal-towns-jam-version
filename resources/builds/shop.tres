@@ -6,11 +6,11 @@
 [resource]
 script = ExtResource("2_pl8nd")
 info_name = "Shop"
-info_description = "A shop that pays texes to your island.
-Costs 4 wood. 
+info_description = "A shop that pays taxes to your island.
+Costs 5 wood. 
 Generates 2 gold per day."
 scene = ExtResource("1_30nmf")
 cost_money = 0
-cost_wood = 4
+cost_wood = 5
 cost_stone = 0
 cost_steel = 0

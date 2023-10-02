@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Build" load_steps=3 format=3 uid="uid://qjfflhvo0h63"]
 
-[ext_resource type="PackedScene" uid="uid://pvlo5xbd2ey6" path="res://scenes/buildings/arcology.tscn" id="1_x8efs"]
+[ext_resource type="PackedScene" uid="uid://b6lebnmk011fa" path="res://scenes/buildings/arcology.tscn" id="1_x8efs"]
 [ext_resource type="Script" path="res://scripts/resources/build.gd" id="2_0crt6"]
 
 [resource]
@@ -8,7 +8,7 @@ script = ExtResource("2_0crt6")
 info_name = "Arcology"
 info_description = "A self sustained city contained within a single structure.
 Costs 15 wood, 15 stone, and 15 steel.
-Holds 50 people."
+Holds 100 people."
 scene = ExtResource("1_x8efs")
 cost_money = 0
 cost_wood = 15
