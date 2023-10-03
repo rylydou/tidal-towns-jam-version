@@ -7,7 +7,7 @@
 script = ExtResource("2_0crt6")
 info_name = "Arcology"
 info_description = "A self sustained city contained within a single structure.
-Costs 20 wood, 20 stone, and 20 steel.
+Costs 15 wood, 15 stone, and 15 steel.
 Holds 100 people."
 scene = ExtResource("1_x8efs")
 cost_money = 0
