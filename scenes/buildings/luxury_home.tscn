@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://br1la1vjewfr7" path="res://resources/models/luxury_house.glb" id="3_y2nh5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2qp6s"]
-size = Vector3(2, 1.5, 2)
+size = Vector3(1.5, 1.5, 1.5)
 
 [node name="luxury_home" type="Area3D"]
 script = ExtResource("1_7k7xs")
@@ -16,7 +16,7 @@ can_destroy = false
 money_income = 1
 
 [node name="Collision" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.123318, 0.75, -0.0358149)
 shape = SubResource("BoxShape3D_2qp6s")
 
 [node name="Banner" type="Node3D" parent="."]

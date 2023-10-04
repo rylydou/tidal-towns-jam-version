@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://brcxv2e7g7qs2" path="res://resources/models/mine.glb" id="3_0wgyv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_riijj"]
-size = Vector3(1.5, 1.5, 1.5)
+size = Vector3(1.4, 1.5, 1.4)
 
 [node name="mine" type="Area3D"]
 script = ExtResource("1_th27e")
