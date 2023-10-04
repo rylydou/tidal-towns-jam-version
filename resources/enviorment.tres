@@ -12,11 +12,9 @@ radiance_size = 0
 
 [resource]
 background_mode = 1
-background_color = Color(0.223529, 0.470588, 0.658824, 1)
-background_energy_multiplier = 0.83
+background_color = Color(0.163351, 0.370039, 0.526241, 1)
 sky = SubResource("Sky_fadno")
 ambient_light_source = 3
 reflected_light_source = 2
 tonemap_mode = 2
-glow_enabled = true
 fog_height_density = 16.0

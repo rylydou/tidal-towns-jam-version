@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c7nn0q30ldtvk"]
+
+[ext_resource type="Texture2D" uid="uid://bs2mby7dpuljp" path="res://resources/textures/w_dirt.png" id="1_5dym5"]
+
+[resource]
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("1_5dym5")
+uv1_triplanar = true
+uv1_world_triplanar = true
+texture_filter = 2

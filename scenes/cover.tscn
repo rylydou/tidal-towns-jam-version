@@ -1,0 +1,524 @@
+[gd_scene load_steps=58 format=3 uid="uid://c8ttlg0f8gkev"]
+
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_qmcam"]
+[ext_resource type="Script" path="res://addons/goshapes/base/GoCurve3D.gd" id="1_t357c"]
+[ext_resource type="Script" path="res://addons/goshapes/Goshape.gd" id="2_pkub2"]
+[ext_resource type="Script" path="res://scripts/dev/capture.gd" id="2_ttgid"]
+[ext_resource type="Script" path="res://addons/goshapes/base/PathOptions.gd" id="3_d6tyr"]
+[ext_resource type="Script" path="res://addons/goshapes/MeshShaper/Shapers/BottomShaper.gd" id="4_pdwna"]
+[ext_resource type="Script" path="res://addons/goshapes/MeshShaper/Shapers/CapFlatShaper.gd" id="6_e3cy4"]
+[ext_resource type="Script" path="res://addons/goshapes/MeshShaper/BlockShaper.gd" id="7_4ritd"]
+[ext_resource type="Material" uid="uid://bwjfrg04ahie6" path="res://resources/mats/f_sand.tres" id="7_s0cv8"]
+[ext_resource type="Script" path="res://addons/goshapes/MeshShaper/Shapers/WallBevelShaper.gd" id="8_iwo3h"]
+[ext_resource type="Environment" uid="uid://cns5r4bdlocwb" path="res://resources/enviorment.tres" id="9_hkcl1"]
+[ext_resource type="Material" uid="uid://dmo6d463ux1e6" path="res://resources/mats/f_grass.tres" id="10_l4c7m"]
+[ext_resource type="FontFile" uid="uid://himeqy34fskt" path="res://resources/fonts/Bespoke Sans/Fonts/OTF/BespokeSans-Extrabold.otf" id="10_twk2f"]
+[ext_resource type="Material" uid="uid://bib2exw0ihb31" path="res://resources/mats/w_dirt.tres" id="11_nvl81"]
+[ext_resource type="Material" uid="uid://bh3mifmtkxadp" path="res://resources/mats/f_stone.tres" id="12_bmps3"]
+[ext_resource type="Texture2D" uid="uid://c6ety77bfi4ba" path="res://resources/textures/f_sand.png" id="12_xacbx"]
+[ext_resource type="Material" uid="uid://c8eaehjkly8u5" path="res://resources/mats/w_stone.tres" id="13_6k23n"]
+[ext_resource type="PackedScene" uid="uid://dhx5k6v6duu1o" path="res://resources/models/tent.glb" id="14_q7nsf"]
+[ext_resource type="PackedScene" uid="uid://brcxv2e7g7qs2" path="res://resources/models/mine.glb" id="17_tt3f1"]
+
+[sub_resource type="Shader" id="Shader_3uchq"]
+code = "shader_type spatial;
+render_mode blend_mix,depth_draw_opaque,diffuse_toon,specular_toon;
+
+uniform sampler2D water_texture : filter_nearest, repeat_enable, hint_roughness_gray;
+
+uniform vec4 WATER_COL : source_color = vec4(0.176471, 0.635294, 0.85098, 1.0);
+uniform vec4 WATER2_COL : source_color = vec4(0.0588235, 0.529412, 0.776471, 1.0);
+uniform vec4 FOAM_COL : source_color = vec4(0.87451, 0.988235, 1, 1.0);
+
+uniform float distortion_speed = 2.0;
+uniform vec2 tile = vec2(5.0, 5.0);
+uniform vec2 offset = vec2(0, 0);
+uniform vec2 size = vec2(32., 32.);
+uniform float pixel_factor = 500.0;
+
+const float TWOPI = 6.283185307;
+const float SIXPI = 18.84955592;
+
+float circ(vec2 pos, vec2 c, float s) {
+	c = abs(pos - c);
+	c = min(c, 1.0 - c);
+	
+	return step(0.0, sqrt(s) - sqrt(dot(c, c))) * -1.0;
+}
+
+float waterlayer(vec2 uv) {
+	return step(0.5, texture(water_texture, uv).r);
+}
+
+vec3 water(vec2 uv, vec3 cdir, float iTime) {
+	uv *= vec2(0.25);
+	
+	// Parallax height distortion with two directional waves at
+	// slightly different angles.
+	vec2 a = 0.025 * cdir.xz / cdir.y; // Parallax offset
+	float h = sin(uv.x + iTime); // Height at UV
+	uv += a * h;
+	h = sin(0.841471 * uv.x - 0.540302 * uv.y + iTime);
+	uv += a * h;
+	
+	// Texture distortion
+	float d1 = mod(uv.x + uv.y, TWOPI);
+	float d2 = mod((uv.x + uv.y + 0.25) * 1.3, SIXPI);
+	d1 = iTime * 0.07 + d1;
+	d2 = iTime * 0.5 + d2;
+	vec2 dist = vec2(
+		sin(d1) * 0.15 + sin(d2) * 0.05,
+		cos(d1) * 0.15 + cos(d2) * 0.05
+	);
+	
+	vec3 ret = WATER_COL.rgb;
+	ret = mix(ret, WATER2_COL.rgb, waterlayer(uv + dist.xy));
+	ret = mix(ret, FOAM_COL.rgb, waterlayer(vec2(1.0) - uv - dist.yx));
+	return ret;
+}
+
+varying vec3 globalposition;
+void vertex() {
+	globalposition = (MODEL_MATRIX*vec4(VERTEX, 0.)).xyz;
+}
+
+void fragment() {
+	float t = distance(globalposition, vec3(0, 0, 0))/25.;
+	t = min(t, 1.);
+	
+	vec2 uv = globalposition.xz/size;
+	uv = round(uv*pixel_factor)/pixel_factor;
+	
+	vec3 water = water(uv*tile + offset, vec3(0., 1., 0.), TIME*distortion_speed);
+	ALBEDO.rgb = mix(water, WATER_COL.rgb, t);
+}"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wjjgx"]
+load_path = "res://.godot/imported/water.png-cb215b76c227001e165fb152100f987d.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3ibtj"]
+render_priority = 0
+shader = SubResource("Shader_3uchq")
+shader_parameter/WATER_COL = Color(0.223529, 0.470588, 0.658824, 1)
+shader_parameter/WATER2_COL = Color(0.156863, 0.8, 0.87451, 1)
+shader_parameter/FOAM_COL = Color(0.87451, 0.964706, 0.960784, 1)
+shader_parameter/distortion_speed = 1.0
+shader_parameter/tile = Vector2(1, 1)
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/size = Vector2(1, 1)
+shader_parameter/pixel_factor = 15.0
+shader_parameter/water_texture = SubResource("CompressedTexture2D_wjjgx")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xd4uv"]
+size = Vector2(1000, 1000)
+
+[sub_resource type="Curve3D" id="Curve3D_o0c5k"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -0.713239, 0, 2.54816, 0, 0, 0, 0, 0, 0, 2.84489, 0, 1.42754, 0, 0, 0, 0, 0, 0, 9.09247, 0, -9.84863, 0, 0, 0, 0, 0, 0, -3.63172, 0, -12.4032, 0, 0, 0, 0, 0, 0, -4.38446, 0, -1.96981),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+script = ExtResource("1_t357c")
+
+[sub_resource type="Resource" id="Resource_tp76l"]
+script = ExtResource("3_d6tyr")
+flatten = true
+twist = false
+line = 0.0
+rounding = 0.0
+interpolate = 1
+points_on_ground = false
+offset_y = 0.0
+ground_placement_mask = 0
+
+[sub_resource type="Resource" id="Resource_kaki1"]
+script = ExtResource("4_pdwna")
+base_depth = 1.0
+enabled = false
+
+[sub_resource type="Resource" id="Resource_674iv"]
+script = ExtResource("6_e3cy4")
+conform_to_wall = false
+material = ExtResource("7_s0cv8")
+build_collider = true
+collision_layer = 1
+enabled = true
+
+[sub_resource type="Resource" id="Resource_yqwxd"]
+script = ExtResource("8_iwo3h")
+height = 1.0
+bevel = 0.0
+taper = 2.0
+material = ExtResource("7_s0cv8")
+build_collider = true
+collision_layer = 1
+enabled = true
+
+[sub_resource type="Resource" id="Resource_c1ckr"]
+script = ExtResource("7_4ritd")
+cap_shaper = SubResource("Resource_674iv")
+wall_shaper = SubResource("Resource_yqwxd")
+bottom_shaper = SubResource("Resource_kaki1")
+bottom_depth = 0.0
+collider_type = 2
+collider_ridge = 0.0
+enabled = true
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_weell"]
+_surfaces = [{
+"aabb": AABB(-4.38446, 0, -12.4032, 13.4769, 1e-05, 14.9514),
+"attribute_data": PackedByteArray(213, 150, 54, 191, 14, 21, 35, 64, 174, 18, 54, 64, 161, 185, 182, 63, 194, 122, 17, 65, 253, 147, 29, 193, 26, 110, 104, 192, 130, 115, 70, 193, 127, 77, 140, 192, 188, 34, 252, 191),
+"format": 4115,
+"index_count": 9,
+"index_data": PackedByteArray(0, 0, 4, 0, 3, 0, 3, 0, 2, 0, 1, 0, 1, 0, 0, 0, 3, 0),
+"material": ExtResource("7_s0cv8"),
+"primitive": 3,
+"vertex_count": 5,
+"vertex_data": PackedByteArray(213, 150, 54, 191, 0, 0, 0, 0, 14, 21, 35, 64, 255, 127, 255, 255, 174, 18, 54, 64, 0, 0, 0, 0, 161, 185, 182, 63, 255, 127, 255, 255, 194, 122, 17, 65, 0, 0, 0, 0, 253, 147, 29, 193, 255, 127, 255, 255, 26, 110, 104, 192, 0, 0, 0, 0, 130, 115, 70, 193, 255, 127, 255, 255, 127, 77, 140, 192, 0, 0, 0, 0, 188, 34, 252, 191, 255, 127, 255, 255)
+}]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_klg41"]
+data = PackedVector3Array(-0.7132, 0, 2.5482, -4.3845, 0, -1.9698, -3.6317, 0, -12.4032, -3.6317, 0, -12.4032, 9.0925, 0, -9.8486, 2.8449, 0, 1.4275, 2.8449, 0, 1.4275, -0.7132, 0, 2.5482, -3.6317, 0, -12.4032)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_fbfr5"]
+_surfaces = [{
+"aabb": AABB(-6.43629, -1, -14.8108, 18.6034, 1.00001, 19.6748),
+"attribute_data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 73, 191, 110, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 191, 73, 191, 110, 64, 0, 0, 128, 191, 73, 191, 110, 64, 0, 0, 0, 0, 48, 249, 132, 65, 0, 0, 0, 0, 73, 191, 110, 64, 0, 0, 128, 191, 48, 249, 132, 65, 0, 0, 128, 191, 48, 249, 132, 65, 0, 0, 0, 0, 81, 204, 236, 65, 0, 0, 0, 0, 48, 249, 132, 65, 0, 0, 128, 191, 81, 204, 236, 65, 0, 0, 128, 191, 81, 204, 236, 65, 0, 0, 0, 0, 184, 61, 32, 66, 0, 0, 0, 0, 81, 204, 236, 65, 0, 0, 128, 191, 184, 61, 32, 66, 0, 0, 128, 191, 184, 61, 32, 66, 0, 0, 0, 0, 240, 134, 55, 66, 0, 0, 0, 0, 184, 61, 32, 66, 0, 0, 128, 191, 240, 134, 55, 66, 0, 0, 128, 191),
+"format": 4115,
+"index_count": 30,
+"index_data": PackedByteArray(0, 0, 1, 0, 3, 0, 2, 0, 0, 0, 3, 0, 4, 0, 5, 0, 7, 0, 6, 0, 4, 0, 7, 0, 8, 0, 9, 0, 11, 0, 10, 0, 8, 0, 11, 0, 12, 0, 13, 0, 15, 0, 14, 0, 12, 0, 15, 0, 16, 0, 17, 0, 19, 0, 18, 0, 16, 0, 19, 0),
+"material": ExtResource("7_s0cv8"),
+"primitive": 3,
+"vertex_count": 20,
+"vertex_data": PackedByteArray(213, 150, 54, 191, 0, 0, 0, 0, 14, 21, 35, 64, 208, 139, 170, 206, 174, 18, 54, 64, 0, 0, 0, 0, 161, 185, 182, 63, 208, 139, 170, 206, 138, 73, 180, 191, 0, 0, 128, 191, 174, 165, 155, 64, 208, 139, 170, 206, 111, 162, 134, 64, 0, 0, 128, 191, 65, 25, 70, 64, 208, 139, 170, 206, 174, 18, 54, 64, 0, 0, 0, 0, 161, 185, 182, 63, 83, 161, 51, 204, 194, 122, 17, 65, 0, 0, 0, 0, 253, 147, 29, 193, 83, 161, 51, 204, 111, 162, 134, 64, 0, 0, 128, 191, 65, 25, 70, 64, 83, 161, 51, 204, 150, 172, 66, 65, 0, 0, 128, 191, 14, 87, 52, 193, 83, 161, 51, 204, 194, 122, 17, 65, 0, 0, 0, 0, 253, 147, 29, 193, 108, 175, 17, 248, 26, 110, 104, 192, 0, 0, 0, 0, 130, 115, 70, 193, 108, 175, 17, 248, 150, 172, 66, 65, 0, 0, 128, 191, 14, 87, 52, 193, 108, 175, 17, 248, 171, 210, 174, 192, 0, 0, 128, 191, 18, 249, 108, 193, 108, 175, 17, 248, 26, 110, 104, 192, 0, 0, 0, 0, 130, 115, 70, 193, 103, 83, 103, 214, 127, 77, 140, 192, 0, 0, 0, 0, 188, 34, 252, 191, 103, 83, 103, 214, 171, 210, 174, 192, 0, 0, 128, 191, 18, 249, 108, 193, 103, 83, 103, 214, 24, 246, 205, 192, 0, 0, 128, 191, 24, 103, 169, 191, 103, 83, 103, 214, 127, 77, 140, 192, 0, 0, 0, 0, 188, 34, 252, 191, 214, 98, 36, 203, 213, 150, 54, 191, 0, 0, 0, 0, 14, 21, 35, 64, 214, 98, 36, 203, 24, 246, 205, 192, 0, 0, 128, 191, 24, 103, 169, 191, 214, 98, 36, 203, 138, 73, 180, 191, 0, 0, 128, 191, 174, 165, 155, 64, 214, 98, 36, 203)
+}]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_f4v7n"]
+data = PackedVector3Array(-0.7132, 0, 2.5482, 2.8449, 0, 1.4275, 4.2073, -1, 3.0953, -1.4085, -1, 4.864, -0.7132, 0, 2.5482, 4.2073, -1, 3.0953, 2.8449, 0, 1.4275, 9.0925, 0, -9.8486, 12.1671, -1, -11.2713, 4.2073, -1, 3.0953, 2.8449, 0, 1.4275, 12.1671, -1, -11.2713, 9.0925, 0, -9.8486, -3.6317, 0, -12.4032, -5.4632, -1, -14.8108, 12.1671, -1, -11.2713, 9.0925, 0, -9.8486, -5.4632, -1, -14.8108, -3.6317, 0, -12.4032, -4.3845, 0, -1.9698, -6.4363, -1, -1.3235, -5.4632, -1, -14.8108, -3.6317, 0, -12.4032, -6.4363, -1, -1.3235, -4.3845, 0, -1.9698, -0.7132, 0, 2.5482, -1.4085, -1, 4.864, -6.4363, -1, -1.3235, -4.3845, 0, -1.9698, -1.4085, -1, 4.864)
+
+[sub_resource type="Curve3D" id="Curve3D_2o4qe"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -4.74078, 0, -1.44621, 0, 0, 0, 0, 0, 0, 3.39846, 0, 0.108726, 0, 0, 0, 0, 0, 0, 5.12841, 0, -6.65154, 0, 0, 0, 0, 0, 0, -3.32237, 0, -6.55731),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+script = ExtResource("1_t357c")
+
+[sub_resource type="Resource" id="Resource_yobay"]
+script = ExtResource("3_d6tyr")
+flatten = true
+twist = false
+line = 0.0
+rounding = 0.0
+interpolate = 1
+points_on_ground = false
+offset_y = 0.0
+ground_placement_mask = 0
+
+[sub_resource type="Resource" id="Resource_8jpiw"]
+script = ExtResource("4_pdwna")
+base_depth = 1.0
+enabled = false
+
+[sub_resource type="Resource" id="Resource_4fspe"]
+script = ExtResource("6_e3cy4")
+conform_to_wall = false
+material = ExtResource("10_l4c7m")
+build_collider = true
+collision_layer = 1
+enabled = true
+
+[sub_resource type="Resource" id="Resource_hkdv5"]
+script = ExtResource("8_iwo3h")
+height = 1.0
+bevel = 0.0
+taper = 0.2
+material = ExtResource("11_nvl81")
+build_collider = true
+collision_layer = 1
+enabled = true
+
+[sub_resource type="Resource" id="Resource_06lap"]
+script = ExtResource("7_4ritd")
+cap_shaper = SubResource("Resource_4fspe")
+wall_shaper = SubResource("Resource_hkdv5")
+bottom_shaper = SubResource("Resource_8jpiw")
+bottom_depth = 0.0
+collider_type = 2
+collider_ridge = 0.0
+enabled = true
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_l1wbd"]
+_surfaces = [{
+"aabb": AABB(-4.74078, 0, -6.65154, 9.86919, 1e-05, 6.76027),
+"attribute_data": PackedByteArray(122, 180, 151, 192, 144, 29, 185, 191, 80, 128, 89, 64, 128, 171, 222, 61, 232, 27, 164, 64, 108, 217, 212, 192, 175, 161, 84, 192, 118, 213, 209, 192),
+"format": 4115,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 3, 0, 2, 0, 2, 0, 1, 0, 0, 0),
+"material": ExtResource("10_l4c7m"),
+"primitive": 3,
+"vertex_count": 4,
+"vertex_data": PackedByteArray(122, 180, 151, 192, 0, 0, 0, 0, 144, 29, 185, 191, 255, 127, 255, 255, 80, 128, 89, 64, 0, 0, 0, 0, 128, 171, 222, 61, 255, 127, 255, 255, 232, 27, 164, 64, 0, 0, 0, 0, 108, 217, 212, 192, 255, 127, 255, 255, 175, 161, 84, 192, 0, 0, 0, 0, 118, 213, 209, 192, 255, 127, 255, 255)
+}]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_l50tb"]
+data = PackedVector3Array(-4.7408, 0, -1.4462, -3.3224, 0, -6.5573, 5.1284, 0, -6.6515, 5.1284, 0, -6.6515, 3.3985, 0, 0.1087, -4.7408, 0, -1.4462)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_jnuvh"]
+_surfaces = [{
+"aabb": AABB(-4.99155, -1, -6.85443, 10.3783, 1.00001, 7.19489),
+"attribute_data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 62, 149, 4, 65, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 191, 62, 149, 4, 65, 0, 0, 128, 191, 62, 149, 4, 65, 0, 0, 0, 0, 142, 59, 116, 65, 0, 0, 0, 0, 62, 149, 4, 65, 0, 0, 128, 191, 142, 59, 116, 65, 0, 0, 128, 191, 142, 59, 116, 65, 0, 0, 0, 0, 10, 186, 189, 65, 0, 0, 0, 0, 142, 59, 116, 65, 0, 0, 128, 191, 10, 186, 189, 65, 0, 0, 128, 191, 10, 186, 189, 65, 0, 0, 0, 0, 42, 41, 232, 65, 0, 0, 0, 0, 10, 186, 189, 65, 0, 0, 128, 191, 42, 41, 232, 65, 0, 0, 128, 191),
+"format": 4115,
+"index_count": 24,
+"index_data": PackedByteArray(0, 0, 1, 0, 3, 0, 2, 0, 0, 0, 3, 0, 4, 0, 5, 0, 7, 0, 6, 0, 4, 0, 7, 0, 8, 0, 9, 0, 11, 0, 10, 0, 8, 0, 11, 0, 12, 0, 13, 0, 15, 0, 14, 0, 12, 0, 15, 0),
+"material": ExtResource("11_nvl81"),
+"primitive": 3,
+"vertex_count": 16,
+"vertex_data": PackedByteArray(122, 180, 151, 192, 0, 0, 0, 0, 144, 29, 185, 191, 118, 110, 175, 146, 80, 128, 89, 64, 0, 0, 0, 0, 128, 171, 222, 61, 118, 110, 175, 146, 202, 186, 159, 192, 0, 0, 128, 191, 73, 47, 165, 191, 118, 110, 175, 146, 37, 235, 98, 64, 0, 0, 128, 191, 240, 79, 174, 62, 118, 110, 175, 146, 80, 128, 89, 64, 0, 0, 0, 0, 128, 171, 222, 61, 135, 215, 17, 146, 232, 27, 164, 64, 0, 0, 0, 0, 108, 217, 212, 192, 135, 215, 17, 146, 37, 235, 98, 64, 0, 0, 128, 191, 240, 79, 174, 62, 135, 215, 17, 146, 111, 96, 172, 64, 0, 0, 128, 191, 134, 87, 219, 192, 135, 215, 17, 146, 232, 27, 164, 64, 0, 0, 0, 0, 108, 217, 212, 192, 35, 21, 209, 254, 175, 161, 84, 192, 0, 0, 0, 0, 118, 213, 209, 192, 35, 21, 209, 254, 111, 96, 172, 64, 0, 0, 128, 191, 134, 87, 219, 192, 35, 21, 209, 254, 163, 100, 94, 192, 0, 0, 128, 191, 8, 46, 216, 192, 35, 21, 209, 254, 175, 161, 84, 192, 0, 0, 0, 0, 118, 213, 209, 192, 227, 17, 206, 169, 122, 180, 151, 192, 0, 0, 0, 0, 144, 29, 185, 191, 227, 17, 206, 169, 163, 100, 94, 192, 0, 0, 128, 191, 8, 46, 216, 192, 227, 17, 206, 169, 202, 186, 159, 192, 0, 0, 128, 191, 73, 47, 165, 191, 227, 17, 206, 169)
+}]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_6i6pm"]
+data = PackedVector3Array(-4.7408, 0, -1.4462, 3.3985, 0, 0.1087, 3.5456, -1, 0.3405, -4.9916, -1, -1.2905, -4.7408, 0, -1.4462, 3.5456, -1, 0.3405, 3.3985, 0, 0.1087, 5.1284, 0, -6.6515, 5.3868, -1, -6.8544, 3.5456, -1, 0.3405, 3.3985, 0, 0.1087, 5.3868, -1, -6.8544, 5.1284, 0, -6.6515, -3.3224, 0, -6.5573, -3.4749, -1, -6.7556, 5.3868, -1, -6.8544, 5.1284, 0, -6.6515, -3.4749, -1, -6.7556, -3.3224, 0, -6.5573, -4.7408, 0, -1.4462, -4.9916, -1, -1.2905, -3.4749, -1, -6.7556, -3.3224, 0, -6.5573, -4.9916, -1, -1.2905)
+
+[sub_resource type="Curve3D" id="Curve3D_kpprc"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -4, 0, 4, 0, 0, 0, 0, 0, 0, 1.11131, 0, 3.6325, 0, 0, 0, 0, 0, 0, 0.908069, 0, -1.68206, 0, 0, 0, 0, 0, 0, -3.40904, 0, -2.11774),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+script = ExtResource("1_t357c")
+
+[sub_resource type="Resource" id="Resource_25dga"]
+script = ExtResource("3_d6tyr")
+flatten = true
+twist = false
+line = 0.0
+rounding = 0.0
+interpolate = 1
+points_on_ground = false
+offset_y = 0.0
+ground_placement_mask = 0
+
+[sub_resource type="Resource" id="Resource_mft7p"]
+script = ExtResource("4_pdwna")
+base_depth = 1.0
+enabled = false
+
+[sub_resource type="Resource" id="Resource_530h8"]
+script = ExtResource("6_e3cy4")
+conform_to_wall = false
+material = ExtResource("12_bmps3")
+build_collider = true
+collision_layer = 1
+enabled = true
+
+[sub_resource type="Resource" id="Resource_1q3vi"]
+script = ExtResource("8_iwo3h")
+height = 5.0
+bevel = 0.0
+taper = 1.0
+material = ExtResource("13_6k23n")
+build_collider = true
+collision_layer = 1
+enabled = true
+
+[sub_resource type="Resource" id="Resource_v26u0"]
+script = ExtResource("7_4ritd")
+cap_shaper = SubResource("Resource_530h8")
+wall_shaper = SubResource("Resource_1q3vi")
+bottom_shaper = SubResource("Resource_mft7p")
+bottom_depth = 0.0
+collider_type = 2
+collider_ridge = 0.0
+enabled = true
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_abbck"]
+_surfaces = [{
+"aabb": AABB(-4, 0, -2.11774, 5.11131, 1e-05, 6.11775),
+"attribute_data": PackedByteArray(0, 0, 128, 192, 0, 0, 128, 64, 92, 63, 142, 63, 224, 122, 104, 64, 58, 119, 104, 63, 208, 77, 215, 191, 166, 45, 90, 192, 20, 137, 7, 192),
+"format": 4115,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 3, 0, 2, 0, 2, 0, 1, 0, 0, 0),
+"material": ExtResource("12_bmps3"),
+"primitive": 3,
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 128, 192, 0, 0, 0, 0, 0, 0, 128, 64, 255, 127, 255, 255, 92, 63, 142, 63, 0, 0, 0, 0, 224, 122, 104, 64, 255, 127, 255, 255, 58, 119, 104, 63, 0, 0, 0, 0, 208, 77, 215, 191, 255, 127, 255, 255, 166, 45, 90, 192, 0, 0, 0, 0, 20, 137, 7, 192, 255, 127, 255, 255)
+}]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_efw7b"]
+data = PackedVector3Array(-4, 0, 4, -3.409, 0, -2.1177, 0.9081, 0, -1.6821, 0.9081, 0, -1.6821, 1.1113, 0, 3.6325, -4, 0, 4)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_gjjhp"]
+_surfaces = [{
+"aabb": AABB(-5.10921, -5, -3.21353, 7.25674, 5.00001, 8.29586),
+"attribute_data": PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 238, 251, 163, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 160, 192, 238, 251, 163, 64, 0, 0, 160, 192, 238, 251, 163, 64, 0, 0, 0, 0, 82, 22, 39, 65, 0, 0, 0, 0, 238, 251, 163, 64, 0, 0, 160, 192, 82, 22, 39, 65, 0, 0, 160, 192, 82, 22, 39, 65, 0, 0, 0, 0, 2, 131, 108, 65, 0, 0, 0, 0, 82, 22, 39, 65, 0, 0, 160, 192, 2, 131, 108, 65, 0, 0, 160, 192, 2, 131, 108, 65, 0, 0, 0, 0, 245, 108, 167, 65, 0, 0, 0, 0, 2, 131, 108, 65, 0, 0, 160, 192, 245, 108, 167, 65, 0, 0, 160, 192),
+"format": 4115,
+"index_count": 24,
+"index_data": PackedByteArray(0, 0, 1, 0, 3, 0, 2, 0, 0, 0, 3, 0, 4, 0, 5, 0, 7, 0, 6, 0, 4, 0, 7, 0, 8, 0, 9, 0, 11, 0, 10, 0, 8, 0, 11, 0, 12, 0, 13, 0, 15, 0, 14, 0, 12, 0, 15, 0),
+"material": ExtResource("13_6k23n"),
+"primitive": 3,
+"vertex_count": 16,
+"vertex_data": PackedByteArray(0, 0, 128, 192, 0, 0, 0, 0, 0, 0, 128, 64, 59, 135, 43, 148, 92, 63, 142, 63, 0, 0, 0, 0, 224, 122, 104, 64, 59, 135, 43, 148, 158, 126, 163, 192, 0, 0, 160, 192, 120, 162, 162, 64, 59, 135, 43, 148, 38, 113, 9, 64, 0, 0, 160, 192, 64, 240, 145, 64, 59, 135, 43, 148, 92, 63, 142, 63, 0, 0, 0, 0, 224, 122, 104, 64, 79, 235, 163, 152, 58, 119, 104, 63, 0, 0, 0, 0, 208, 77, 215, 191, 79, 235, 163, 152, 38, 113, 9, 64, 0, 0, 160, 192, 64, 240, 145, 64, 79, 235, 163, 152, 65, 226, 239, 63, 0, 0, 160, 192, 216, 188, 37, 192, 79, 235, 163, 152, 58, 119, 104, 63, 0, 0, 0, 0, 208, 77, 215, 191, 59, 236, 19, 246, 166, 45, 90, 192, 0, 0, 0, 0, 20, 137, 7, 192, 59, 236, 19, 246, 65, 226, 239, 63, 0, 0, 160, 192, 216, 188, 37, 192, 59, 236, 19, 246, 211, 217, 137, 192, 0, 0, 160, 192, 112, 170, 77, 192, 59, 236, 19, 246, 166, 45, 90, 192, 0, 0, 0, 0, 20, 137, 7, 192, 210, 19, 89, 157, 0, 0, 128, 192, 0, 0, 0, 0, 0, 0, 128, 64, 210, 19, 89, 157, 211, 217, 137, 192, 0, 0, 160, 192, 112, 170, 77, 192, 210, 19, 89, 157, 158, 126, 163, 192, 0, 0, 160, 192, 120, 162, 162, 64, 210, 19, 89, 157)
+}]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_fnn8n"]
+data = PackedVector3Array(-4, 0, 4, 1.1113, 0, 3.6325, 2.1475, -5, 4.5606, -5.1092, -5, 5.0823, -4, 0, 4, 2.1475, -5, 4.5606, 1.1113, 0, 3.6325, 0.9081, 0, -1.6821, 1.8741, -5, -2.5897, 2.1475, -5, 4.5606, 1.1113, 0, 3.6325, 1.8741, -5, -2.5897, 0.9081, 0, -1.6821, -3.409, 0, -2.1177, -4.3078, -5, -3.2135, 1.8741, -5, -2.5897, 0.9081, 0, -1.6821, -4.3078, -5, -3.2135, -3.409, 0, -2.1177, -4, 0, 4, -5.1092, -5, 5.0823, -4.3078, -5, -3.2135, -3.409, 0, -2.1177, -5.1092, -5, 5.0823)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n5rns"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("12_xacbx")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+texture_filter = 2
+
+[sub_resource type="TextMesh" id="TextMesh_1hhur"]
+text = "TIDAL"
+font = ExtResource("10_twk2f")
+font_size = 34
+vertical_alignment = 2
+line_spacing = -18.9
+pixel_size = 0.0625
+depth = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kyngu"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("12_xacbx")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+texture_filter = 2
+
+[sub_resource type="TextMesh" id="TextMesh_dkdci"]
+text = "TOWNS"
+font = ExtResource("10_twk2f")
+font_size = 34
+vertical_alignment = 2
+line_spacing = -18.9
+pixel_size = 0.0625
+depth = 2.0
+
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("water", "camera_anchor")]
+script = ExtResource("1_qmcam")
+water = NodePath("Water")
+camera_anchor = NodePath("CameraAnchor")
+
+[node name="Capture" type="Node" parent="."]
+script = ExtResource("2_ttgid")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("9_hkcl1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.873362, 0.385929, -0.297148, -0.157534, 0.801097, 0.577431, 0.460892, -0.457495, 0.760445, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_split_1 = 0.5
+directional_shadow_split_2 = 0.75
+directional_shadow_split_3 = 0.75
+directional_shadow_max_distance = 50.0
+
+[node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.79312, 0, 0.372582)
+material_override = SubResource("ShaderMaterial_3ibtj")
+cast_shadow = 0
+gi_mode = 0
+mesh = SubResource("PlaneMesh_xd4uv")
+
+[node name="CameraAnchor" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965927, 0.258819, 0, -0.258819, 0.965925, 2.15703, 0, -6.24347)
+
+[node name="Camera" type="Camera3D" parent="CameraAnchor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 25)
+current = true
+fov = 30.0
+
+[node name="Sand" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.361028, 0)
+curve = SubResource("Curve3D_o0c5k")
+script = ExtResource("2_pkub2")
+path_options = SubResource("Resource_tp76l")
+shaper = SubResource("Resource_c1ckr")
+
+[node name="Mesh0" type="MeshInstance3D" parent="Sand"]
+mesh = SubResource("ArrayMesh_weell")
+
+[node name="Collider1" type="StaticBody3D" parent="Sand"]
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Sand/Collider1"]
+shape = SubResource("ConcavePolygonShape3D_klg41")
+
+[node name="Mesh2" type="MeshInstance3D" parent="Sand"]
+mesh = SubResource("ArrayMesh_fbfr5")
+
+[node name="Collider3" type="StaticBody3D" parent="Sand"]
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Sand/Collider3"]
+shape = SubResource("ConcavePolygonShape3D_f4v7n")
+
+[node name="Grass" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.18412, 1, -6.57332)
+curve = SubResource("Curve3D_2o4qe")
+script = ExtResource("2_pkub2")
+path_options = SubResource("Resource_yobay")
+shaper = SubResource("Resource_06lap")
+
+[node name="Mesh0" type="MeshInstance3D" parent="Grass"]
+mesh = SubResource("ArrayMesh_l1wbd")
+
+[node name="Collider1" type="StaticBody3D" parent="Grass"]
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Grass/Collider1"]
+shape = SubResource("ConcavePolygonShape3D_l50tb")
+
+[node name="Mesh2" type="MeshInstance3D" parent="Grass"]
+mesh = SubResource("ArrayMesh_jnuvh")
+
+[node name="Collider3" type="StaticBody3D" parent="Grass"]
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Grass/Collider3"]
+shape = SubResource("ConcavePolygonShape3D_6i6pm")
+
+[node name="Stone" type="Path3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3727, 1.71055, -12.115)
+curve = SubResource("Curve3D_kpprc")
+script = ExtResource("2_pkub2")
+path_options = SubResource("Resource_25dga")
+shaper = SubResource("Resource_v26u0")
+
+[node name="Mesh0" type="MeshInstance3D" parent="Stone"]
+mesh = SubResource("ArrayMesh_abbck")
+
+[node name="Collider1" type="StaticBody3D" parent="Stone"]
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Stone/Collider1"]
+shape = SubResource("ConcavePolygonShape3D_efw7b")
+
+[node name="Mesh2" type="MeshInstance3D" parent="Stone"]
+mesh = SubResource("ArrayMesh_gjjhp")
+
+[node name="Collider3" type="StaticBody3D" parent="Stone"]
+
+[node name="CollisionShape" type="CollisionShape3D" parent="Stone/Collider3"]
+shape = SubResource("ConcavePolygonShape3D_fnn8n")
+
+[node name="Text Top" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.965962, 0, -0.258684, 0, 1, 0, 0.258684, 0, 0.965962, 5.69129, 1.83339, -10.5496)
+material_override = SubResource("StandardMaterial3D_n5rns")
+mesh = SubResource("TextMesh_1hhur")
+
+[node name="Text Bottom" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.965962, 0, -0.258684, 0, 1, 0, 0.258684, 0, 0.965962, 6.19863, 0.356628, -10.4137)
+material_override = SubResource("StandardMaterial3D_kyngu")
+mesh = SubResource("TextMesh_dkdci")
+
+[node name="tent" parent="." instance=ExtResource("14_q7nsf")]
+transform = Transform3D(-0.54093, 0, -0.841067, 0, 1, 0, 0.841067, 0, -0.54093, 3.32445, 0.361028, -3.53224)
+
+[node name="tent2" parent="." instance=ExtResource("14_q7nsf")]
+transform = Transform3D(0.813639, 0, -0.581371, 0, 1, 0, 0.581371, 0, 0.813639, -2.00344, 0.361028, -2.25043)
+
+[node name="tent3" parent="." instance=ExtResource("14_q7nsf")]
+transform = Transform3D(0.298874, 0, -0.954292, 0, 1, 0, 0.954292, 0, 0.298874, 0.337993, 0.361028, -4.49709)
+
+[node name="mine" parent="." instance=ExtResource("17_tt3f1")]
+transform = Transform3D(0.998367, 0, -1.73299, 0, 2, 0, 1.73299, 0, 0.998367, -2.97027, 1.67026, -10.9845)

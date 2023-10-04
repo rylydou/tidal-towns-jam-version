@@ -191,3 +191,5 @@ fullscreen={
 [rendering]
 
 renderer/rendering_method="mobile"
+environment/defaults/default_clear_color=Color(0.223529, 0.470588, 0.658824, 1)
+environment/defaults/default_environment="res://resources/enviorment.tres"

@@ -4,31 +4,31 @@ signal next_day()
 signal water_level_changed()
 signal building_special()
 
-@export var fail_screen: Control
-@export var win_screen: Control
-@export var start_screen: Control
-
-@export var info_control: Control
-@export var info_name_label: Label
-@export var info_description_label: Label
-
-@export var tutorial_container: PanelContainer
-var message_num = 0
-@export var tutorial_label: Label
-
-@export var build_menu: Control
-
-@export var people_label: Label
-
-@export var money_label: Label
-@export var wood_label: Label
-@export var stone_label: Label
-@export var steel_label: Label
-@export var day_button: Button
-
+@export var spin_speed := 2.0
 @export var builds: Array[Build] = []
 
-@export var spin_speed := 2.0
+@onready var fail_screen: Control = %'Fail'
+@onready var win_screen: Control = %'Win'
+@onready var start_screen: Control = %'Start'
+
+@onready var info_control: Control = %'Info'
+@onready var info_name_label: Label = %'Info Name'
+@onready var info_text_label: Label = %'Info Text'
+
+@onready var tutorial_control: Control = %'Tut'
+@onready var tutorial_text: Label = %'Tut Text'
+
+@onready var build_contents: Control = %'Build Contents'
+
+@onready var people_label: Label = %'People Tooltip'
+
+@onready var money_label: Label = %'Money'
+@onready var wood_label: Label = %'Wood'
+@onready var stone_label: Label = %'Stone'
+@onready var steel_label: Label = %'Steel'
+
+@onready var day_button: Button = %'Day Button'
+@onready var days_til_label: Label = %'Days Til'
 
 var money := 0
 var wood := 0
@@ -52,6 +52,8 @@ var build: Build
 @export var sapling_build: Build
 var building: Building
 
+var tut_msg_index = 0
+
 var body_ray: RayCast3D
 var area_ray: RayCast3D
 var camera: Camera3D
@@ -64,7 +66,7 @@ func _ready() -> void:
 		build_button.pressed.connect(func(): start_build(build))
 		build_button.alignment = HORIZONTAL_ALIGNMENT_LEFT
 		build_button.focus_mode = Control.FOCUS_NONE
-		build_menu.add_child(build_button)
+		build_contents.add_child(build_button)
 	
 	body_ray = RayCast3D.new()
 	add_child(body_ray)
@@ -78,6 +80,9 @@ func _ready() -> void:
 	calc_til_rise()
 	
 	restart()
+	
+	if not OS.is_debug_build():
+		%StartContainer.show()
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed('fullscreen'):
@@ -90,9 +95,9 @@ func _process(delta: float) -> void:
 	people_label.position = get_local_mouse_position()
 	people_label.position.y -= people_label.size.y
 	people_label.position.x += 16.
-	
 	people_label.visible = people > 0
 	people_label.text = str(people,' ','people' if people > 1 else 'person')
+	
 	money_label.text = str('Gold: ',money)
 	wood_label.text = str('Wood: ',wood)
 	stone_label.text = str('Stone: ',stone)
@@ -110,7 +115,7 @@ func _process(delta: float) -> void:
 	info_control.visible = is_instance_valid(obj)
 	if obj:
 		info_name_label.text = obj.info_name
-		info_description_label.text = obj.info_description
+		info_text_label.text = obj.info_description
 	
 	if is_instance_valid(building):
 		building.position = body_ray.get_collision_point()
@@ -160,13 +165,13 @@ func _process(delta: float) -> void:
 		return
 
 func next_msg() -> void:
-	if message_num < get_tree().current_scene.tutorial_messages.size() - 1:
+	if tut_msg_index < get_tree().current_scene.tutorial_messages.size() - 1:
 		SoundBank.play_ui('tut_next')
-		message_num += 1
-		tutorial_label.text = get_tree().current_scene.tutorial_messages[message_num]
+		tut_msg_index += 1
+		tutorial_text.text = get_tree().current_scene.tutorial_messages[tut_msg_index]
 		return
 	
-	tutorial_container.hide()
+	tutorial_control.hide()
 
 func cast_ray() -> void:
 	if not is_instance_valid(camera): return
@@ -196,7 +201,7 @@ func restart() -> void:
 	day = 0
 	people = 0
 	is_failed = false
-	message_num = 0
+	tut_msg_index = 0
 	
 	fail_screen.hide()
 	win_screen.hide()
@@ -206,10 +211,10 @@ func restart() -> void:
 	await get_tree().process_frame
 	
 	camera = get_tree().current_scene.find_child('Camera')
-	tutorial_container.hide()
+	tutorial_control.hide()
 	if get_tree().current_scene.tutorial_messages.size() > 0:
-		tutorial_label.text = get_tree().current_scene.tutorial_messages[0]
-		tutorial_container.show()
+		tutorial_text.text = get_tree().current_scene.tutorial_messages[0]
+		tutorial_control.show()
 	
 	next_day.emit()
 	
@@ -244,14 +249,13 @@ func _on_next_button_pressed() -> void:
 	if people > 0: return
 	if is_instance_valid(building): return
 	
-	if day >= max_day - 1:
-		win()
-	
-	SoundBank.play_ui('next_day')
-	
 	if day >= max_day: return
-	
 	day += 1
+	
+	if day >= max_day:
+		win()
+	else:
+		SoundBank.play_ui('next_day')
 	
 	next_day.emit()
 	water_level_changed.emit()
@@ -278,11 +282,11 @@ func calc_til_rise():
 		if day >= raise_day: continue
 		
 		if raise_day - day == 1:
-			%DaysTilLabel.label_settings.font_color = Color(.9,.28,.18)
-			%DaysTilLabel.text = str(raise_day - day,' day until sea levels rise')
+			days_til_label.label_settings.font_color = Color(.9,.28,.18)
+			days_til_label.text = str(raise_day - day,' day until sea levels rise')
 		else:
-			%DaysTilLabel.label_settings.font_color = Color.WHITE
-			%DaysTilLabel.text = str(raise_day - day,' days until sea levels rise')
+			days_til_label.label_settings.font_color = Color.WHITE
+			days_til_label.text = str(raise_day - day,' days until sea levels rise')
 		break
 
 
