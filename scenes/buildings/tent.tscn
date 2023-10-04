@@ -12,6 +12,7 @@ script = ExtResource("1_p23v4")
 max_inhabitants = 1
 info_name = "Tent"
 info_description = "Provides great temporary housing. Tents can be destroyed."
+reclaim_money = 1
 
 [node name="Collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)

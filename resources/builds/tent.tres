@@ -10,7 +10,7 @@ info_description = "A quick fix to a housing crisis.
 Costs 2 gold. 
 Holds 1 person. Tents can be destroyed for 1 gold."
 scene = ExtResource("1_f7hv6")
-cost_money = 1
+cost_money = 2
 cost_wood = 0
 cost_stone = 0
 cost_steel = 0
