@@ -18,13 +18,13 @@ class_name Building extends Area3D
 @export var money_income = 0
 
 @onready var label: Label3D = %Label
-@export var is_built := false
 
 var is_reclaimed = false
 var is_sunk = false
 var will_sink = false
 
-@onready var warning_color = Color.from_string('#e6482e', Color.RED)
+@onready var warning_color = Color.from_string('#f4b41b', Color.YELLOW)
+@onready var danger_color = Color.from_string('#e6482e', Color.RED)
 @onready var normal_color = Color.WHITE
 
 func _enter_tree() -> void:
@@ -43,7 +43,7 @@ func water_level_changed() -> void:
 
 func special() -> void:
 	if is_sunk: return
-		
+	
 	Game.wood += wood_income
 	Game.stone += stone_income
 	Game.steel += steel_income
@@ -57,22 +57,20 @@ func _on_input_event(camera: Node, event: InputEvent, position: Vector3, normal:
 	
 	if Input.is_action_just_pressed('add'):
 		_add()
+		return
 	
 	if Input.is_action_just_pressed('sub'):
 		_sub()
+		return
 
 func _add() -> void:
 	pass
-	
-func _add_all() -> void:
-	pass
 
 func _sub() -> void:
-	if can_destroy && is_built:
-		reclaim()
-
-func _sub_all() -> void:
-	pass
+	if not can_destroy: return 
+	if is_instance_valid(Game.building): return
+	if Game.people > 0: return
+	reclaim()
 
 func reclaim() -> void:
 	if is_sunk: return
@@ -99,9 +97,10 @@ func sink() -> void:
 func test_placement(floor_valid: bool) -> bool:
 	var is_valid = floor_valid
 	if get_overlapping_areas().size() > 0: is_valid = false
+	if get_overlapping_bodies().size() > 1: is_valid = false
 	if position.y <= Game.current_water_level: is_valid = false
 	
 	label.visible = not is_valid
-	label.modulate = warning_color
+	label.modulate = danger_color
 	label.text = 'X'
 	return is_valid

@@ -118,7 +118,7 @@ func _process(delta: float) -> void:
 		info_text_label.text = obj.info_description
 	
 	if is_instance_valid(building):
-		building.position = body_ray.get_collision_point()
+		building.position = body_ray.get_collision_point() if body_ray.is_colliding() else Vector3(0, -1000, 0)
 		building.rotation.y += Input.get_axis("spin_left", "spin_right") * delta * spin_speed
 		building.test_placement(floor_valid)
 	
@@ -247,7 +247,9 @@ func _on_retry_button_pressed() -> void:
 func _on_next_button_pressed() -> void:
 	if is_failed: return
 	if people > 0: return
-	if is_instance_valid(building): return
+	if is_instance_valid(building):
+		building.queue_free()
+		building = null
 	
 	if day >= max_day: return
 	day += 1

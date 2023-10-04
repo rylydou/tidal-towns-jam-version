@@ -69,21 +69,23 @@ func get_sound(name: String) -> AudioStream:
 	loaded_sounds[name] = sound
 	return sound
 
-func play_3d(name: String, position: Vector3, bus: StringName = &'SFX') -> void:
+func play_3d(name: String, position: Vector3, pitch := 0.0, volume := 0.0, bus: StringName = &'SFX') -> AudioStreamPlayer3D:
 	var player := get_player_3d()
 	var sound := get_sound(name)
 	player.stop()
 	player.stream = sound
 	player.position = position
-	player.pitch_scale = randf_range(0.9, 1.1)
-	player.volume_db = randf_range(-2.5, 2.5)
+	player.pitch_scale = pitch if pitch > 0 else randf_range(0.9, 1.1)
+	player.volume_db = volume
 	player.bus = bus
 	player.play()
+	return player
 
-func play_ui(name: String, bus: StringName = &'UI') -> void:
+func play_ui(name: String, bus: StringName = &'UI') -> AudioStreamPlayer:
 	var player := get_player_ui()
 	var sound := get_sound(name)
 	player.stop()
 	player.stream = sound
 	player.bus = bus
 	player.play()
+	return player

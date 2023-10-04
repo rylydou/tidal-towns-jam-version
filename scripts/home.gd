@@ -5,6 +5,9 @@ class_name Home extends Building
 @export var max_inhabitants = 0
 
 func update_label() -> void:
+	if will_sink and current_inhabitants > 0:
+		label.modulate = danger_color
+	
 	label.text = str(current_inhabitants,'/',max_inhabitants)
 
 func water_level_changed() -> void:
@@ -20,21 +23,31 @@ func sink():
 		Game.fail()
 
 func _add() -> void:
-	while Game.people > 0 and current_inhabitants < max_inhabitants:
-		SoundBank.play_3d('drop', global_position)
-		current_inhabitants += 1
-		Game.people -= 1
+	if current_inhabitants >= max_inhabitants or Game.people <= 0:
+		super._add()
+		return
 	
+	var amount = min(max_inhabitants - current_inhabitants, Game.people)
+	if amount <= 0: return
+	
+	current_inhabitants += amount
+	Game.people -= amount
+	
+	var player := SoundBank.play_3d('drop', global_position)
+	player.pitch_scale = remap(amount, 0, 25, .5, 1.75)
 	update_label()
 
 func _sub() -> void:
 	if current_inhabitants <= 0 and Game.people <= 0:
-		if can_destroy:
-			reclaim()
+		super._sub()
 		return
 	
-	while current_inhabitants > 0:
-		SoundBank.play_3d('pickup', global_position)
-		current_inhabitants -= 1
-		Game.people += 1
+	var amount = current_inhabitants
+	if amount <= 0: return
+		
+	Game.people += amount
+	current_inhabitants = 0
+	
+	var player := SoundBank.play_3d('pickup', global_position)
+	player.pitch_scale = remap(amount, 0, 25, .5, 1.75)
 	update_label()
