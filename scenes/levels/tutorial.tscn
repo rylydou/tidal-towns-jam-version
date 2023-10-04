@@ -447,7 +447,6 @@ shape = SubResource("ConcavePolygonShape3D_xt04r")
 [node name="tent" parent="." instance=ExtResource("8_ayiie")]
 transform = Transform3D(0.841011, 0, 0.541019, 0, 1, 0, -0.541019, 0, 0.841011, 1.97024, 0.900287, -0.189185)
 current_inhabitants = 1
-can_destroy = null
 reclaim_cost = null
 reclaim_money = null
 reclaim_wood = null
@@ -461,7 +460,6 @@ money_income = null
 [node name="tent2" parent="." instance=ExtResource("8_ayiie")]
 transform = Transform3D(0.967237, 0, -0.253876, 0, 1, 0, 0.253876, 0, 0.967237, -1.09058, 0.900288, -5.22506)
 current_inhabitants = 1
-can_destroy = null
 reclaim_cost = null
 reclaim_money = null
 reclaim_wood = null

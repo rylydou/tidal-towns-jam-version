@@ -50,6 +50,7 @@ var next_water_level := 0.0
 var people := 0
 var build: Build
 @export var sapling_build: Build
+@export var tent_build: Build
 var building: Building
 
 var tut_msg_index = 0
@@ -137,6 +138,9 @@ func _process(delta: float) -> void:
 			if build == sapling_build:
 				building = null
 				start_build(sapling_build)
+			if build == tent_build:
+				building = null
+				start_build(tent_build)
 			else:
 				building = null
 				SoundBank.play_3d('build_confirm', body_ray.get_collision_point())

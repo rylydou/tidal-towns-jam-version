@@ -5,17 +5,17 @@ class_name Building extends Area3D
 
 @export_category('Reclaim')
 @export var can_destroy = true
-@export var reclaim_cost = 0
-@export var reclaim_money = 0
-@export var reclaim_wood = 0
-@export var reclaim_stone = 0
-@export var reclaim_steel = 0
+@export var reclaim_cost := 0
+@export var reclaim_money := 0
+@export var reclaim_wood := 0
+@export var reclaim_stone := 0
+@export var reclaim_steel := 0
 
 @export_category('Income')
-@export var wood_income = 0
-@export var stone_income = 0
-@export var steel_income = 0
-@export var money_income = 0
+@export var wood_income := 0
+@export var stone_income := 0
+@export var steel_income := 0
+@export var money_income := 0
 
 @onready var label: Label3D = %Label
 
