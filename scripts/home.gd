@@ -15,7 +15,7 @@ func water_level_changed() -> void:
 	
 	update_label()
 	
-	label.show()
+	label.visible = not is_sunk
 	
 func sink():
 	super.sink()

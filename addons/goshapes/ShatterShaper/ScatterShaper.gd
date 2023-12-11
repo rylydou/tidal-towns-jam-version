@@ -101,7 +101,7 @@ var watcher_noise := ResourceWatcher.new(emit_changed)
 			
 			
 func _init():
-	super._init()
+	# super._init()
 	if not scene_source:
 		scene_source = ScatterItem.new()
 	watcher_noise.watch(noise)

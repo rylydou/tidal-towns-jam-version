@@ -36,7 +36,7 @@ func water_level_changed() -> void:
 	will_sink = position.y <= Game.next_water_level
 	label.text = '!'
 	label.modulate = warning_color if will_sink else normal_color
-	label.visible = will_sink
+	label.visible = will_sink and not is_sunk
 	
 	if position.y <= Game.current_water_level:
 		sink()
@@ -87,6 +87,7 @@ func reclaim() -> void:
 	queue_free()
 
 func sink() -> void:
+	label.hide()
 	SoundBank.play_ui('sink')
 	if is_sunk: return
 	if is_reclaimed: return

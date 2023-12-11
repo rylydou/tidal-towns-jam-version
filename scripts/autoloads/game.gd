@@ -57,7 +57,8 @@ var tut_msg_index = 0
 
 var body_ray: RayCast3D
 var area_ray: RayCast3D
-var camera: Camera3D
+
+var build_debounce_time := 0.0
 
 func _ready() -> void:
 	for build in builds:
@@ -80,7 +81,7 @@ func _ready() -> void:
 	area_ray.collide_with_bodies = false
 	calc_til_rise()
 	
-	restart()
+	restart(false)
 	
 	if not OS.is_debug_build():
 		%StartContainer.show()
@@ -123,7 +124,8 @@ func _process(delta: float) -> void:
 		building.rotation.y += Input.get_axis("spin_left", "spin_right") * delta * spin_speed
 		building.test_placement(floor_valid)
 	
-	if Input.is_action_just_pressed('add'):
+	build_debounce_time -= delta
+	if Input.is_action_just_pressed('add') and build_debounce_time < 0:
 		if is_instance_valid(building):
 			if not building.test_placement(floor_valid):
 				SoundBank.play_3d('build_invalid', body_ray.get_collision_point())
@@ -135,15 +137,16 @@ func _process(delta: float) -> void:
 			stone -= build.cost_stone
 			steel -= build.cost_steel
 			
+			SoundBank.play_3d('build_confirm', body_ray.get_collision_point())
+			
 			if build == sapling_build:
 				building = null
 				start_build(sapling_build)
-			if build == tent_build:
+			elif build == tent_build:
 				building = null
 				start_build(tent_build)
 			else:
 				building = null
-				SoundBank.play_3d('build_confirm', body_ray.get_collision_point())
 			return
 	
 	if Input.is_action_just_pressed('sub'):
@@ -178,7 +181,11 @@ func next_msg() -> void:
 	tutorial_control.hide()
 
 func cast_ray() -> void:
+	if not is_instance_valid(get_tree().current_scene): return
+	
+	var camera = get_tree().root.get_camera_3d()
 	if not is_instance_valid(camera): return
+	
 	body_ray.position = camera.global_position
 	body_ray.target_position = body_ray.position + camera.project_ray_normal(get_local_mouse_position())*1000
 	body_ray.force_raycast_update()
@@ -200,8 +207,15 @@ func start_build(build: Build) -> void:
 	self.build = build
 	building = build.scene.instantiate()
 	get_tree().current_scene.add_child(building)
+	
+	build_debounce_time = 0.5
 
-func restart() -> void:
+var is_restarting = false
+
+func restart(reload_scene := true) -> void:
+	if is_restarting: return
+	is_restarting = true
+	
 	day = 0
 	people = 0
 	is_failed = false
@@ -210,11 +224,16 @@ func restart() -> void:
 	fail_screen.hide()
 	win_screen.hide()
 	
-	get_tree().reload_current_scene()
+	if reload_scene:
+		get_tree().reload_current_scene()
 	
-	await get_tree().process_frame
+	while true:
+		await get_tree().process_frame
+		if is_instance_valid(get_tree().current_scene):
+			break
 	
-	camera = get_tree().current_scene.find_child('Camera')
+	get_tree().current_scene.find_child('DirectionalLight3D').shadow_enabled = not OS.has_feature('web')
+	
 	tutorial_control.hide()
 	if get_tree().current_scene.tutorial_messages.size() > 0:
 		tutorial_text.text = get_tree().current_scene.tutorial_messages[0]
@@ -226,6 +245,8 @@ func restart() -> void:
 	
 	water_level_changed.emit()
 	calc_til_rise()
+	
+	is_restarting = false
 
 func win() -> void:
 	if is_failed: return
@@ -246,7 +267,7 @@ func fail() -> void:
 
 func _on_retry_button_pressed() -> void:
 	SoundBank.play_ui('retry')
-	restart()
+	restart(true)
 
 func _on_next_button_pressed() -> void:
 	if is_failed: return
@@ -277,11 +298,7 @@ func next_level():
 	
 	get_tree().change_scene_to_packed(levels[level_number])
 	
-	await get_tree().process_frame
-	await get_tree().process_frame
-	await get_tree().process_frame
-	
-	restart()
+	restart(false)
 
 func calc_til_rise():
 	for raise_day in raise_days:

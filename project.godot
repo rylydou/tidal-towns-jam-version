@@ -11,8 +11,9 @@ config_version=5
 [application]
 
 config/name="Tidal Towns"
+config/tags=PackedStringArray("jam")
 run/main_scene="res://scenes/levels/tutorial.tscn"
-config/features=PackedStringArray("4.1", "Mobile")
+config/features=PackedStringArray("4.2", "Mobile")
 boot_splash/bg_color=Color(1, 1, 1, 1)
 boot_splash/show_image=false
 config/icon="res://icon.svg"
@@ -34,6 +35,7 @@ gdscript/warnings/enable=false
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
@@ -191,4 +193,3 @@ fullscreen={
 [rendering]
 
 renderer/rendering_method="mobile"
-environment/defaults/default_clear_color=Color(0.223529, 0.470588, 0.658824, 1)

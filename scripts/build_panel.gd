@@ -15,7 +15,7 @@ func _process(delta: float) -> void:
 	if is_visible:
 		target = get_parent().size.y - size.y
 	else:
-		target = get_parent().size.y - 48
+		target = get_parent().size.y - 40
 	
 	# position.y = lerp(position.y, target, .25)
 	position.y = lerp(target, position.y, exp(delta * -10))

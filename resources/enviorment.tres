@@ -4,17 +4,15 @@
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_scure"]
 panorama = ExtResource("1_87ev3")
-filter = false
 
 [sub_resource type="Sky" id="Sky_fadno"]
 sky_material = SubResource("PanoramaSkyMaterial_scure")
-radiance_size = 0
 
 [resource]
 background_mode = 1
 background_color = Color(0.163351, 0.370039, 0.526241, 1)
 sky = SubResource("Sky_fadno")
 ambient_light_source = 3
-reflected_light_source = 2
+reflected_light_source = 1
 tonemap_mode = 2
 fog_height_density = 16.0
